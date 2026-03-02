@@ -1,0 +1,329 @@
+/*
+Theme Name: Hello Elementor Child
+Theme URI: https://websweetstudio.com
+Description: Child theme for Hello Elementor.
+Author: Aditya Kristyanto
+Author URI: https://websweetstudio.com/
+Template: hello-elementor
+Version: 1.0.0
+Text Domain: wschild
+*/
+
+.umroh-landing {
+  color: #0f172a;
+  background: #ffffff;
+}
+
+.umroh-container {
+  width: min(1100px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+.umroh-hero {
+  padding: 72px 0 56px;
+  background:
+    radial-gradient(
+      800px 300px at 20% 20%,
+      rgba(245, 158, 11, 0.18),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 400px at 80% 30%,
+      rgba(16, 185, 129, 0.14),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #ffffff, #f8fafc);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.umroh-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(2, 132, 199, 0.12);
+  color: #075985;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.umroh-title {
+  margin: 14px 0 10px;
+  font-size: clamp(32px, 4.2vw, 46px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.umroh-subtitle {
+  margin: 0;
+  max-width: 60ch;
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(15, 23, 42, 0.78);
+}
+
+.umroh-cta {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.umroh-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  border: 1px solid transparent;
+}
+
+.umroh-button--primary {
+  background: #0ea5e9;
+  border-color: #0ea5e9;
+  color: #ffffff;
+}
+
+.umroh-button--ghost {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: rgba(15, 23, 42, 0.14);
+  color: #0f172a;
+}
+
+.umroh-button--block {
+  width: 100%;
+}
+
+.umroh-highlights {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.umroh-highlight {
+  padding: 14px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.umroh-highlight__title {
+  font-weight: 800;
+}
+
+.umroh-highlight__desc {
+  color: rgba(15, 23, 42, 0.72);
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.umroh-section {
+  padding: 56px 0;
+}
+
+.umroh-section--alt {
+  background: #f8fafc;
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.umroh-section__title {
+  margin: 0 0 10px;
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.umroh-section__subtitle {
+  margin: 0 0 22px;
+  max-width: 70ch;
+  color: rgba(15, 23, 42, 0.74);
+}
+
+.umroh-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.umroh-grid--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.umroh-grid--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.umroh-card {
+  padding: 18px 18px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.umroh-card__title {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.umroh-card__desc {
+  margin: 0;
+  color: rgba(15, 23, 42, 0.72);
+  line-height: 1.6;
+}
+
+.umroh-list__item {
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.umroh-list__item:first-child {
+  padding-top: 0;
+}
+
+.umroh-list__title {
+  font-weight: 800;
+}
+
+.umroh-list__desc {
+  margin-top: 4px;
+  color: rgba(15, 23, 42, 0.72);
+}
+
+.umroh-proof {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  align-content: start;
+}
+
+.umroh-proof__box {
+  padding: 16px 16px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.umroh-proof__kpi {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.umroh-proof__label {
+  margin-top: 6px;
+  color: rgba(15, 23, 42, 0.72);
+}
+
+.umroh-price {
+  padding: 18px 18px;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.umroh-price--featured {
+  border-color: rgba(14, 165, 233, 0.5);
+  box-shadow: 0 12px 40px rgba(14, 165, 233, 0.18);
+}
+
+.umroh-price__name {
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+
+.umroh-price__price {
+  margin-top: 6px;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.umroh-price__list {
+  margin: 14px 0 18px;
+  padding-left: 18px;
+  color: rgba(15, 23, 42, 0.74);
+}
+
+.umroh-note {
+  margin: 16px 0 0;
+  color: rgba(15, 23, 42, 0.7);
+}
+
+.umroh-faq__item {
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.umroh-faq {
+  display: grid;
+  gap: 12px;
+}
+
+.umroh-faq__q {
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.umroh-faq__a {
+  margin-top: 10px;
+  color: rgba(15, 23, 42, 0.72);
+  line-height: 1.6;
+}
+
+.umroh-section--cta {
+  padding: 64px 0;
+  background: linear-gradient(
+    135deg,
+    rgba(14, 165, 233, 0.16),
+    rgba(16, 185, 129, 0.12)
+  );
+}
+
+.umroh-final {
+  padding: 22px 22px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 18px;
+  align-items: center;
+}
+
+.umroh-final__title {
+  margin: 0 0 8px;
+}
+
+.umroh-final__subtitle {
+  margin: 0;
+  color: rgba(15, 23, 42, 0.74);
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .umroh-highlights {
+    grid-template-columns: 1fr;
+  }
+
+  .umroh-grid--3 {
+    grid-template-columns: 1fr;
+  }
+
+  .umroh-grid--2 {
+    grid-template-columns: 1fr;
+  }
+
+  .umroh-proof {
+    grid-template-columns: 1fr;
+  }
+
+  .umroh-final {
+    grid-template-columns: 1fr;
+  }
+}
