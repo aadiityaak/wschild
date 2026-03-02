@@ -1,5 +1,5 @@
 /*
-Theme Name: Hello Elementor Child
+Theme Name: Wschild
 Theme URI: https://websweetstudio.com
 Description: Child theme for Hello Elementor.
 Author: Aditya Kristyanto
@@ -240,6 +240,98 @@ Text Domain: wschild
   margin-top: 6px;
   font-size: 28px;
   font-weight: 900;
+}
+
+.umroh-price__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.umroh-price__old {
+  margin-top: 6px;
+  color: rgba(15, 23, 42, 0.55);
+  text-decoration: line-through;
+  font-weight: 700;
+}
+
+.umroh-price__actions {
+  display: grid;
+  gap: 10px;
+}
+
+.umroh-pricing .umroh-price__list {
+  margin-bottom: 16px;
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+.umroh-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+}
+
+.umroh-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.umroh-modal__panel {
+  position: relative;
+  width: min(720px, 100%);
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  box-shadow: 0 30px 100px rgba(2, 6, 23, 0.35);
+  padding: 18px;
+}
+
+.umroh-modal__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  padding-bottom: 12px;
+}
+
+.umroh-modal__title {
+  font-weight: 900;
+  font-size: 18px;
+}
+
+.umroh-modal__subtitle {
+  margin-top: 6px;
+  color: rgba(15, 23, 42, 0.72);
+  line-height: 1.5;
+}
+
+.umroh-modal__close {
+  background: rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(15, 23, 42, 0.14);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.umroh-modal__list {
+  margin: 14px 0 0;
+  padding-left: 18px;
+  color: rgba(15, 23, 42, 0.8);
+  line-height: 1.7;
+}
+
+.umroh-modal__item {
+  padding: 3px 0;
 }
 
 .umroh-price__list {

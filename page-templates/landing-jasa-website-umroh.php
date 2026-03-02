@@ -3,7 +3,7 @@
 Template Name: Landing Page - Jasa Website Umroh
 */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (! defined('ABSPATH')) {
 	exit;
 }
 
@@ -11,6 +11,9 @@ get_header();
 
 $primary_cta_url   = '#';
 $secondary_cta_url = '#';
+
+// Pricing component is loaded from src/component/umroh/pricing.php
+// Function wschild_render_pricing_card() is now in functions.php
 ?>
 
 <main id="primary" class="umroh-landing">
@@ -23,8 +26,8 @@ $secondary_cta_url = '#';
 				lead calon jamaah.
 			</p>
 			<div class="umroh-cta">
-				<a class="umroh-button umroh-button--primary" href="<?php echo esc_url( $primary_cta_url ); ?>">Konsultasi Gratis</a>
-				<a class="umroh-button umroh-button--ghost" href="<?php echo esc_url( $secondary_cta_url ); ?>">Lihat Paket</a>
+				<a class="umroh-button umroh-button--primary" href="<?php echo esc_url($primary_cta_url); ?>">Konsultasi Gratis</a>
+				<a class="umroh-button umroh-button--ghost" href="<?php echo esc_url($secondary_cta_url); ?>">Lihat Paket</a>
 			</div>
 			<div class="umroh-highlights">
 				<div class="umroh-highlight">
@@ -105,38 +108,16 @@ $secondary_cta_url = '#';
 	<section class="umroh-section">
 		<div class="umroh-container">
 			<h2 class="umroh-section__title">Paket Pembuatan Website</h2>
-			<div class="umroh-grid umroh-grid--3">
-				<div class="umroh-price">
-					<div class="umroh-price__name">Starter</div>
-					<div class="umroh-price__price">Mulai 1,9jt</div>
-					<ul class="umroh-price__list">
-						<li>1 landing page</li>
-						<li>CTA WhatsApp</li>
-						<li>SEO dasar</li>
-					</ul>
-					<a class="umroh-button umroh-button--primary umroh-button--block" href="<?php echo esc_url( $primary_cta_url ); ?>">Pilih Starter</a>
-				</div>
-				<div class="umroh-price umroh-price--featured">
-					<div class="umroh-price__name">Business</div>
-					<div class="umroh-price__price">Mulai 3,9jt</div>
-					<ul class="umroh-price__list">
-						<li>Landing + profil travel</li>
-						<li>Halaman paket & detail</li>
-						<li>Form lead + WhatsApp</li>
-					</ul>
-					<a class="umroh-button umroh-button--primary umroh-button--block" href="<?php echo esc_url( $primary_cta_url ); ?>">Pilih Business</a>
-				</div>
-				<div class="umroh-price">
-					<div class="umroh-price__name">Premium</div>
-					<div class="umroh-price__price">Mulai 6,9jt</div>
-					<ul class="umroh-price__list">
-						<li>Desain custom</li>
-						<li>Optimasi kecepatan</li>
-						<li>Setup analytics</li>
-					</ul>
-					<a class="umroh-button umroh-button--primary umroh-button--block" href="<?php echo esc_url( $primary_cta_url ); ?>">Pilih Premium</a>
-				</div>
-			</div>
+			<?php
+			// Include pricing component
+			get_template_part(
+				'src/component/umroh/pricing',
+				null,
+				[
+					'primary_cta_url' => $primary_cta_url,
+				]
+			);
+			?>
 			<p class="umroh-note">Harga bisa menyesuaikan kebutuhan fitur dan jumlah halaman.</p>
 		</div>
 	</section>
@@ -169,14 +150,14 @@ $secondary_cta_url = '#';
 					<p class="umroh-final__subtitle">Kirim kebutuhan Anda, kami bantu rekomendasikan struktur landing page yang tepat.</p>
 				</div>
 				<div class="umroh-final__actions">
-					<a class="umroh-button umroh-button--primary umroh-button--block" href="<?php echo esc_url( $primary_cta_url ); ?>">Konsultasi Sekarang</a>
+					<a class="umroh-button umroh-button--primary umroh-button--block" href="<?php echo esc_url($primary_cta_url); ?>">Konsultasi Sekarang</a>
 				</div>
 			</div>
 		</div>
 	</section>
 
 	<?php
-	while ( have_posts() ) {
+	while (have_posts()) {
 		the_post();
 		the_content();
 	}
@@ -185,4 +166,3 @@ $secondary_cta_url = '#';
 
 <?php
 get_footer();
-
