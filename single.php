@@ -36,7 +36,11 @@ get_header();
 				<div class="wschild-article__featured-image">
 					<div class="wschild-container">
 						<div class="wschild-article__image-wrapper">
-							<?php the_post_thumbnail('full'); ?>
+							<?php the_post_thumbnail('full', [
+								'loading'       => 'eager',
+								'fetchpriority' => 'high',
+								'decoding'      => 'async',
+							]); ?>
 						</div>
 					</div>
 				</div>

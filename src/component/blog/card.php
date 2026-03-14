@@ -11,7 +11,16 @@
 		<?php if (has_post_thumbnail()) : ?>
 			<div class="wschild-blog-card__image-wrapper">
 				<a href="<?php the_permalink(); ?>">
-					<?php the_post_thumbnail('medium_large', ['class' => 'wschild-blog-card__image']); ?>
+					<?php
+					global $wp_query;
+					$thumbnail_args = ['class' => 'wschild-blog-card__image'];
+					// Apply LCP optimizations only for the first post in archives/blog home
+					if ($wp_query->current_post === 0 && (is_home() || is_archive())) {
+						$thumbnail_args['fetchpriority'] = 'high';
+						$thumbnail_args['loading']       = 'eager';
+					}
+					the_post_thumbnail('medium_large', $thumbnail_args);
+					?>
 				</a>
 			</div>
 		<?php endif; ?>

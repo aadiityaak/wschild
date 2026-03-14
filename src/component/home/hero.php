@@ -31,6 +31,7 @@ $image_srcset = $args['image_srcset'] ?? 'https://websweetstudio.com/wp-content/
 					id="hero-main-image"
 					decoding="async"
 					fetchpriority="high"
+					loading="eager"
 					width="800"
 					height="995"
 					src="<?php echo esc_url($image_url); ?>"

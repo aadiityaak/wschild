@@ -107,6 +107,43 @@ add_action('wp_head', function () {
 	echo '<link rel="preconnect" href="https://unpkg.com" crossorigin>' . "\n";
 	echo '<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>' . "\n";
 	echo '<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>' . "\n";
+
+	// 3. LCP Image Preload
+	$lcp_image = '';
+	$lcp_srcset = '';
+
+	if (is_page_template('page-templates/home.php') || is_page_template('page-templates/about-us.php') || is_page_template('page-templates/pricing.php') || is_page_template('page-templates/contact.php') || is_front_page()) {
+		$lcp_image = 'https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home.webp';
+		$lcp_srcset = 'https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home.webp 823w, https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home-600x747.webp 600w, https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home-241x300.webp 241w, https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home-768x956.webp 768w';
+	} elseif (is_page_template('page-templates/services.php')) {
+		$lcp_image = 'https://websweetstudio.com/wp-content/uploads/2024/07/layanan.webp';
+		$lcp_srcset = 'https://websweetstudio.com/wp-content/uploads/2024/07/layanan.webp 823w, https://websweetstudio.com/wp-content/uploads/2024/07/layanan-241x300.webp 241w, https://websweetstudio.com/wp-content/uploads/2024/07/layanan-768x956.webp 768w, https://websweetstudio.com/wp-content/uploads/2024/07/layanan-600x747.webp 600w';
+	} elseif (is_single() && has_post_thumbnail()) {
+		$lcp_id = get_post_thumbnail_id();
+		$lcp_data = wp_get_attachment_image_src($lcp_id, 'full');
+		if ($lcp_data) {
+			$lcp_image = $lcp_data[0];
+			$lcp_srcset = wp_get_attachment_image_srcset($lcp_id, 'full');
+		}
+	} elseif (is_archive() && have_posts()) {
+		// Preload first post thumbnail for archive pages
+		global $wp_query;
+		if (isset($wp_query->posts[0])) {
+			$first_post_id = $wp_query->posts[0]->ID;
+			if (has_post_thumbnail($first_post_id)) {
+				$lcp_id = get_post_thumbnail_id($first_post_id);
+				$lcp_data = wp_get_attachment_image_src($lcp_id, 'full');
+				if ($lcp_data) {
+					$lcp_image = $lcp_data[0];
+					$lcp_srcset = wp_get_attachment_image_srcset($lcp_id, 'full');
+				}
+			}
+		}
+	}
+
+	if ($lcp_image) {
+		echo '<link rel="preload" as="image" href="' . esc_url($lcp_image) . '" imagesrcset="' . esc_attr($lcp_srcset) . '" imagesizes="(max-width: 800px) 100vw, 800px" fetchpriority="high">' . "\n";
+	}
 }, 1);
 
 add_filter('script_loader_tag', function ($tag, $handle, $src) {
