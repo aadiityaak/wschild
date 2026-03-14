@@ -45,24 +45,26 @@ add_action('wp_enqueue_scripts', function () {
 			true
 		);
 
-		wp_enqueue_script(
-			'alpine-collapse',
-			'https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js',
-			[],
-			null,
-			true
-		);
+		if (! wp_script_is('alpinejs', 'enqueued') && ! wp_script_is('alpinejs', 'registered')) {
+			wp_enqueue_script(
+				'alpine-collapse',
+				'https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js',
+				[],
+				null,
+				true
+			);
 
-		wp_enqueue_script(
-			'wschild-alpine',
-			'https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js',
-			['alpine-collapse'],
-			null,
-			true
-		);
+			wp_enqueue_script(
+				'alpinejs',
+				'https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js',
+				['alpine-collapse'],
+				null,
+				true
+			);
+		}
 
 		wp_add_inline_script(
-			'wschild-alpine',
+			'alpinejs',
 			"window.wschildPricing=function(designs){return{designs:designs,activeKey:null,isOpen:false,openDesign:function(key){this.activeKey=key;this.isOpen=true;},closeDesign:function(){this.isOpen=false;},get active(){var empty={title:\"\",subtitle:\"\",items:[]};if(!this.activeKey){return empty;}return this.designs&&this.designs[this.activeKey]?this.designs[this.activeKey]:empty;}}};",
 			'after'
 		);
@@ -79,7 +81,7 @@ add_action('after_setup_theme', function () {
 });
 
 add_filter('script_loader_tag', function ($tag, $handle, $src) {
-	if (! in_array($handle, ['wschild-alpine', 'alpine-collapse'], true)) {
+	if (! in_array($handle, ['alpinejs', 'alpine-collapse'], true)) {
 		return $tag;
 	}
 

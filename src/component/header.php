@@ -10,7 +10,7 @@ $home_url = home_url('/');
 ?>
 
 <div class="wschild-header" x-data="{ mobileMenuOpen: false }">
-  <div class="umroh-container">
+  <div class="wschild-header-container">
     <div class="wschild-header__inner">
       <!-- Logo Section -->
       <div class="wschild-header__logo">
@@ -56,8 +56,19 @@ $home_url = home_url('/');
     x-transition:leave="transition ease-in duration-200"
     x-transition:leave-start="opacity-100 translate-y-0"
     x-transition:leave-end="opacity-0 -translate-y-4"
+    @keydown.window.escape="mobileMenuOpen = false"
     x-cloak>
-    <div class="umroh-container">
+    <div class="wschild-header-container">
+      <!-- Header inside Overlay for Close Button -->
+      <div class="wschild-header__mobile-header">
+        <button class="wschild-header__mobile-close" @click="mobileMenuOpen = false" aria-label="Close Menu">
+          <span>Tutup</span>
+          <svg aria-hidden="true" class="e-font-icon-svg e-fas-times" viewBox="0 0 352 512" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+            <path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path>
+          </svg>
+        </button>
+      </div>
+
       <nav class="wschild-header__mobile-nav">
         <?php
         wp_nav_menu([
