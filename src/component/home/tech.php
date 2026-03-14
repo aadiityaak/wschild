@@ -22,7 +22,7 @@ $tech_images = [
 				<?php foreach ($tech_images as $index => $img_url) : ?>
 					<div class="swiper-slide">
 						<figure class="home-tech__item">
-							<img src="<?php echo esc_url($img_url); ?>" alt="Tech Logo <?php echo $index + 1; ?>" loading="lazy">
+							<img src="<?php echo esc_url($img_url); ?>" alt="Tech Logo <?php echo $index + 1; ?>" loading="lazy" decoding="async">
 						</figure>
 					</div>
 				<?php endforeach; ?>

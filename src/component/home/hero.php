@@ -27,6 +27,7 @@ $cta_url = $args['cta_url'] ?? '#';
 				<img
 					id="hero-main-image"
 					decoding="async"
+					loading="lazy"
 					width="800"
 					height="995"
 					src="https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home.webp"
