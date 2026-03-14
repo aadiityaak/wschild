@@ -22,6 +22,21 @@ add_action('wp_enqueue_scripts', function () {
 	);
 
 	if (is_page_template('page-templates/landing-jasa-website-umroh.php') || is_page_template('page-templates/trial.php')) {
+		wp_enqueue_style(
+			'swiper-css',
+			'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css',
+			[],
+			'11.0.0'
+		);
+
+		wp_enqueue_script(
+			'swiper-js',
+			'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js',
+			[],
+			'11.0.0',
+			true
+		);
+
 		wp_enqueue_script(
 			'gsap',
 			'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js',

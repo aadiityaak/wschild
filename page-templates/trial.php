@@ -16,6 +16,9 @@ $primary_cta_url = '#';
 	<?php
 	// Include the new Hero component
 	get_template_part('src/component/home/hero');
+
+	// Include the Tech carousel component
+	get_template_part('src/component/home/tech');
 	?>
 
 	<section class="umroh-section">

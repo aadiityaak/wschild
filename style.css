@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap");
+
 /*
 Theme Name: Wschild
 Theme URI: https://websweetstudio.com
@@ -8,6 +10,25 @@ Template: hello-elementor
 Version: 1.0.0
 Text Domain: wschild
 */
+
+:root {
+  --font-main: "Space Grotesk", Sans-serif;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.umroh-landing,
+.umroh-button,
+.umroh-price__name,
+.umroh-pricing-main__title,
+.home-hero__title {
+  font-family: var(--font-main);
+}
 
 .umroh-landing {
   color: #0f172a;
@@ -515,13 +536,13 @@ a.umroh-button--dark:hover {
 
 .home-hero__grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 30%;
   align-items: center;
   gap: 60px;
 }
 
 .home-hero__content {
-  max-width: 580px;
+  width: 100%;
 }
 
 .home-hero__title {
@@ -550,11 +571,6 @@ a.umroh-button--dark:hover {
 .home-hero__image {
   max-width: 100%;
   height: auto;
-  border-radius: 40px;
-  box-shadow:
-    0 20px 50px -10px rgba(0, 0, 0, 0.15),
-    0 40px 100px -20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.1s ease-out;
 }
 
 @media (max-width: 1024px) {
@@ -585,6 +601,72 @@ a.umroh-button--dark:hover {
     display: flex;
     justify-content: center;
   }
+}
+
+/* Home Tech Section */
+.home-tech {
+  padding: 40px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background: #fdfdfd;
+}
+
+.home-tech__container {
+  position: relative;
+  padding: 0 50px; /* Memberi ruang untuk panah di kiri-kanan */
+}
+
+.home-tech__carousel {
+  width: 100%;
+  height: auto;
+}
+
+.home-tech__prev,
+.home-tech__next {
+  color: #666666 !important;
+  transform: scale(0.4);
+  transition: all 0.3s ease;
+}
+
+.home-tech__prev:hover,
+.home-tech__next:hover {
+  color: #000000 !important;
+  transform: scale(0.8);
+}
+
+.home-tech__prev::after,
+.home-tech__next::after {
+  font-weight: 900;
+}
+
+.home-tech__prev {
+  left: 0 !important;
+}
+
+.home-tech__next {
+  right: 0 !important;
+}
+
+.home-tech__item {
+  margin: 0;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.6;
+  filter: grayscale(100%);
+  transition: all 0.3s ease;
+}
+
+.home-tech__item:hover {
+  opacity: 1;
+  filter: grayscale(0%);
+}
+
+.home-tech__item img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 @media (max-width: 900px) {
