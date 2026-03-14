@@ -43,13 +43,6 @@ $primary_cta_url = '#';
 	// Include the QNA component
 	get_template_part('src/component/home/qna');
 	?>
-
-	<?php
-	while (have_posts()) {
-		the_post();
-		the_content();
-	}
-	?>
 </main>
 
 <?php
