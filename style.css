@@ -219,50 +219,140 @@ Text Domain: wschild
   color: rgba(15, 23, 42, 0.72);
 }
 
+/* Pricing Refactor - Theme Colors */
+.umroh-price--purple {
+  --theme-soft: #e0d9ff;
+  --theme-solid: #4c4c80;
+  --theme-text: #ffffff;
+}
+
+.umroh-price--orange {
+  --theme-soft: #fce9d2;
+  --theme-solid: #f97316;
+  --theme-text: #ffffff;
+}
+
+.umroh-price--pink {
+  --theme-soft: #f8c7ca;
+  --theme-solid: #e11d48;
+  --theme-text: #ffffff;
+}
+
 .umroh-price {
-  padding: 18px 18px;
-  border-radius: 18px;
+  padding: 0;
+  border-radius: 24px;
   background: #ffffff;
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  overflow: hidden;
+  display: flex;
+  background: linear-gradient(
+    200deg,
+    var(--theme-soft, #f8fafc) 0%,
+    #ffffff 40%
+  );
+  flex-direction: column;
 }
 
 .umroh-price--featured {
-  border-color: rgba(14, 165, 233, 0.5);
   box-shadow: 0 12px 40px rgba(14, 165, 233, 0.18);
 }
 
+.umroh-price__header {
+  padding: 32px 24px 24px;
+  text-align: center;
+}
+
 .umroh-price__name {
-  font-weight: 900;
-  letter-spacing: -0.01em;
+  font-weight: 800;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #0f172a;
 }
 
-.umroh-price__price {
-  margin-top: 6px;
-  font-size: 28px;
-  font-weight: 900;
-}
-
-.umroh-price__row {
+.umroh-price__body {
+  padding: 0 10px 32px;
+  flex: 1;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.umroh-price__badge {
+  background: var(--theme-solid, #0f172a);
+  color: var(--theme-text, #ffffff);
+  padding: 14px;
+  border-radius: 16px;
+  display: flex;
   align-items: baseline;
-  gap: 10px;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.umroh-price__amount {
+  font-size: 24px;
+  font-weight: 800;
 }
 
 .umroh-price__old {
-  margin-top: 6px;
-  color: rgba(15, 23, 42, 0.55);
+  font-size: 14px;
+  opacity: 0.7;
   text-decoration: line-through;
+  font-weight: 500;
+}
+
+.umroh-price__list {
+  margin: 0 0 32px;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+  flex: 1;
+}
+
+.umroh-price__list li {
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  color: rgba(15, 23, 42, 0.72);
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.umroh-price__list li:last-child {
+  border-bottom: none;
+}
+
+.umroh-check-icon {
+  width: 16px;
+  height: 16px;
+  color: #0f172a;
+}
+
+.umroh-button--pill {
+  border-radius: 999px;
+  padding: 14px 32px;
   font-weight: 700;
+  width: auto;
+  min-width: 180px;
+}
+
+a.umroh-button--dark,
+a.umroh-button--dark:visited {
+  background: #1e1e1e;
+  color: #ffffff;
+  border: 1px solid #1e1e1e;
+  border-radius: 30px;
+}
+
+a.umroh-button--dark:hover {
+  background: #000000;
+  color: #ffffff;
 }
 
 .umroh-price__actions {
-  display: grid;
-  gap: 10px;
-}
-
-.umroh-pricing .umroh-price__list {
-  margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
 }
 
 [x-cloak] {
@@ -396,6 +486,24 @@ Text Domain: wschild
   margin: 0;
   color: rgba(15, 23, 42, 0.74);
   line-height: 1.6;
+}
+
+.umroh-pricing-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.umroh-pricing-main__title {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 900;
+  margin-bottom: 8px;
+  color: #0f172a;
+}
+
+.umroh-pricing-main__subtitle {
+  font-size: 18px;
+  color: rgba(15, 23, 42, 0.6);
+  margin: 0;
 }
 
 @media (max-width: 900px) {

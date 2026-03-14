@@ -2,7 +2,7 @@
 // Default data
 $pricing_plans = [
 	[
-		'design_key'   => 'instant',
+		'category'   => 'haji-umroh',
 		'name'         => 'Paket Instant',
 		'price'        => 'Rp 750K',
 		'old_price'    => 'dari Rp 990K',
@@ -17,7 +17,7 @@ $pricing_plans = [
 		'featured'     => false,
 	],
 	[
-		'design_key'   => 'custom',
+		'category'   => 'haji-umroh',
 		'name'         => 'Paket Custom',
 		'price'        => 'Rp 1.200K',
 		'old_price'    => 'dari Rp 1.450K',
