@@ -69,6 +69,15 @@ add_action('wp_enqueue_scripts', function () {
 	}
 });
 
+/**
+ * Register Navigation Menus
+ */
+add_action('after_setup_theme', function () {
+	register_nav_menus([
+		'primary' => __('Primary Menu', 'wschild'),
+	]);
+});
+
 add_filter('script_loader_tag', function ($tag, $handle, $src) {
 	if (! in_array($handle, ['wschild-alpine', 'alpine-collapse'], true)) {
 		return $tag;

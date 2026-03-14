@@ -57,15 +57,36 @@ $cta_url = $args['cta_url'] ?? '#';
 				} = window;
 
 				// Hitung pergerakan berlawanan (multiplier negatif)
-				// Range -15px sampai 15px
+				// Range -15px sampai 15px untuk translasi
 				const moveX = (clientX - innerWidth / 2) / (innerWidth / 2) * -15;
 				const moveY = (clientY - innerHeight / 2) / (innerHeight / 2) * -15;
+
+				// Hitung rotasi 3D (tilt)
+				// Range -10deg sampai 10deg
+				const rotateX = (clientY - innerHeight / 2) / (innerHeight / 2) * 10; // Kebalikan Y untuk Tilt X
+				const rotateY = (clientX - innerWidth / 2) / (innerWidth / 2) * -10; // X untuk Tilt Y
 
 				gsap.to(image, {
 					x: moveX,
 					y: moveY,
-					duration: 1,
-					ease: 'power2.out'
+					rotateX: rotateX,
+					rotateY: rotateY,
+					duration: 1.2,
+					ease: 'power2.out',
+					transformPerspective: 1200,
+					transformOrigin: 'center center'
+				});
+			});
+
+			// Reset saat mouse meninggalkan window atau area tertentu (opsional)
+			window.addEventListener('mouseleave', () => {
+				gsap.to(image, {
+					x: 0,
+					y: 0,
+					rotateX: 0,
+					rotateY: 0,
+					duration: 1.5,
+					ease: 'elastic.out(1, 0.5)'
 				});
 			});
 		}
