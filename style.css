@@ -842,6 +842,7 @@ a.umroh-button--dark:hover {
 .home-tech__carousel {
   width: 100%;
   height: auto;
+  min-height: 80px; /* Pre-size to prevent layout shift and reduce reflow calculations */
 }
 
 .home-tech__prev,
@@ -879,6 +880,7 @@ a.umroh-button--dark:hover {
   opacity: 0.6;
   filter: grayscale(100%);
   transition: all 0.3s ease;
+  aspect-ratio: 300 / 96; /* Match image dimensions to stabilize layout */
 }
 
 .home-tech__item:hover {

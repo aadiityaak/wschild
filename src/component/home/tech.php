@@ -37,29 +37,54 @@ $tech_images = [
 
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
-		if (typeof Swiper !== 'undefined') {
-			new Swiper('.home-tech__carousel', {
-				slidesPerView: 1, // Mobile 1
-				spaceBetween: 30,
-				loop: true,
-				speed: 1500, // Memperlambat transisi slide (1.5 detik)
-				autoplay: {
-					delay: 4000, // Menambah jeda antar slide (4 detik)
-					disableOnInteraction: false,
-				},
-				navigation: {
-					nextEl: '.home-tech__next',
-					prevEl: '.home-tech__prev',
-				},
-				breakpoints: {
-					768: { // Tablet 3
-						slidesPerView: 3,
+		const techCarousel = document.querySelector('.home-tech__carousel');
+
+		if (techCarousel && typeof Swiper !== 'undefined') {
+			const initSwiper = () => {
+				new Swiper('.home-tech__carousel', {
+					slidesPerView: 2, // Mobile 2 for better balance
+					spaceBetween: 20,
+					loop: true,
+					speed: 1000,
+					autoplay: {
+						delay: 3000,
+						disableOnInteraction: false,
+						pauseOnMouseEnter: true, // Reduce reflows when user interacts
 					},
-					1024: { // Desktop 4
-						slidesPerView: 4,
+					navigation: {
+						nextEl: '.home-tech__next',
+						prevEl: '.home-tech__prev',
 					},
-				},
-			});
+					breakpoints: {
+						768: {
+							slidesPerView: 4,
+							spaceBetween: 30,
+						},
+						1024: {
+							slidesPerView: 6,
+							spaceBetween: 40,
+						},
+					},
+				});
+			};
+
+			// Lazy Load Swiper using Intersection Observer to mitigate forced reflow on load
+			if ('IntersectionObserver' in window) {
+				const observer = new IntersectionObserver((entries) => {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) {
+							initSwiper();
+							observer.unobserve(entry.target);
+						}
+					});
+				}, {
+					rootMargin: '100px'
+				}); // Load 100px before it enters viewport
+				observer.observe(techCarousel);
+			} else {
+				// Fallback for older browsers
+				initSwiper();
+			}
 		}
 	});
 </script>
