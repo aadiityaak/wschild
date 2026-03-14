@@ -23,18 +23,11 @@ get_header();
       'cta_url'   => '/kontak',
     ]
   );
-  ?>
 
-  <div class="wschild-container">
-    <div class="wschild-content-area" style="padding: 60px 0;">
-      <?php
-      while (have_posts()) {
-        the_post();
-        the_content();
-      }
-      ?>
-    </div>
-  </div>
+  // Why Us section for About Us
+  get_template_part('src/component/about/why-us');
+  get_template_part('src/component/home/tech');
+  ?>
 </main>
 
 <?php
