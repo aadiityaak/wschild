@@ -9,6 +9,9 @@ $title = $args['title'] ?? 'Jasa Pembuatan Website';
 $subtitle = $args['subtitle'] ?? 'Dapatkan website yang dirancang profesional, mudah digunakan, dan dioptimalkan untuk meningkatkan kehadiran online bisnis Anda.';
 $cta_label = $args['cta_label'] ?? 'Selengkapnya';
 $cta_url = $args['cta_url'] ?? '#';
+
+$image_url = $args['image_url'] ?? 'https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home.webp';
+$image_srcset = $args['image_srcset'] ?? 'https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home.webp 823w, https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home-600x747.webp 600w, https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home-241x300.webp 241w, https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home-768x956.webp 768w';
 ?>
 
 <section class="home-hero">
@@ -30,10 +33,10 @@ $cta_url = $args['cta_url'] ?? '#';
 					fetchpriority="high"
 					width="800"
 					height="995"
-					src="https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home.webp"
+					src="<?php echo esc_url($image_url); ?>"
 					class="home-hero__image"
-					alt="Layanan Jasa Pembuatan Website Profesional - Websweetstudio"
-					srcset="https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home.webp 823w, https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home-600x747.webp 600w, https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home-241x300.webp 241w, https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home-768x956.webp 768w"
+					alt="<?php echo esc_attr($title); ?> - Websweetstudio"
+					srcset="<?php echo esc_attr($image_srcset); ?>"
 					sizes="(max-width: 800px) 100vw, 800px">
 			</div>
 		</div>
