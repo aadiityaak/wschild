@@ -19,6 +19,9 @@ $primary_cta_url = '#';
 
 	// Include the Tech carousel component
 	get_template_part('src/component/home/tech');
+
+	// Include the Why Us component
+	get_template_part('src/component/home/why-us');
 	?>
 
 	<section class="umroh-section">
