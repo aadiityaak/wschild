@@ -25,31 +25,10 @@ get_header();
 			'image_srcset' => 'https://websweetstudio.com/wp-content/uploads/2024/07/layanan.webp 823w, https://websweetstudio.com/wp-content/uploads/2024/07/layanan-241x300.webp 241w, https://websweetstudio.com/wp-content/uploads/2024/07/layanan-768x956.webp 768w, https://websweetstudio.com/wp-content/uploads/2024/07/layanan-600x747.webp 600w',
 		]
 	);
+
+	// Services list section
+	get_template_part('src/component/services/list');
 	?>
-
-	<div class="wschild-container">
-		<div class="wschild-content-area" style="padding: 60px 0;">
-			<?php
-			// Render the pricing component as part of services
-			get_template_part(
-				'src/component/pricing',
-				null,
-				[
-					'primary_cta_url' => '/order',
-				]
-			);
-			?>
-
-			<div class="wschild-main-content" style="margin-top: 60px;">
-				<?php
-				while (have_posts()) {
-					the_post();
-					the_content();
-				}
-				?>
-			</div>
-		</div>
-	</div>
 </main>
 
 <?php
