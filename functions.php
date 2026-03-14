@@ -46,9 +46,17 @@ add_action('wp_enqueue_scripts', function () {
 		);
 
 		wp_enqueue_script(
+			'alpine-collapse',
+			'https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js',
+			[],
+			null,
+			true
+		);
+
+		wp_enqueue_script(
 			'wschild-alpine',
 			'https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js',
-			[],
+			['alpine-collapse'],
 			null,
 			true
 		);
@@ -62,7 +70,7 @@ add_action('wp_enqueue_scripts', function () {
 });
 
 add_filter('script_loader_tag', function ($tag, $handle, $src) {
-	if ($handle !== 'wschild-alpine') {
+	if (! in_array($handle, ['wschild-alpine', 'alpine-collapse'], true)) {
 		return $tag;
 	}
 
