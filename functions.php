@@ -7,6 +7,14 @@ if (! defined('ABSPATH')) {
 add_action('wp_enqueue_scripts', function () {
 	$parent_handle = 'hello-elementor-parent';
 
+	// Enqueue Fonts
+	wp_enqueue_style(
+		'wschild-fonts',
+		'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap',
+		[],
+		null
+	);
+
 	wp_enqueue_style(
 		$parent_handle,
 		get_template_directory_uri() . '/style.css',
@@ -72,13 +80,34 @@ add_action('wp_enqueue_scripts', function () {
 });
 
 /**
- * Register Navigation Menus
+ * Register Navigation Menus & Theme Support
  */
 add_action('after_setup_theme', function () {
 	register_nav_menus([
 		'primary' => __('Primary Menu', 'wschild'),
 	]);
+
+	add_theme_support('title-tag');
+	add_theme_support('post-thumbnails');
+	add_theme_support('html5', ['search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script']);
 });
+
+/**
+ * Add SEO Speed Optimizations
+ */
+add_action('wp_head', function () {
+	// Speed Optimizations: Resource Hints
+	echo '<link rel="dns-prefetch" href="//fonts.googleapis.com">' . "\n";
+	echo '<link rel="dns-prefetch" href="//fonts.gstatic.com">' . "\n";
+	echo '<link rel="dns-prefetch" href="//unpkg.com">' . "\n";
+	echo '<link rel="dns-prefetch" href="//cdnjs.cloudflare.com">' . "\n";
+	echo '<link rel="dns-prefetch" href="//cdn.jsdelivr.net">' . "\n";
+	echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
+	echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
+	echo '<link rel="preconnect" href="https://unpkg.com" crossorigin>' . "\n";
+	echo '<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>' . "\n";
+	echo '<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>' . "\n";
+}, 1);
 
 add_filter('script_loader_tag', function ($tag, $handle, $src) {
 	if (! in_array($handle, ['alpinejs', 'alpine-collapse'], true)) {
