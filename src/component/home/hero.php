@@ -27,12 +27,12 @@ $cta_url = $args['cta_url'] ?? '#';
 				<img
 					id="hero-main-image"
 					decoding="async"
-					loading="lazy"
+					fetchpriority="high"
 					width="800"
 					height="995"
 					src="https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home.webp"
 					class="home-hero__image"
-					alt="Websweetstudio Home"
+					alt="Layanan Jasa Pembuatan Website Profesional - Websweetstudio"
 					srcset="https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home.webp 823w, https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home-600x747.webp 600w, https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home-241x300.webp 241w, https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home-768x956.webp 768w"
 					sizes="(max-width: 800px) 100vw, 800px">
 			</div>

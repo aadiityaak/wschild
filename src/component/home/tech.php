@@ -6,23 +6,24 @@
  */
 
 $tech_images = [
-	'https://websweetstudio.com/wp-content/uploads/2022/03/1-300x96.webp',
-	'https://websweetstudio.com/wp-content/uploads/2022/03/2-300x96.webp',
-	'https://websweetstudio.com/wp-content/uploads/2022/03/3-300x96.webp',
-	'https://websweetstudio.com/wp-content/uploads/2022/03/4-300x96.webp',
-	'https://websweetstudio.com/wp-content/uploads/2022/03/5-300x96.webp',
-	'https://websweetstudio.com/wp-content/uploads/2022/03/6-300x96.webp',
+	['url' => 'https://websweetstudio.com/wp-content/uploads/2022/03/1-300x96.webp', 'name' => 'WordPress'],
+	['url' => 'https://websweetstudio.com/wp-content/uploads/2022/03/2-300x96.webp', 'name' => 'Elementor'],
+	['url' => 'https://websweetstudio.com/wp-content/uploads/2022/03/3-300x96.webp', 'name' => 'WooCommerce'],
+	['url' => 'https://websweetstudio.com/wp-content/uploads/2022/03/4-300x96.webp', 'name' => 'PHP'],
+	['url' => 'https://websweetstudio.com/wp-content/uploads/2022/03/5-300x96.webp', 'name' => 'MySQL'],
+	['url' => 'https://websweetstudio.com/wp-content/uploads/2022/03/6-300x96.webp', 'name' => 'JavaScript'],
 ];
 ?>
 
 <section class="home-tech">
 	<div class="umroh-container home-tech__container">
+		<h2 class="screen-reader-text">Teknologi Pengembangan Website yang Kami Gunakan</h2>
 		<div class="swiper home-tech__carousel">
 			<div class="swiper-wrapper">
-				<?php foreach ($tech_images as $index => $img_url) : ?>
+				<?php foreach ($tech_images as $item) : ?>
 					<div class="swiper-slide">
 						<figure class="home-tech__item">
-							<img src="<?php echo esc_url($img_url); ?>" alt="Tech Logo <?php echo $index + 1; ?>" loading="lazy" decoding="async">
+							<img src="<?php echo esc_url($item['url']); ?>" alt="Teknologi <?php echo esc_attr($item['name']); ?> untuk Pembuatan Website" loading="lazy" decoding="async">
 						</figure>
 					</div>
 				<?php endforeach; ?>

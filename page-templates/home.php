@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Trial Component Test
+Template Name: Home Template
 */
 
 if (! defined('ABSPATH')) {

@@ -32,8 +32,8 @@ $qna_items = [
 <section class="home-qna">
 	<div class="umroh-container">
 		<div class="home-qna__header">
-			<h2 class="home-qna__title">Q.N.A</h2>
-			<p class="home-qna__subtitle">Pertanyaan yang Sering Diajukan</p>
+			<h2 class="home-qna__title">Tanya Jawab Jasa Pembuatan Website</h2>
+			<p class="home-qna__subtitle">Beberapa hal yang sering ditanyakan oleh klien kami.</p>
 		</div>
 
 		<div class="home-qna__content" x-data="{ active: 1 }">
@@ -44,7 +44,8 @@ $qna_items = [
 							type="button"
 							class="home-qna__trigger"
 							:class="{ 'home-qna__trigger--active': active === <?php echo $id; ?> }"
-							@click="active = (active === <?php echo $id; ?> ? null : <?php echo $id; ?>)">
+							@click="active = (active === <?php echo $id; ?> ? null : <?php echo $id; ?>)"
+							:aria-expanded="active === <?php echo $id; ?> ? 'true' : 'false'">
 							<span><?php echo esc_html($item['q']); ?></span>
 							<svg class="home-qna__icon" :class="{ 'home-qna__icon--rotated': active === <?php echo $id; ?> }" viewBox="0 0 192 512" xmlns="http://www.w3.org/2000/svg">
 								<path fill="currentColor" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"></path>
@@ -65,3 +66,23 @@ $qna_items = [
 		</div>
 	</div>
 </section>
+
+<!-- FAQ Structured Data (SEO) -->
+<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "FAQPage",
+		"mainEntity": [
+			<?php foreach ($qna_items as $index => $item) : ?> {
+					"@type": "Question",
+					"name": "<?php echo esc_attr($item['q']); ?>",
+					"acceptedAnswer": {
+						"@type": "Answer",
+						"text": "<?php echo esc_attr(strip_tags($item['a'])); ?>"
+					}
+				}
+				<?php echo ($index < count($qna_items) - 1) ? ',' : ''; ?>
+			<?php endforeach; ?>
+		]
+	}
+</script>
