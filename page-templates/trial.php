@@ -13,12 +13,17 @@ $primary_cta_url = '#';
 ?>
 
 <main id="primary" class="umroh-landing">
+	<?php
+	// Include the new Hero component
+	get_template_part('src/component/home/hero');
+	?>
+
 	<section class="umroh-section">
 		<div class="umroh-container">
 			<?php
-			// Include the new pricing-main component for testing
+			// Include the new pricing component for testing
 			get_template_part(
-				'src/component/umroh/pricing-main',
+				'src/component/pricing',
 				null,
 				[
 					'primary_cta_url' => $primary_cta_url,

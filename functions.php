@@ -23,6 +23,14 @@ add_action('wp_enqueue_scripts', function () {
 
 	if (is_page_template('page-templates/landing-jasa-website-umroh.php') || is_page_template('page-templates/trial.php')) {
 		wp_enqueue_script(
+			'gsap',
+			'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js',
+			[],
+			null,
+			true
+		);
+
+		wp_enqueue_script(
 			'wschild-alpine',
 			'https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js',
 			[],
