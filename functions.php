@@ -21,6 +21,24 @@ add_action('wp_enqueue_scripts', function () {
 		wp_get_theme()->get('Version')
 	);
 
+	if (! wp_script_is('alpinejs', 'enqueued') && ! wp_script_is('alpinejs', 'registered')) {
+		wp_enqueue_script(
+			'alpine-collapse',
+			'https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js',
+			[],
+			null,
+			true
+		);
+
+		wp_enqueue_script(
+			'alpinejs',
+			'https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js',
+			['alpine-collapse'],
+			null,
+			true
+		);
+	}
+
 	if (is_page_template('page-templates/landing-jasa-website-umroh.php') || is_page_template('page-templates/trial.php')) {
 		wp_enqueue_style(
 			'swiper-css',
@@ -44,24 +62,6 @@ add_action('wp_enqueue_scripts', function () {
 			null,
 			true
 		);
-
-		if (! wp_script_is('alpinejs', 'enqueued') && ! wp_script_is('alpinejs', 'registered')) {
-			wp_enqueue_script(
-				'alpine-collapse',
-				'https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js',
-				[],
-				null,
-				true
-			);
-
-			wp_enqueue_script(
-				'alpinejs',
-				'https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js',
-				['alpine-collapse'],
-				null,
-				true
-			);
-		}
 
 		wp_add_inline_script(
 			'alpinejs',
