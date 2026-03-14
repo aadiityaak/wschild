@@ -25,7 +25,7 @@ $primary_cta_url = '#';
 	?>
 
 	<section class="umroh-section">
-		<div class="umroh-container">
+		<div class="wschild-container">
 			<?php
 			// Include the new pricing component for testing
 			get_template_part(

@@ -18,7 +18,7 @@ $secondary_cta_url = '#';
 
 <main id="primary" class="umroh-landing">
 	<section class="umroh-hero">
-		<div class="umroh-container">
+		<div class="wschild-container">
 			<p class="umroh-badge">Landing Page</p>
 			<h1 class="umroh-title">Jasa Website Umroh Profesional</h1>
 			<p class="umroh-subtitle">
@@ -47,7 +47,7 @@ $secondary_cta_url = '#';
 	</section>
 
 	<section class="umroh-section">
-		<div class="umroh-container">
+		<div class="wschild-container">
 			<h2 class="umroh-section__title">Solusi Website untuk Travel Umroh</h2>
 			<p class="umroh-section__subtitle">
 				Didesain khusus untuk kebutuhan promosi paket, edukasi jamaah, dan konversi konsultasi.
@@ -70,7 +70,7 @@ $secondary_cta_url = '#';
 	</section>
 
 	<section class="umroh-section umroh-section--alt">
-		<div class="umroh-container">
+		<div class="wschild-container">
 			<h2 class="umroh-section__title">Kenapa Pilih Kami</h2>
 			<div class="umroh-grid umroh-grid--2">
 				<div class="umroh-list">
@@ -106,7 +106,7 @@ $secondary_cta_url = '#';
 	</section>
 
 	<section class="umroh-section">
-		<div class="umroh-container">
+		<div class="wschild-container">
 			<h2 class="umroh-section__title">Paket Pembuatan Website</h2>
 			<?php
 			// Include pricing component
@@ -123,7 +123,7 @@ $secondary_cta_url = '#';
 	</section>
 
 	<section class="umroh-section umroh-section--alt">
-		<div class="umroh-container">
+		<div class="wschild-container">
 			<h2 class="umroh-section__title">FAQ</h2>
 			<div class="umroh-faq">
 				<details class="umroh-faq__item">
@@ -143,7 +143,7 @@ $secondary_cta_url = '#';
 	</section>
 
 	<section class="umroh-section umroh-section--cta">
-		<div class="umroh-container">
+		<div class="wschild-container">
 			<div class="umroh-final">
 				<div>
 					<h2 class="umroh-final__title">Siap tingkatkan penjualan paket umroh?</h2>

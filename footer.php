@@ -16,7 +16,7 @@ if (! defined('ABSPATH')) {
 </div><!-- #content -->
 
 <footer class="wschild-footer">
-	<div class="umroh-container">
+	<div class="wschild-container">
 		<!-- Main Footer Row -->
 		<div class="wschild-footer__main">
 			<!-- Logo Section -->

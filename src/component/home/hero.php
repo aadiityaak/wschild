@@ -12,7 +12,7 @@ $cta_url = $args['cta_url'] ?? '#';
 ?>
 
 <section class="home-hero">
-	<div class="umroh-container">
+	<div class="wschild-container">
 		<div class="home-hero__grid">
 			<div class="home-hero__content">
 				<h1 class="home-hero__title"><?php echo esc_html($title); ?></h1>

@@ -16,7 +16,7 @@ $tech_images = [
 ?>
 
 <section class="home-tech">
-	<div class="umroh-container home-tech__container">
+	<div class="wschild-container home-tech__container">
 		<h2 class="screen-reader-text">Teknologi Pengembangan Website yang Kami Gunakan</h2>
 		<div class="swiper home-tech__carousel">
 			<div class="swiper-wrapper">

@@ -39,7 +39,7 @@ add_action('wp_enqueue_scripts', function () {
 		);
 	}
 
-	if (is_page_template('page-templates/landing-jasa-website-umroh.php') || is_page_template('page-templates/home.php')) {
+	if (is_page_template('page-templates/landing-jasa-website-umroh.php') || is_page_template('page-templates/home.php') || is_page_template('page-templates/about-us.php')) {
 		wp_enqueue_style(
 			'swiper-css',
 			'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css',

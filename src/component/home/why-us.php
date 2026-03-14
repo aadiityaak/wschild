@@ -40,7 +40,7 @@ $why_us_items = [
 ?>
 
 <section class="home-why-us">
-	<div class="umroh-container">
+	<div class="wschild-container">
 		<div class="home-why-us__header">
 			<h2 class="home-why-us__title">Mengapa Perlu Memiliki Web?</h2>
 			<p class="home-why-us__subtitle">Pelajari mengapa memiliki website sangat penting untuk meningkatkan penjualan dan jangkauan pasar Anda.</p>
