@@ -71,6 +71,15 @@ add_action('wp_enqueue_scripts', function () {
 		);
 	}
 
+	// Pricing Card Hover Animation
+	wp_enqueue_script(
+		'wschild-pricing-hover',
+		get_stylesheet_directory_uri() . '/assets/js/pricing-hover.js',
+		['gsap'],
+		wp_get_theme()->get('Version'),
+		true
+	);
+
 	// Circle Cursor
 	wp_enqueue_style(
 		'wschild-cursor',
@@ -194,7 +203,7 @@ if (! function_exists('wschild_render_pricing_card')) {
 	function wschild_render_pricing_card(array $plan, string $primary_cta_url): void
 	{
 		$theme = $plan['theme'] ?? 'purple';
-		$classes = 'umroh-price umroh-price--' . $theme;
+		$classes = 'umroh-price umroh-price--' . $theme . ' umroh-pricing-card';
 		if (! empty($plan['featured'])) {
 			$classes .= ' umroh-price--featured';
 		}
