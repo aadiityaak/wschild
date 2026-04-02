@@ -5,9 +5,9 @@
  * Path: src/component/home/hero.php
  */
 
-$title = $args['title'] ?? 'Jasa Pembuatan Website';
-$subtitle = $args['subtitle'] ?? 'Dapatkan website yang dirancang profesional, mudah digunakan, dan dioptimalkan untuk meningkatkan kehadiran online bisnis Anda.';
-$cta_label = $args['cta_label'] ?? 'Selengkapnya';
+$title = $args['title'] ?? 'Bikin Website Semanis Studio Kami';
+$subtitle = $args['subtitle'] ?? 'Kami meracik website profesional dengan sentuhan kasih sayang, memastikan bisnis Anda tampil memikat dan memberikan pengalaman yang "manis" bagi setiap pengunjung.';
+$cta_label = $args['cta_label'] ?? 'Lihat Menu Kami';
 $cta_url = $args['cta_url'] ?? '#';
 
 $image_url = $args['image_url'] ?? 'https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home.webp';
@@ -21,7 +21,7 @@ $image_srcset = $args['image_srcset'] ?? 'https://websweetstudio.com/wp-content/
 				<h1 class="home-hero__title"><?php echo esc_html($title); ?></h1>
 				<p class="home-hero__subtitle"><?php echo esc_html($subtitle); ?></p>
 				<div class="home-hero__actions">
-					<a href="<?php echo esc_url($cta_url); ?>" class="umroh-button umroh-button--dark umroh-button--pill">
+					<a href="<?php echo esc_url($cta_url); ?>" class="wschild-button wschild-button--dark wschild-button--pill">
 						<?php echo esc_html($cta_label); ?>
 					</a>
 				</div>
@@ -48,8 +48,22 @@ $image_srcset = $args['image_srcset'] ?? 'https://websweetstudio.com/wp-content/
 	document.addEventListener('DOMContentLoaded', function() {
 		const container = document.getElementById('hero-image-container');
 		const image = document.getElementById('hero-main-image');
+		const floatingItems = document.querySelectorAll('.floating-item');
 
-		if (container && image && typeof gsap !== 'undefined') {
+		if (typeof gsap !== 'undefined') {
+			// Initial floating animation
+			floatingItems.forEach((item, index) => {
+				gsap.to(item, {
+					y: '+=20',
+					x: '+=10',
+					rotation: '+=15',
+					duration: 2 + index,
+					repeat: -1,
+					yoyo: true,
+					ease: 'sine.inOut'
+				});
+			});
+
 			window.addEventListener('mousemove', (e) => {
 				const {
 					clientX,
@@ -60,37 +74,60 @@ $image_srcset = $args['image_srcset'] ?? 'https://websweetstudio.com/wp-content/
 					innerHeight
 				} = window;
 
-				// Hitung pergerakan berlawanan (multiplier negatif)
-				// Range -15px sampai 15px untuk translasi
-				const moveX = (clientX - innerWidth / 2) / (innerWidth / 2) * -15;
-				const moveY = (clientY - innerHeight / 2) / (innerHeight / 2) * -15;
+				// Hero Image Tilt
+				if (container && image) {
+					const moveX = (clientX - innerWidth / 2) / (innerWidth / 2) * -15;
+					const moveY = (clientY - innerHeight / 2) / (innerHeight / 2) * -15;
+					const rotateX = (clientY - innerHeight / 2) / (innerHeight / 2) * 10;
+					const rotateY = (clientX - innerWidth / 2) / (innerWidth / 2) * -10;
 
-				// Hitung rotasi 3D (tilt)
-				// Range -10deg sampai 10deg
-				const rotateX = (clientY - innerHeight / 2) / (innerHeight / 2) * 10; // Kebalikan Y untuk Tilt X
-				const rotateY = (clientX - innerWidth / 2) / (innerWidth / 2) * -10; // X untuk Tilt Y
+					gsap.to(image, {
+						x: moveX,
+						y: moveY,
+						rotateX: rotateX,
+						rotateY: rotateY,
+						duration: 1.2,
+						ease: 'power2.out',
+						transformPerspective: 1200,
+						transformOrigin: 'center center'
+					});
+				}
 
-				gsap.to(image, {
-					x: moveX,
-					y: moveY,
-					rotateX: rotateX,
-					rotateY: rotateY,
-					duration: 1.2,
-					ease: 'power2.out',
-					transformPerspective: 1200,
-					transformOrigin: 'center center'
+				// Floating Elements Mouse Follow (Parallax)
+				floatingItems.forEach((item) => {
+					const speed = item.getAttribute('data-speed') || 20;
+					const x = (innerWidth - clientX * speed) / 100;
+					const y = (innerHeight - clientY * speed) / 100;
+
+					gsap.to(item, {
+						x: x,
+						y: y,
+						duration: 1,
+						ease: 'power1.out'
+					});
 				});
 			});
 
-			// Reset saat mouse meninggalkan window atau area tertentu (opsional)
+			// Reset saat mouse meninggalkan window
 			window.addEventListener('mouseleave', () => {
-				gsap.to(image, {
-					x: 0,
-					y: 0,
-					rotateX: 0,
-					rotateY: 0,
-					duration: 1.5,
-					ease: 'elastic.out(1, 0.5)'
+				if (image) {
+					gsap.to(image, {
+						x: 0,
+						y: 0,
+						rotateX: 0,
+						rotateY: 0,
+						duration: 1.5,
+						ease: 'elastic.out(1, 0.5)'
+					});
+				}
+
+				floatingItems.forEach((item) => {
+					gsap.to(item, {
+						x: 0,
+						y: 0,
+						duration: 1.5,
+						ease: 'elastic.out(1, 0.5)'
+					});
 				});
 			});
 		}

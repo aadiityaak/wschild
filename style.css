@@ -19,15 +19,15 @@ h3,
 h4,
 h5,
 h6,
-.umroh-landing,
-.umroh-button,
-.umroh-price__name,
-.umroh-pricing-main__title,
+.wschild-landing,
+.wschild-button,
+.wschild-price__name,
+.wschild-pricing-main__title,
 .home-hero__title {
   font-family: var(--font-main);
 }
 
-.umroh-landing {
+.wschild-landing {
   color: #0f172a;
   background: #ffffff;
 }
@@ -37,7 +37,7 @@ h6,
   margin-inline: auto;
 }
 
-.umroh-hero {
+.wschild-hero {
   padding: 72px 0 56px;
   background:
     radial-gradient(
@@ -54,7 +54,7 @@ h6,
   border-bottom: 1px solid rgba(15, 23, 42, 0.08);
 }
 
-.umroh-badge {
+.wschild-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -66,14 +66,14 @@ h6,
   letter-spacing: 0.02em;
 }
 
-.umroh-title {
+.wschild-title {
   margin: 14px 0 10px;
   font-size: clamp(32px, 4.2vw, 46px);
   line-height: 1.08;
   letter-spacing: -0.02em;
 }
 
-.umroh-subtitle {
+.wschild-subtitle {
   margin: 0;
   max-width: 60ch;
   font-size: 18px;
@@ -81,14 +81,14 @@ h6,
   color: rgba(15, 23, 42, 0.78);
 }
 
-.umroh-cta {
+.wschild-cta {
   margin-top: 22px;
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
 }
 
-.umroh-button {
+.wschild-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -99,164 +99,164 @@ h6,
   border: 1px solid transparent;
 }
 
-.umroh-button--primary {
+.wschild-button--primary {
   background: #0ea5e9;
   border-color: #0ea5e9;
   color: #ffffff;
 }
 
-.umroh-button--ghost {
+.wschild-button--ghost {
   background: rgba(15, 23, 42, 0.04);
   border-color: rgba(15, 23, 42, 0.14);
   color: #0f172a;
 }
 
-.umroh-button--block {
+.wschild-button--block {
   width: 100%;
 }
 
-.umroh-highlights {
+.wschild-highlights {
   margin-top: 28px;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
 }
 
-.umroh-highlight {
+.wschild-highlight {
   padding: 14px 14px;
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.76);
   border: 1px solid rgba(15, 23, 42, 0.08);
 }
 
-.umroh-highlight__title {
+.wschild-highlight__title {
   font-weight: 800;
 }
 
-.umroh-highlight__desc {
+.wschild-highlight__desc {
   color: rgba(15, 23, 42, 0.72);
   margin-top: 4px;
   font-size: 14px;
   line-height: 1.5;
 }
 
-.umroh-section {
+.wschild-section {
   padding: 56px 0;
 }
 
-.umroh-section--alt {
+.wschild-section--alt {
   background: #f8fafc;
   border-top: 1px solid rgba(15, 23, 42, 0.06);
   border-bottom: 1px solid rgba(15, 23, 42, 0.06);
 }
 
-.umroh-section__title {
+.wschild-section__title {
   margin: 0 0 10px;
   font-size: 28px;
   line-height: 1.2;
   letter-spacing: -0.01em;
 }
 
-.umroh-section__subtitle {
+.wschild-section__subtitle {
   margin: 0 0 22px;
   max-width: 70ch;
   color: rgba(15, 23, 42, 0.74);
 }
 
-.umroh-grid {
+.wschild-grid {
   display: grid;
   gap: 16px;
 }
 
-.umroh-grid--2 {
+.wschild-grid--2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.umroh-grid--3 {
+.wschild-grid--3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.umroh-card {
+.wschild-card {
   padding: 18px 18px;
   border-radius: 16px;
   background: #ffffff;
   border: 1px solid rgba(15, 23, 42, 0.08);
 }
 
-.umroh-card__title {
+.wschild-card__title {
   margin: 0 0 8px;
   font-size: 18px;
 }
 
-.umroh-card__desc {
+.wschild-card__desc {
   margin: 0;
   color: rgba(15, 23, 42, 0.72);
   line-height: 1.6;
 }
 
-.umroh-list__item {
+.wschild-list__item {
   padding: 14px 0;
   border-bottom: 1px solid rgba(15, 23, 42, 0.08);
 }
 
-.umroh-list__item:first-child {
+.wschild-list__item:first-child {
   padding-top: 0;
 }
 
-.umroh-list__title {
+.wschild-list__title {
   font-weight: 800;
 }
 
-.umroh-list__desc {
+.wschild-list__desc {
   margin-top: 4px;
   color: rgba(15, 23, 42, 0.72);
 }
 
-.umroh-proof {
+.wschild-proof {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
   align-content: start;
 }
 
-.umroh-proof__box {
+.wschild-proof__box {
   padding: 16px 16px;
   border-radius: 16px;
   background: #ffffff;
   border: 1px solid rgba(15, 23, 42, 0.08);
 }
 
-.umroh-proof__kpi {
+.wschild-proof__kpi {
   font-size: 26px;
   font-weight: 900;
   letter-spacing: -0.02em;
 }
 
-.umroh-proof__label {
+.wschild-proof__label {
   margin-top: 6px;
   color: rgba(15, 23, 42, 0.72);
 }
 
 /* Pricing Refactor - Theme Colors */
-.umroh-price--purple {
+.wschild-price--purple {
   --theme-soft: #e0d9ff;
   --theme-solid: #4c4c80;
   --theme-text: #ffffff;
 }
 
-.umroh-price--orange {
+.wschild-price--orange {
   --theme-soft: #fce9d2;
   --theme-solid: #f97316;
   --theme-text: #ffffff;
 }
 
-.umroh-price--pink {
+.wschild-price--pink {
   --theme-soft: #f8c7ca;
   --theme-solid: #e11d48;
   --theme-text: #ffffff;
 }
 
-.umroh-price {
+.wschild-price {
   padding: 0;
   border-radius: 24px;
   background: #ffffff;
@@ -270,16 +270,16 @@ h6,
   flex-direction: column;
 }
 
-.umroh-price--featured {
+.wschild-price--featured {
   box-shadow: 0 12px 40px rgba(14, 165, 233, 0.18);
 }
 
-.umroh-price__header {
+.wschild-price__header {
   padding: 32px 24px 24px;
   text-align: center;
 }
 
-.umroh-price__name {
+.wschild-price__name {
   font-weight: 800;
   font-size: 20px;
   text-transform: uppercase;
@@ -287,14 +287,14 @@ h6,
   color: #0f172a;
 }
 
-.umroh-price__body {
+.wschild-price__body {
   padding: 0 10px 32px;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.umroh-price__badge {
+.wschild-price__badge {
   background: var(--theme-solid, #0f172a);
   color: var(--theme-text, #ffffff);
   padding: 14px;
@@ -306,19 +306,19 @@ h6,
   margin-bottom: 24px;
 }
 
-.umroh-price__amount {
+.wschild-price__amount {
   font-size: 24px;
   font-weight: 800;
 }
 
-.umroh-price__old {
+.wschild-price__old {
   font-size: 14px;
   opacity: 0.7;
   text-decoration: line-through;
   font-weight: 500;
 }
 
-.umroh-price__list {
+.wschild-price__list {
   margin: 0 0 32px;
   padding: 0;
   list-style: none;
@@ -326,7 +326,7 @@ h6,
   flex: 1;
 }
 
-.umroh-price__list li {
+.wschild-price__list li {
   padding: 12px 0;
   border-bottom: 1px solid rgba(15, 23, 42, 0.06);
   color: rgba(15, 23, 42, 0.72);
@@ -337,17 +337,17 @@ h6,
   gap: 8px;
 }
 
-.umroh-price__list li:last-child {
+.wschild-price__list li:last-child {
   border-bottom: none;
 }
 
-.umroh-check-icon {
+.wschild-check-icon {
   width: 16px;
   height: 16px;
   color: #0f172a;
 }
 
-.umroh-button--pill {
+.wschild-button--pill {
   border-radius: 999px;
   padding: 14px 32px;
   font-weight: 700;
@@ -355,20 +355,20 @@ h6,
   min-width: 180px;
 }
 
-a.umroh-button--dark,
-a.umroh-button--dark:visited {
+a.wschild-button--dark,
+a.wschild-button--dark:visited {
   background: #1e1e1e;
   color: #ffffff;
   border: 1px solid #1e1e1e;
   border-radius: 30px;
 }
 
-a.umroh-button--dark:hover {
+a.wschild-button--dark:hover {
   background: #000000;
   color: #ffffff;
 }
 
-.umroh-price__actions {
+.wschild-price__actions {
   display: flex;
   justify-content: center;
 }
@@ -377,7 +377,7 @@ a.umroh-button--dark:hover {
   display: none !important;
 }
 
-.umroh-modal {
+.wschild-modal {
   position: fixed;
   inset: 0;
   z-index: 9999;
@@ -386,13 +386,13 @@ a.umroh-button--dark:hover {
   padding: 18px;
 }
 
-.umroh-modal__backdrop {
+.wschild-modal__backdrop {
   position: absolute;
   inset: 0;
   background: rgba(15, 23, 42, 0.6);
 }
 
-.umroh-modal__panel {
+.wschild-modal__panel {
   position: relative;
   width: min(720px, 100%);
   background: #ffffff;
@@ -402,7 +402,7 @@ a.umroh-button--dark:hover {
   padding: 18px;
 }
 
-.umroh-modal__header {
+.wschild-modal__header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -411,18 +411,18 @@ a.umroh-button--dark:hover {
   padding-bottom: 12px;
 }
 
-.umroh-modal__title {
+.wschild-modal__title {
   font-weight: 900;
   font-size: 18px;
 }
 
-.umroh-modal__subtitle {
+.wschild-modal__subtitle {
   margin-top: 6px;
   color: rgba(15, 23, 42, 0.72);
   line-height: 1.5;
 }
 
-.umroh-modal__close {
+.wschild-modal__close {
   background: rgba(15, 23, 42, 0.06);
   border: 1px solid rgba(15, 23, 42, 0.14);
   border-radius: 12px;
@@ -431,52 +431,52 @@ a.umroh-button--dark:hover {
   cursor: pointer;
 }
 
-.umroh-modal__list {
+.wschild-modal__list {
   margin: 14px 0 0;
   padding-left: 18px;
   color: rgba(15, 23, 42, 0.8);
   line-height: 1.7;
 }
 
-.umroh-modal__item {
+.wschild-modal__item {
   padding: 3px 0;
 }
 
-.umroh-price__list {
+.wschild-price__list {
   margin: 14px 0 18px;
   padding-left: 18px;
   color: rgba(15, 23, 42, 0.74);
 }
 
-.umroh-note {
+.wschild-note {
   margin: 16px 0 0;
   color: rgba(15, 23, 42, 0.7);
 }
 
-.umroh-faq__item {
+.wschild-faq__item {
   padding: 14px 16px;
   border-radius: 16px;
   background: #ffffff;
   border: 1px solid rgba(15, 23, 42, 0.08);
 }
 
-.umroh-faq {
+.wschild-faq {
   display: grid;
   gap: 12px;
 }
 
-.umroh-faq__q {
+.wschild-faq__q {
   font-weight: 800;
   cursor: pointer;
 }
 
-.umroh-faq__a {
+.wschild-faq__a {
   margin-top: 10px;
   color: rgba(15, 23, 42, 0.72);
   line-height: 1.6;
 }
 
-.umroh-section--cta {
+.wschild-section--cta {
   padding: 64px 0;
   background: linear-gradient(
     135deg,
@@ -485,7 +485,7 @@ a.umroh-button--dark:hover {
   );
 }
 
-.umroh-final {
+.wschild-final {
   padding: 22px 22px;
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.72);
@@ -496,29 +496,29 @@ a.umroh-button--dark:hover {
   align-items: center;
 }
 
-.umroh-final__title {
+.wschild-final__title {
   margin: 0 0 8px;
 }
 
-.umroh-final__subtitle {
+.wschild-final__subtitle {
   margin: 0;
   color: rgba(15, 23, 42, 0.74);
   line-height: 1.6;
 }
 
-.umroh-pricing-header {
+.wschild-pricing-header {
   text-align: center;
   margin-bottom: 48px;
 }
 
-.umroh-pricing-main__title {
+.wschild-pricing-main__title {
   font-size: clamp(32px, 5vw, 48px);
   font-weight: 900;
   margin-bottom: 8px;
   color: #0f172a;
 }
 
-.umroh-pricing-main__subtitle {
+.wschild-pricing-main__subtitle {
   font-size: 18px;
   color: rgba(15, 23, 42, 0.6);
   margin: 0;
@@ -662,7 +662,41 @@ a.umroh-button--dark:hover {
   padding: 100px 0;
   overflow: hidden;
   background: #ffffff;
+  position: relative;
 }
+
+.home-hero .wschild-container {
+  position: relative;
+  z-index: 1;
+}
+
+.home-hero__floating-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.floating-item {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  opacity: 0.6;
+  filter: blur(0.5px);
+}
+
+.floating-item svg {
+  width: 100%;
+  height: 100%;
+}
+
+.item-1 { top: 15%; left: 5%; }
+.item-2 { top: 20%; right: 10%; }
+.item-3 { bottom: 25%; left: 15%; }
+.item-4 { bottom: 15%; right: 25%; }
 
 .home-hero__grid {
   display: grid;
@@ -944,16 +978,40 @@ a.umroh-button--dark:hover {
 }
 
 .home-why-us__card {
-  padding: 0;
-  background: transparent;
-  border-radius: 0;
-  transition: all 0.3s ease;
-  border: none;
+  padding: 32px;
+  background: #ffffff;
+  border-radius: 32px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+  position: relative;
+  overflow: hidden;
+}
+
+.home-why-us__card::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, var(--sweet-pink) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.home-why-us__card:hover::after {
+  opacity: 0.1;
+}
+
+.home-why-us__card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .home-why-us__card:hover {
-  background: transparent;
-  box-shadow: none;
   transform: translateY(-5px);
 }
 
@@ -1110,23 +1168,23 @@ a.umroh-button--dark:hover {
 }
 
 @media (max-width: 900px) {
-  .umroh-highlights {
+  .wschild-highlights {
     grid-template-columns: 1fr;
   }
 
-  .umroh-grid--3 {
+  .wschild-grid--3 {
     grid-template-columns: 1fr;
   }
 
-  .umroh-grid--2 {
+  .wschild-grid--2 {
     grid-template-columns: 1fr;
   }
 
-  .umroh-proof {
+  .wschild-proof {
     grid-template-columns: 1fr;
   }
 
-  .umroh-final {
+  .wschild-final {
     grid-template-columns: 1fr;
   }
 }

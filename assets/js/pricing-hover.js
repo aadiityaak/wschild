@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const pricingCards = document.querySelectorAll(".umroh-pricing-card");
+  const pricingCards = document.querySelectorAll(".wschild-pricing-card");
 
   if (!pricingCards.length) return;
 

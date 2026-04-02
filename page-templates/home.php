@@ -12,7 +12,7 @@ get_header();
 $primary_cta_url = '#';
 ?>
 
-<main id="primary" class="umroh-landing">
+<main id="primary" class="wschild-landing">
 	<?php
 	// Include the new Hero component
 	get_template_part('src/component/home/hero');
@@ -24,7 +24,7 @@ $primary_cta_url = '#';
 	get_template_part('src/component/home/why-us');
 	?>
 
-	<section class="umroh-section">
+	<section class="wschild-section">
 		<div class="wschild-container">
 			<?php
 			// Include the new pricing component for testing

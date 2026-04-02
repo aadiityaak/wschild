@@ -74,40 +74,40 @@ if (! isset($primary_cta_url)) {
 ?>
 
 <div x-data='wschildPricing(<?php echo wp_json_encode($design_data); ?>)'>
-	<div class="umroh-grid umroh-grid--2 umroh-pricing">
+	<div class="wschild-grid wschild-grid--2 wschild-pricing">
 		<?php foreach ($pricing_plans as $plan) : ?>
 			<?php wschild_render_pricing_card($plan, $primary_cta_url); ?>
 		<?php endforeach; ?>
 	</div>
 
-	<div class="umroh-modal" x-cloak x-show="isOpen" x-transition.opacity @keydown.escape.window="closeDesign()" role="dialog" aria-modal="true">
-		<div class="umroh-modal__backdrop" @click="closeDesign()"></div>
-		<div class="umroh-modal__panel" @click.stop>
-			<div class="umroh-modal__header">
+	<div class="wschild-modal" x-cloak x-show="isOpen" x-transition.opacity @keydown.escape.window="closeDesign()" role="dialog" aria-modal="true">
+		<div class="wschild-modal__backdrop" @click="closeDesign()"></div>
+		<div class="wschild-modal__panel" @click.stop>
+			<div class="wschild-modal__header">
 				<div>
-					<h3 class="umroh-modal__title" x-text="active().title"></h3>
-					<p class="umroh-modal__subtitle" x-text="active().subtitle"></p>
+					<h3 class="wschild-modal__title" x-text="active().title"></h3>
+					<p class="wschild-modal__subtitle" x-text="active().subtitle"></p>
 				</div>
-				<button type="button" class="umroh-modal__close" @click="closeDesign()">
+				<button type="button" class="wschild-modal__close" @click="closeDesign()">
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 						<line x1="18" y1="6" x2="6" y2="18"></line>
 						<line x1="6" y1="6" x2="18" y2="18"></line>
 					</svg>
 				</button>
 			</div>
-			<div class="umroh-modal__body">
-				<ul class="umroh-check-list">
+			<div class="wschild-modal__body">
+				<ul class="wschild-check-list">
 					<template x-for="item in active().items" :key="item">
 						<li>
-							<svg class="umroh-check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+							<svg class="wschild-check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
 								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
 							</svg>
 							<span x-text="item"></span>
 						</li>
 					</template>
 				</ul>
-				<div class="umroh-modal__cta">
-					<a class="umroh-button umroh-button--primary umroh-button--block" href="<?php echo esc_url($primary_cta_url); ?>">Konsultasi Desain Ini</a>
+				<div class="wschild-modal__cta">
+					<a class="wschild-button wschild-button--primary wschild-button--block" href="<?php echo esc_url($primary_cta_url); ?>">Konsultasi Desain Ini</a>
 				</div>
 			</div>
 		</div>
