@@ -5,7 +5,7 @@
  * Path: src/component/home/hero.php
  */
 
-$title = $args['title'] ?? 'Wujudkan Website Impian dengan Sentuhan Elegan';
+$title = $args['title'] ?? 'Wujudkan Website Impian';
 $subtitle = $args['subtitle'] ?? 'Websweet Studio menghadirkan desain yang memikat dan pengalaman pengguna yang lembut, dirancang khusus untuk memperkuat kredibilitas bisnis Anda di dunia digital.';
 $cta_label = $args['cta_label'] ?? 'Mulai Eksplorasi';
 $cta_url = $args['cta_url'] ?? '#';

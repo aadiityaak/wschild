@@ -710,7 +710,7 @@ a.wschild-button--dark:hover {
 }
 
 .home-hero__title {
-  font-size: clamp(40px, 6vw, 61px);
+  font-size: clamp(40px, 6vw, 45px);
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 24px;
