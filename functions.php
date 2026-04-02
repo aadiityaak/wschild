@@ -29,33 +29,34 @@ add_action('wp_enqueue_scripts', function () {
 		wp_get_theme()->get('Version')
 	);
 
-	if (! wp_script_is('alpinejs', 'enqueued') && ! wp_script_is('alpinejs', 'registered')) {
-		// Enqueue Alpine Collapse only on home page (used in QNA component)
-		if (is_page_template('page-templates/home.php')) {
-			wp_enqueue_script(
-				'alpine-collapse',
-				'https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js',
-				[],
-				null,
-				true
-			);
-		}
+	// Enqueue Alpine Collapse only on home page
+	if (is_page_template('page-templates/home.php') && ! wp_script_is('alpine-collapse', 'enqueued') && ! wp_script_is('alpine-collapse', 'registered')) {
+		wp_enqueue_script(
+			'alpine-collapse',
+			'https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js',
+			[],
+			null,
+			false // Move to head
+		);
+	}
 
+	// Always enqueue theme-specific Alpine components FIRST
+	wp_enqueue_script(
+		'wschild-pricing',
+		get_stylesheet_directory_uri() . '/assets/js/pricing.js',
+		[], // Remove alpinejs dependency to control order
+		wp_get_theme()->get('Version'),
+		false // Move to head
+	);
+
+	// Enqueue Alpine.js LAST (with defer, it will wait for components)
+	if (! wp_script_is('alpinejs', 'enqueued') && ! wp_script_is('alpinejs', 'registered')) {
 		wp_enqueue_script(
 			'alpinejs',
 			'https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js',
-			is_page_template('page-templates/home.php') ? ['alpine-collapse'] : [],
+			is_page_template('page-templates/home.php') ? ['alpine-collapse', 'wschild-pricing'] : ['wschild-pricing'],
 			null,
-			true
-		);
-
-		// Pricing & Modal Logic
-		wp_enqueue_script(
-			'wschild-pricing',
-			get_stylesheet_directory_uri() . '/assets/js/pricing.js',
-			['alpinejs'],
-			wp_get_theme()->get('Version'),
-			true
+			false // Move to head
 		);
 	}
 
@@ -101,6 +102,19 @@ add_action('wp_enqueue_scripts', function () {
 		true
 	);
 });
+
+/**
+ * Add defer attribute to Alpine.js and related scripts
+ */
+add_filter('script_loader_tag', function ($tag, $handle) {
+	if (in_array($handle, ['alpinejs', 'alpine-collapse', 'wschild-pricing'])) {
+		if (strpos($tag, 'defer') === false) {
+			return str_replace(' src', ' defer src', $tag);
+		}
+	}
+	return $tag;
+}, 10, 2);
+
 
 /**
  * Register Navigation Menus & Theme Support
