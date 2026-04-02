@@ -25,7 +25,7 @@ if (! defined('ABSPATH')) {
 <body <?php body_class(); ?> x-data="{ mobileMenuOpen: false }">
 	<?php wp_body_open(); ?>
 
-	<header id="masthead" class="site-header">
+	<header id="masthead" class="site-header sticky-header">
 		<?php get_template_part('src/component/header'); ?>
 	</header>
 

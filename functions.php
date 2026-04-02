@@ -49,11 +49,13 @@ add_action('wp_enqueue_scripts', function () {
 			true
 		);
 
-		// Pricing & Modal Logic (Always include if AlpineJS is present for robustness)
-		wp_add_inline_script(
-			'alpinejs',
-			"window.wschildPricing=function(designs){return{designs:designs,activeKey:null,isOpen:false,openDesign(key){this.activeKey=key;this.isOpen=true;},closeDesign(){this.isOpen=false;},active(){const empty={title:'',subtitle:'',items:[]};if(!this.activeKey){return empty;}return this.designs&&this.designs[this.activeKey]?this.designs[this.activeKey]:empty;}}};",
-			'after'
+		// Pricing & Modal Logic
+		wp_enqueue_script(
+			'wschild-pricing',
+			get_stylesheet_directory_uri() . '/assets/js/pricing.js',
+			['alpinejs'],
+			wp_get_theme()->get('Version'),
+			true
 		);
 	}
 
@@ -76,10 +78,25 @@ add_action('wp_enqueue_scripts', function () {
 		wp_get_theme()->get('Version')
 	);
 
+	wp_enqueue_style(
+		'wschild-header',
+		get_stylesheet_directory_uri() . '/assets/css/header.css',
+		[],
+		wp_get_theme()->get('Version')
+	);
+
 	wp_enqueue_script(
 		'wschild-cursor',
 		get_stylesheet_directory_uri() . '/assets/js/cursor.js',
 		['gsap'],
+		wp_get_theme()->get('Version'),
+		true
+	);
+
+	wp_enqueue_script(
+		'wschild-header',
+		get_stylesheet_directory_uri() . '/assets/js/header.js',
+		[],
 		wp_get_theme()->get('Version'),
 		true
 	);
@@ -151,7 +168,7 @@ add_action('wp_head', function () {
 }, 1);
 
 add_filter('script_loader_tag', function ($tag, $handle, $src) {
-	if (! in_array($handle, ['alpinejs', 'alpine-collapse', 'gsap', 'wschild-cursor'], true)) {
+	if (! in_array($handle, ['alpinejs', 'alpine-collapse', 'gsap', 'wschild-cursor', 'wschild-pricing'], true)) {
 		return $tag;
 	}
 
