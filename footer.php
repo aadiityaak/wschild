@@ -108,6 +108,8 @@ if (! defined('ABSPATH')) {
 	</div>
 </div>
 
+<div class="cursor-circle"></div>
+
 <?php wp_footer(); ?>
 
 </body>

@@ -1,0 +1,23 @@
+.cursor-circle {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  background-color: #fff;
+  transition:
+    width 0.3s,
+    height 0.3s;
+}
+
+.cursor-circle.active {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid #fff;
+}

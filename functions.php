@@ -58,17 +58,31 @@ add_action('wp_enqueue_scripts', function () {
 	}
 
 	// GSAP for Mouse Movement Effects (Hero & Why Us components)
-	if (is_page_template(['page-templates/home.php', 'page-templates/about-us.php', 'page-templates/services.php', 'page-templates/pricing.php', 'page-templates/contact.php'])) {
-		if (! wp_script_is('gsap', 'enqueued') && ! wp_script_is('gsap', 'registered')) {
-			wp_enqueue_script(
-				'gsap',
-				'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js',
-				[],
-				null,
-				true
-			);
-		}
+	if (! wp_script_is('gsap', 'enqueued') && ! wp_script_is('gsap', 'registered')) {
+		wp_enqueue_script(
+			'gsap',
+			'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js',
+			[],
+			null,
+			true
+		);
 	}
+
+	// Circle Cursor
+	wp_enqueue_style(
+		'wschild-cursor',
+		get_stylesheet_directory_uri() . '/assets/css/cursor.css',
+		[],
+		wp_get_theme()->get('Version')
+	);
+
+	wp_enqueue_script(
+		'wschild-cursor',
+		get_stylesheet_directory_uri() . '/assets/js/cursor.js',
+		['gsap'],
+		wp_get_theme()->get('Version'),
+		true
+	);
 });
 
 /**
@@ -137,7 +151,7 @@ add_action('wp_head', function () {
 }, 1);
 
 add_filter('script_loader_tag', function ($tag, $handle, $src) {
-	if (! in_array($handle, ['alpinejs', 'alpine-collapse', 'gsap'], true)) {
+	if (! in_array($handle, ['alpinejs', 'alpine-collapse', 'gsap', 'wschild-cursor'], true)) {
 		return $tag;
 	}
 
