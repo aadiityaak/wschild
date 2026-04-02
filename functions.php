@@ -48,6 +48,13 @@ add_action('wp_enqueue_scripts', function () {
 			null,
 			true
 		);
+
+		// Pricing & Modal Logic (Always include if AlpineJS is present for robustness)
+		wp_add_inline_script(
+			'alpinejs',
+			"window.wschildPricing=function(designs){return{designs:designs,activeKey:null,isOpen:false,openDesign(key){this.activeKey=key;this.isOpen=true;},closeDesign(){this.isOpen=false;},active(){const empty={title:'',subtitle:'',items:[]};if(!this.activeKey){return empty;}return this.designs&&this.designs[this.activeKey]?this.designs[this.activeKey]:empty;}}};",
+			'after'
+		);
 	}
 
 	// GSAP for Mouse Movement Effects (Hero & Why Us components)
@@ -61,15 +68,6 @@ add_action('wp_enqueue_scripts', function () {
 				true
 			);
 		}
-	}
-
-	// Pricing Logic (Home, Pricing Template, & Landing Umroh)
-	if (is_page_template(['page-templates/home.php', 'page-templates/pricing.php', 'page-templates/landing-jasa-website-umroh.php'])) {
-		wp_add_inline_script(
-			'alpinejs',
-			"window.wschildPricing=function(designs){return{designs:designs,activeKey:null,isOpen:false,openDesign:function(key){this.activeKey=key;this.isOpen=true;},closeDesign:function(){this.isOpen=false;},get active(){var empty={title:\"\",subtitle:\"\",items:[]};if(!this.activeKey){return empty;}return this.designs&&this.designs[this.activeKey]?this.designs[this.activeKey]:empty;}}};",
-			'after'
-		);
 	}
 });
 

@@ -113,8 +113,8 @@ $primary_cta_url = $args['primary_cta_url'] ?? '#';
 			<div class="umroh-modal__panel" @click.stop>
 				<div class="umroh-modal__header">
 					<div>
-						<h3 class="umroh-modal__title" x-text="active.title"></h3>
-						<p class="umroh-modal__subtitle" x-text="active.subtitle"></p>
+						<h3 class="umroh-modal__title" x-text="active().title"></h3>
+						<p class="umroh-modal__subtitle" x-text="active().subtitle"></p>
 					</div>
 					<button type="button" class="umroh-modal__close" @click="closeDesign()">
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -125,7 +125,7 @@ $primary_cta_url = $args['primary_cta_url'] ?? '#';
 				</div>
 				<div class="umroh-modal__body">
 					<ul class="umroh-check-list">
-						<template x-for="item in active.items" :key="item">
+						<template x-for="item in active().items" :key="item">
 							<li>
 								<svg class="umroh-check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
 									<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
