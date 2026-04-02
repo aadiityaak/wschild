@@ -5,9 +5,9 @@
  * Path: src/component/home/hero.php
  */
 
-$title = $args['title'] ?? 'Bikin Website Semanis Studio Kami';
-$subtitle = $args['subtitle'] ?? 'Kami meracik website profesional dengan sentuhan kasih sayang, memastikan bisnis Anda tampil memikat dan memberikan pengalaman yang "manis" bagi setiap pengunjung.';
-$cta_label = $args['cta_label'] ?? 'Lihat Menu Kami';
+$title = $args['title'] ?? 'Wujudkan Website Impian dengan Sentuhan Elegan';
+$subtitle = $args['subtitle'] ?? 'Websweet Studio menghadirkan desain yang memikat dan pengalaman pengguna yang lembut, dirancang khusus untuk memperkuat kredibilitas bisnis Anda di dunia digital.';
+$cta_label = $args['cta_label'] ?? 'Mulai Eksplorasi';
 $cta_url = $args['cta_url'] ?? '#';
 
 $image_url = $args['image_url'] ?? 'https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home.webp';
