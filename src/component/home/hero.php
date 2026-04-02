@@ -11,7 +11,7 @@ $cta_label = $args['cta_label'] ?? 'Selengkapnya';
 $cta_url = $args['cta_url'] ?? '#';
 
 $image_url = $args['image_url'] ?? 'https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home.webp';
-$image_srcset = $args['image_srcset'] ?? 'https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home.webp 823w, https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home-600x747.webp 600w, https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home-241x300.webp 241w, https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home-768x956.webp 768w';
+$image_srcset = $args['image_srcset'] ?? 'https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home-241x300.webp 241w, https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home-600x747.webp 600w, https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home-768x956.webp 768w, https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home.webp 823w';
 ?>
 
 <section class="home-hero">
@@ -38,7 +38,7 @@ $image_srcset = $args['image_srcset'] ?? 'https://websweetstudio.com/wp-content/
 					class="home-hero__image"
 					alt="<?php echo esc_attr($title); ?> - Websweetstudio"
 					srcset="<?php echo esc_attr($image_srcset); ?>"
-					sizes="(max-width: 800px) 100vw, 800px">
+					sizes="(max-width: 480px) 241px, (max-width: 768px) 600px, (max-width: 1024px) 768px, 800px">
 			</div>
 		</div>
 	</div>

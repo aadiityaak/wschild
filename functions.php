@@ -132,7 +132,7 @@ add_action('wp_head', function () {
 	}
 
 	if ($lcp_image) {
-		echo '<link rel="preload" as="image" href="' . esc_url($lcp_image) . '" imagesrcset="' . esc_attr($lcp_srcset) . '" imagesizes="(max-width: 800px) 100vw, 800px" fetchpriority="high">' . "\n";
+		echo '<link rel="preload" as="image" href="' . esc_url($lcp_image) . '" imagesrcset="' . esc_attr($lcp_srcset) . '" imagesizes="(max-width: 480px) 241px, (max-width: 768px) 600px, (max-width: 1024px) 768px, 800px" fetchpriority="high">' . "\n";
 	}
 }, 1);
 
