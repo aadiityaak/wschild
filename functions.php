@@ -30,47 +30,41 @@ add_action('wp_enqueue_scripts', function () {
 	);
 
 	if (! wp_script_is('alpinejs', 'enqueued') && ! wp_script_is('alpinejs', 'registered')) {
-		wp_enqueue_script(
-			'alpine-collapse',
-			'https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js',
-			[],
-			null,
-			true
-		);
+		// Enqueue Alpine Collapse only on home page (used in QNA component)
+		if (is_page_template('page-templates/home.php')) {
+			wp_enqueue_script(
+				'alpine-collapse',
+				'https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js',
+				[],
+				null,
+				true
+			);
+		}
 
 		wp_enqueue_script(
 			'alpinejs',
 			'https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js',
-			['alpine-collapse'],
+			is_page_template('page-templates/home.php') ? ['alpine-collapse'] : [],
 			null,
 			true
 		);
 	}
 
-	if (is_page_template('page-templates/landing-jasa-website-umroh.php') || is_page_template('page-templates/home.php') || is_page_template('page-templates/about-us.php') || is_page_template('page-templates/services.php') || is_page_template('page-templates/pricing.php') || is_page_template('page-templates/contact.php')) {
-		wp_enqueue_style(
-			'swiper-css',
-			'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css',
-			[],
-			'11.0.0'
-		);
+	// GSAP for Mouse Movement Effects (Hero & Why Us components)
+	if (is_page_template(['page-templates/home.php', 'page-templates/about-us.php', 'page-templates/services.php', 'page-templates/pricing.php', 'page-templates/contact.php'])) {
+		if (! wp_script_is('gsap', 'enqueued') && ! wp_script_is('gsap', 'registered')) {
+			wp_enqueue_script(
+				'gsap',
+				'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js',
+				[],
+				null,
+				true
+			);
+		}
+	}
 
-		wp_enqueue_script(
-			'swiper-js',
-			'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js',
-			[],
-			'11.0.0',
-			true
-		);
-
-		wp_enqueue_script(
-			'gsap',
-			'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js',
-			[],
-			null,
-			true
-		);
-
+	// Pricing Logic (Home, Pricing Template, & Landing Umroh)
+	if (is_page_template(['page-templates/home.php', 'page-templates/pricing.php', 'page-templates/landing-jasa-website-umroh.php'])) {
 		wp_add_inline_script(
 			'alpinejs',
 			"window.wschildPricing=function(designs){return{designs:designs,activeKey:null,isOpen:false,openDesign:function(key){this.activeKey=key;this.isOpen=true;},closeDesign:function(){this.isOpen=false;},get active(){var empty={title:\"\",subtitle:\"\",items:[]};if(!this.activeKey){return empty;}return this.designs&&this.designs[this.activeKey]?this.designs[this.activeKey]:empty;}}};",
@@ -101,12 +95,10 @@ add_action('wp_head', function () {
 	echo '<link rel="dns-prefetch" href="//fonts.gstatic.com">' . "\n";
 	echo '<link rel="dns-prefetch" href="//unpkg.com">' . "\n";
 	echo '<link rel="dns-prefetch" href="//cdnjs.cloudflare.com">' . "\n";
-	echo '<link rel="dns-prefetch" href="//cdn.jsdelivr.net">' . "\n";
 	echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
 	echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
 	echo '<link rel="preconnect" href="https://unpkg.com" crossorigin>' . "\n";
 	echo '<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>' . "\n";
-	echo '<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>' . "\n";
 
 	// 3. LCP Image Preload
 	$lcp_image = '';
@@ -147,7 +139,7 @@ add_action('wp_head', function () {
 }, 1);
 
 add_filter('script_loader_tag', function ($tag, $handle, $src) {
-	if (! in_array($handle, ['alpinejs', 'alpine-collapse', 'swiper-js', 'gsap'], true)) {
+	if (! in_array($handle, ['alpinejs', 'alpine-collapse', 'gsap'], true)) {
 		return $tag;
 	}
 

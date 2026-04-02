@@ -839,36 +839,60 @@ a.umroh-button--dark:hover {
   padding: 0 50px; /* Memberi ruang untuk panah di kiri-kanan */
 }
 
-.home-tech__carousel {
+.home-tech__carousel-alpine {
   width: 100%;
-  height: auto;
-  min-height: 80px; /* Pre-size to prevent layout shift and reduce reflow calculations */
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
-.home-tech__prev,
-.home-tech__next {
-  color: #666666 !important;
-  transform: scale(0.4);
+.home-tech__wrapper-alpine {
+  display: flex;
+  width: 100%;
+}
+
+.home-tech__slide-alpine {
+  flex: 0 0 50%;
+  width: 50%;
+}
+
+@media (min-width: 768px) {
+  .home-tech__slide-alpine {
+    flex: 0 0 25%;
+    width: 25%;
+  }
+}
+
+.home-tech__nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent !important;
+  border: none !important;
+  border-radius: 50% !important;
+  width: 36px !important;
+  height: 36px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  color: #666666;
   transition: all 0.3s ease;
+  padding: 0;
 }
 
-.home-tech__prev:hover,
-.home-tech__next:hover {
+.home-tech__nav-btn:hover {
   color: #000000 !important;
-  transform: scale(0.8);
+  background: rgba(0, 0, 0, 0.05) !important;
 }
 
-.home-tech__prev::after,
-.home-tech__next::after {
-  font-weight: 900;
+.home-tech__prev-btn {
+  left: 0;
 }
 
-.home-tech__prev {
-  left: 0 !important;
-}
-
-.home-tech__next {
-  right: 0 !important;
+.home-tech__next-btn {
+  right: 0;
 }
 
 .home-tech__item {

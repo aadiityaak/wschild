@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tech Component (Carousel)
+ * Tech Component (Carousel) - AlpineJS Version
  * Path: src/component/home/tech.php
  */
 
@@ -16,12 +16,47 @@ $tech_images = [
 ?>
 
 <section class="home-tech">
-	<div class="wschild-container home-tech__container">
+	<div class="wschild-container home-tech__container"
+		x-data="{
+			skip: 1,
+			autoplay: null,
+			next() {
+				const container = this.$refs.carousel;
+				const itemWidth = container.firstElementChild.firstElementChild.offsetWidth;
+				const maxScroll = container.scrollWidth - container.offsetWidth;
+				
+				if (container.scrollLeft >= (maxScroll - 10)) {
+					container.scrollTo({ left: 0, behavior: 'smooth' });
+				} else {
+					container.scrollBy({ left: itemWidth, behavior: 'smooth' });
+				}
+			},
+			prev() {
+				const container = this.$refs.carousel;
+				const itemWidth = container.firstElementChild.firstElementChild.offsetWidth;
+				
+				if (container.scrollLeft <= 10) {
+					container.scrollTo({ left: container.scrollWidth, behavior: 'smooth' });
+				} else {
+					container.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+				}
+			},
+			startAutoplay() {
+				this.autoplay = setInterval(() => { this.next() }, 4000);
+			},
+			stopAutoplay() {
+				clearInterval(this.autoplay);
+			}
+		}"
+		x-init="startAutoplay()"
+		@mouseenter="stopAutoplay()"
+		@mouseleave="startAutoplay()">
 		<h2 class="screen-reader-text">Teknologi Pengembangan Website yang Kami Gunakan</h2>
-		<div class="swiper home-tech__carousel">
-			<div class="swiper-wrapper">
+
+		<div class="home-tech__carousel-alpine" x-ref="carousel">
+			<div class="home-tech__wrapper-alpine">
 				<?php foreach ($tech_images as $item) : ?>
-					<div class="swiper-slide">
+					<div class="home-tech__slide-alpine">
 						<figure class="home-tech__item">
 							<img src="<?php echo esc_url($item['url']); ?>" alt="Teknologi <?php echo esc_attr($item['name']); ?> untuk Pembuatan Website" loading="lazy" decoding="async">
 						</figure>
@@ -29,62 +64,17 @@ $tech_images = [
 				<?php endforeach; ?>
 			</div>
 		</div>
+
 		<!-- Navigation Arrows -->
-		<div class="swiper-button-prev home-tech__prev"></div>
-		<div class="swiper-button-next home-tech__next"></div>
+		<button type="button" class="home-tech__nav-btn home-tech__prev-btn" @click="prev()" aria-label="Previous Slide">
+			<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+				<polyline points="15 18 9 12 15 6"></polyline>
+			</svg>
+		</button>
+		<button type="button" class="home-tech__nav-btn home-tech__next-btn" @click="next()" aria-label="Next Slide">
+			<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+				<polyline points="9 18 15 12 9 6"></polyline>
+			</svg>
+		</button>
 	</div>
 </section>
-
-<script>
-	document.addEventListener('DOMContentLoaded', function() {
-		const techCarousel = document.querySelector('.home-tech__carousel');
-
-		if (techCarousel && typeof Swiper !== 'undefined') {
-			const initSwiper = () => {
-				new Swiper('.home-tech__carousel', {
-					slidesPerView: 2, // Mobile 2 for better balance
-					spaceBetween: 20,
-					loop: true,
-					speed: 1000,
-					autoplay: {
-						delay: 3000,
-						disableOnInteraction: false,
-						pauseOnMouseEnter: true, // Reduce reflows when user interacts
-					},
-					navigation: {
-						nextEl: '.home-tech__next',
-						prevEl: '.home-tech__prev',
-					},
-					breakpoints: {
-						768: {
-							slidesPerView: 4,
-							spaceBetween: 30,
-						},
-						1024: {
-							slidesPerView: 6,
-							spaceBetween: 40,
-						},
-					},
-				});
-			};
-
-			// Lazy Load Swiper using Intersection Observer to mitigate forced reflow on load
-			if ('IntersectionObserver' in window) {
-				const observer = new IntersectionObserver((entries) => {
-					entries.forEach(entry => {
-						if (entry.isIntersecting) {
-							initSwiper();
-							observer.unobserve(entry.target);
-						}
-					});
-				}, {
-					rootMargin: '100px'
-				}); // Load 100px before it enters viewport
-				observer.observe(techCarousel);
-			} else {
-				// Fallback for older browsers
-				initSwiper();
-			}
-		}
-	});
-</script>
