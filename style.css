@@ -544,10 +544,17 @@ a.wschild-button--dark:hover {
   justify-content: space-between;
 }
 
-.wschild-header__logo img {
-  height: 40px;
+.wschild-header__logo img,
+.wschild-header__logo svg {
+  height: 55px;
   width: auto;
   display: block;
+}
+
+.wschild-header__logo {
+  display: flex;
+  align-items: center;
+  min-height: 70px; /* Memberi ruang untuk animasi melayang */
 }
 
 .wschild-header__nav {

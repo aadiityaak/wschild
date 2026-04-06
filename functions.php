@@ -80,6 +80,15 @@ add_action('wp_enqueue_scripts', function () {
 		true
 	);
 
+	// Logo Animation
+	wp_enqueue_script(
+		'wschild-logo-animation',
+		get_stylesheet_directory_uri() . '/assets/js/logo-animation.js',
+		['gsap'],
+		wp_get_theme()->get('Version'),
+		true
+	);
+
 	// Circle Cursor
 	wp_enqueue_style(
 		'wschild-cursor',
