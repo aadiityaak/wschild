@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const o = t.getTotalLength
       ? t.getTotalLength()
       : 2 * Math.PI * t.r.baseVal.value;
-    t.style.stroke = "rgba(0,0,0,0.8)";
+    t.style.stroke = "#E11D48";
     t.style.strokeWidth = e;
     t.style.strokeLinecap = "round";
     t.style.strokeLinejoin = "round";
