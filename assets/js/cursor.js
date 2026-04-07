@@ -54,9 +54,9 @@ document.addEventListener("DOMContentLoaded", () => {
   interactives.forEach((el) => {
     el.addEventListener("mouseenter", () => {
       gsap.to(cursor, {
-        scale: 3,
+        scale: 4,
         duration: 0.3,
-        backgroundColor: "rgba(255, 255, 255, 0.2)",
+        backgroundColor: "rgba(254, 240, 138, 0.2)", // Subtle yellow on hover
         ease: "power2.out",
       });
     });
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
       gsap.to(cursor, {
         scale: 1,
         duration: 0.3,
-        backgroundColor: "rgba(255, 255, 255, 1)",
+        backgroundColor: "#fef08a", // Original yellow
         ease: "power2.out",
       });
     });

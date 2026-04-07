@@ -1,23 +1,28 @@
 .cursor-circle {
-  width: 20px;
-  height: 20px;
-  border: 1px solid #fff;
+  width: 10px;
+  height: 10px;
+  background-color: #fef08a; /* Soft yellow */
   border-radius: 50%;
   position: fixed;
   top: 0;
   left: 0;
   pointer-events: none;
   z-index: 9999;
-  mix-blend-mode: difference;
-  background-color: #fff;
+  box-shadow:
+    0 0 10px 2px rgba(250, 204, 21, 0.4),
+    /* Thin yellow glow */ 0 0 20px 5px rgba(250, 204, 21, 0.2);
   transition:
     width 0.3s,
-    height 0.3s;
+    height 0.3s,
+    background-color 0.3s,
+    box-shadow 0.3s;
 }
 
 .cursor-circle.active {
-  width: 60px;
-  height: 60px;
-  background-color: rgba(255, 255, 255, 0.2);
-  border: 1px solid #fff;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(254, 240, 138, 0.3);
+  box-shadow:
+    0 0 15px 3px rgba(250, 204, 21, 0.5),
+    0 0 30px 8px rgba(250, 204, 21, 0.25);
 }
