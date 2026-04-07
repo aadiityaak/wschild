@@ -36,7 +36,39 @@ $qna_items = [
 			<p class="home-qna__subtitle">Beberapa hal yang sering ditanyakan oleh klien kami.</p>
 		</div>
 
-		<div class="home-qna__content" x-data="{ active: 1 }">
+		<div class="home-qna__content" x-data="{ active: 1 }" x-init="
+			// Split words into spans for GSAP animation
+			$el.querySelectorAll('.home-qna__answer-inner').forEach(inner => {
+				const text = inner.innerText.trim();
+				inner.innerHTML = text.split(/\s+/).map(word => `<span class='qna-word'>${word}</span>`).join(' ');
+			});
+
+			$watch('active', (val, oldVal) => {
+				if (typeof gsap === 'undefined') return;
+				
+				if (val !== null) {
+					$nextTick(() => {
+						const words = $el.querySelectorAll('.home-qna__item')[val-1].querySelectorAll('.qna-word');
+						gsap.fromTo(words, 
+							{ opacity: 0, y: 10 },
+							{ opacity: 1, y: 0, duration: 0.4, stagger: 0.015, ease: 'power2.out', delay: 0.1, overwrite: true }
+						);
+					});
+				}
+				if (oldVal !== null) {
+					const words = $el.querySelectorAll('.home-qna__item')[oldVal-1].querySelectorAll('.qna-word');
+					gsap.to(words, { opacity: 0, y: 5, duration: 0.2, overwrite: true });
+				}
+			});
+
+			// Initial animation for the first active item
+			$nextTick(() => {
+				if (typeof gsap !== 'undefined' && active !== null) {
+					const words = $el.querySelectorAll('.home-qna__item')[active-1].querySelectorAll('.qna-word');
+					gsap.to(words, { opacity: 1, y: 0, duration: 0.4, stagger: 0.015, ease: 'power2.out', delay: 0.4 });
+				}
+			});
+		">
 			<div class="home-qna__list">
 				<?php foreach ($qna_items as $index => $item) : $id = $index + 1; ?>
 					<div class="home-qna__item">

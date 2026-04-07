@@ -1199,6 +1199,14 @@ a.wschild-button--dark:hover {
   font-size: 16px;
 }
 
+.qna-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(10px);
+  margin-right: 0.25em;
+  will-change: transform, opacity;
+}
+
 @media (max-width: 640px) {
   .home-qna {
     padding: 60px 0;
