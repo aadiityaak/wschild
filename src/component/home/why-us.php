@@ -59,3 +59,27 @@ $why_us_items = [
 		</div>
 	</div>
 </section>
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+		gsap.registerPlugin(ScrollTrigger);
+		var cards = document.querySelectorAll('.home-why-us__card');
+		if (!cards.length) return;
+		cards.forEach(function(card, i) {
+			var startPct = Math.floor(70 + Math.random() * 20); // 70% - 90%
+			var randDelay = Math.random() * 0.15;
+			gsap.from(card, {
+				scrollTrigger: {
+					trigger: card,
+					start: 'top ' + startPct + '%',
+					toggleActions: 'play none none reverse'
+				},
+				y: 40,
+				opacity: 0,
+				duration: 0.9,
+				ease: 'power3.out',
+				delay: randDelay
+			});
+		});
+	});
+</script>

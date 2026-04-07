@@ -98,6 +98,15 @@ add_action('wp_enqueue_scripts', function () {
 		true
 	);
 
+	// Pricing Card Scroll Speed Parallax
+	wp_enqueue_script(
+		'wschild-pricing-scroll',
+		get_stylesheet_directory_uri() . '/assets/js/pricing-scroll.js',
+		['gsap', 'gsap-scrolltrigger'],
+		wp_get_theme()->get('Version'),
+		true
+	);
+
 	// Logo Animation
 	wp_enqueue_script(
 		'wschild-logo-animation',
