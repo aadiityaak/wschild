@@ -53,7 +53,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initialize buttons for gooey effect
   interactives.forEach((el) => {
-    if (el.classList.contains("wschild-button") || el.tagName === "BUTTON") {
+    // Check if the button should NOT have the gooey effect (e.g., nav buttons)
+    const isExcluded =
+      el.classList.contains("home-tech__nav-btn") ||
+      el.closest(".home-tech__nav-btn");
+
+    if (
+      !isExcluded &&
+      (el.classList.contains("wschild-button") || el.tagName === "BUTTON")
+    ) {
       // Create gooey container
       const gooey = document.createElement("div");
       gooey.className = "wschild-button__gooey";
@@ -74,16 +82,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     el.addEventListener("mouseenter", () => {
+      // Don't hide cursor or play blobs for excluded buttons
+      if (isExcluded) {
+        gsap.to(cursor, {
+          scale: 1.5,
+          duration: 0.3,
+          backgroundColor: "rgba(254, 240, 138, 0.4)",
+          ease: "power2.out",
+        });
+        return;
+      }
+
       gsap.to(cursor, {
         scale: 0, // Hide cursor when inside gooey button area
         duration: 0.2,
       });
 
-      // Set initial perspective for 3D effect
       if (el.classList.contains("wschild-button") || el.tagName === "BUTTON") {
-        gsap.set(el, { transformPerspective: 1000 });
-
-        // Gooey blobs animation
+        // Gooey blobs animation - scale up blobs
         const blobs = el.querySelectorAll(".wschild-button__blob");
         blobs.forEach((blob, i) => {
           gsap.set(blob, {
@@ -93,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
             opacity: 1,
           });
           gsap.to(blob, {
-            scale: i === 0 ? 1 : 1.8,
+            scale: i === 0 ? 1 : 1.5,
             duration: 0.5,
             delay: i * 0.05,
             ease: "back.out(1.7)",
@@ -103,7 +119,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     el.addEventListener("mousemove", (e) => {
-      // Slime Magnetic Interaction with 3D Effect for buttons
+      // Don't play slime/magnetic for excluded buttons
+      if (isExcluded) return;
+
+      // Gooey Blobs Interaction for buttons
       if (el.classList.contains("wschild-button") || el.tagName === "BUTTON") {
         const rect = el.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
@@ -111,21 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const x = e.clientX - centerX;
         const y = e.clientY - centerY;
 
-        // Calculate distance and normalized direction
-        const dist = Math.sqrt(x * x + y * y);
-        const maxDist = rect.width / 2;
-        const strength = Math.min(dist / maxDist, 1);
-
-        gsap.to(el, {
-          x: x * 0.35,
-          y: y * 0.35,
-          rotateX: -y * 0.1,
-          rotateY: x * 0.1,
-          duration: 0.4,
-          ease: "power3.out",
-        });
-
-        // Move blobs towards cursor with liquid feel
+        // Move blobs towards cursor with liquid feel (Button itself stays static)
         const blobs = el.querySelectorAll(".wschild-button__blob");
         blobs.forEach((blob, i) => {
           // The first blob (white) follows the mouse more accurately (1:1)
@@ -143,6 +148,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     el.addEventListener("mouseleave", () => {
+      // Don't reset blobs for excluded buttons
+      if (isExcluded) {
+        gsap.to(cursor, {
+          scale: 1,
+          duration: 0.3,
+          backgroundColor: "#fef08a",
+          ease: "power2.out",
+        });
+        return;
+      }
+
       gsap.to(cursor, {
         scale: 1,
         duration: 0.3,
@@ -150,22 +166,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ease: "power2.out",
       });
 
-      // Reset magnetic slime effect with 3D reset
+      // Reset gooey blobs only - sucking back in
       if (el.classList.contains("wschild-button") || el.tagName === "BUTTON") {
-        gsap.to(el, {
-          x: 0,
-          y: 0,
-          rotateX: 0,
-          rotateY: 0,
-          rotateZ: 0,
-          skewX: 0,
-          scaleX: 1,
-          scaleY: 1,
-          duration: 1,
-          ease: "elastic.out(1.2, 0.4)",
-        });
-
-        // Reset gooey blobs - sucking back in
         const blobs = el.querySelectorAll(".wschild-button__blob");
         gsap.to(blobs, {
           x: 0,

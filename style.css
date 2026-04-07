@@ -92,7 +92,7 @@ h6,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 14px 28px;
+  padding: 12px 24px;
   border-radius: 99px;
   text-decoration: none;
   font-weight: 700;
@@ -106,10 +106,10 @@ h6,
 /* Gooey Wrapper that holds everything to be blurred/merged */
 .wschild-button__gooey {
   position: absolute;
-  top: -50px;
-  left: -50px;
-  right: -50px;
-  bottom: -50px;
+  top: -40px;
+  left: -40px;
+  right: -40px;
+  bottom: -40px;
   filter: url('#gooey');
   pointer-events: none;
   z-index: -1;
@@ -118,10 +118,10 @@ h6,
 /* The actual button shape inside the gooey filter */
 .wschild-button__bg {
   position: absolute;
-  top: 50px;
-  left: 50px;
-  right: 50px;
-  bottom: 50px;
+  top: 40px;
+  left: 40px;
+  right: 40px;
+  bottom: 40px;
   background: var(--btn-bg, #000000);
   border-radius: 99px;
   z-index: 1;
@@ -131,8 +131,8 @@ h6,
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   background: var(--btn-bg, #000000);
   border-radius: 50%;
   opacity: 0;
@@ -142,8 +142,8 @@ h6,
 
 .wschild-button__blob--white {
   background: #ffffff !important;
-  width: 35px;
-  height: 35px;
+  width: 22px;
+  height: 22px;
 }
 
 .wschild-button--primary {
