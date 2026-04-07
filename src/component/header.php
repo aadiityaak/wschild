@@ -10,6 +10,16 @@ $home_url = home_url('/');
 ?>
 
 <div class="wschild-header">
+  <!-- Global Gooey Filter -->
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display:none;">
+    <defs>
+      <filter id="gooey">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur" />
+        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 25 -10" result="goo" />
+      </filter>
+    </defs>
+  </svg>
+
   <div class="wschild-header-container">
     <div class="wschild-header__inner">
       <!-- Logo Section -->

@@ -92,22 +92,67 @@ h6,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 18px;
-  border-radius: 12px;
+  padding: 14px 28px;
+  border-radius: 99px;
   text-decoration: none;
   font-weight: 700;
   border: 1px solid transparent;
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s;
+  background: transparent !important; /* Original color moved to gooey bg */
+}
+
+/* Gooey Wrapper that holds everything to be blurred/merged */
+.wschild-button__gooey {
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  right: -50px;
+  bottom: -50px;
+  filter: url('#gooey');
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* The actual button shape inside the gooey filter */
+.wschild-button__bg {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  right: 50px;
+  bottom: 50px;
+  background: var(--btn-bg, #000000);
+  border-radius: 99px;
+  z-index: 1;
+}
+
+.wschild-button__blob {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  background: var(--btn-bg, #000000);
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: 0;
+}
+
+.wschild-button__blob--white {
+  background: #ffffff !important;
+  width: 35px;
+  height: 35px;
 }
 
 .wschild-button--primary {
-  background: #0ea5e9;
-  border-color: #0ea5e9;
+  --btn-bg: #000000;
   color: #ffffff;
 }
 
 .wschild-button--ghost {
-  background: rgba(15, 23, 42, 0.04);
-  border-color: rgba(15, 23, 42, 0.14);
+  --btn-bg: rgba(15, 23, 42, 0.04);
   color: #0f172a;
 }
 
@@ -359,8 +404,8 @@ a.wschild-button--dark,
 a.wschild-button--dark:visited {
   background: #1e1e1e;
   color: #ffffff;
-  border: 1px solid #1e1e1e;
-  border-radius: 30px;
+  border-radius: 20px;
+  border: none !important;
 }
 
 a.wschild-button--dark:hover {
@@ -651,7 +696,7 @@ a.wschild-button--dark:hover {
 }
 
 .wschild-mobile-menu .current-menu-item > a {
-  color: #0ea5e9;
+  color: #000000;
 }
 
 @media (max-width: 900px) {
@@ -816,7 +861,7 @@ a.wschild-button--dark:hover {
 }
 
 .wschild-footer__menu a:hover {
-  color: #0ea5e9;
+  color: #000000;
 }
 
 .wschild-social-wrapper {
@@ -837,7 +882,7 @@ a.wschild-button--dark:hover {
 }
 
 .wschild-social-icon:hover {
-  background: #0ea5e9;
+  background: #000000;
   transform: translateY(-3px);
 }
 
