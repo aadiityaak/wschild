@@ -585,6 +585,13 @@ a.wschild-button--dark:hover {
   z-index: 1000;
   padding: 16px 0;
   width: 100%;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.sticky-header {
+  background: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(10px);
 }
 
 .wschild-header__inner {

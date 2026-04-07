@@ -56,10 +56,16 @@ document.addEventListener("DOMContentLoaded", () => {
     // Check if the button should NOT have the gooey effect (e.g., nav buttons)
     const isExcluded =
       el.classList.contains("home-tech__nav-btn") ||
-      el.closest(".home-tech__nav-btn");
+      el.closest(".home-tech__nav-btn") ||
+      el.classList.contains("home-qna__trigger") ||
+      el.closest(".home-qna__trigger");
+    const isLogo =
+      el.classList.contains("wschild-header__logo") ||
+      el.closest(".wschild-header__logo");
 
     if (
       !isExcluded &&
+      !isLogo &&
       (el.classList.contains("wschild-button") || el.tagName === "BUTTON")
     ) {
       // Create gooey container
