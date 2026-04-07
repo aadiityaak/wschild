@@ -717,6 +717,11 @@ a.wschild-button--dark:hover {
 
   .wschild-header__mobile-trigger {
     display: block;
+    background: none !important;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    color: #fff !important;
   }
 }
 
@@ -998,6 +1003,18 @@ a.wschild-button--dark:hover {
   align-items: center;
   opacity: 0.6;
   filter: grayscale(100%);
+}
+
+/* Adjust mobile overlay for WordPress Admin Bar */
+body.admin-bar .wschild-header__mobile-overlay {
+  top: 32px; /* Default admin bar height */
+}
+
+@media screen and (max-width: 782px) {
+  body.admin-bar .wschild-header__mobile-overlay {
+    top: 46px; /* Admin bar height on smaller screens */
+  }
+}
   transition: all 0.3s ease;
   aspect-ratio: 300 / 96; /* Match image dimensions to stabilize layout */
 }
@@ -2047,3 +2064,10 @@ a.wschild-button--dark:hover {
     gap: 30px;
   }
 }
+
+.scramble-char {
+  display: inline-block;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
