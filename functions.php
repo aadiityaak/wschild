@@ -61,7 +61,7 @@ add_action('wp_enqueue_scripts', function () {
 	}
 
 	// GSAP for Mouse Movement Effects (Hero & Why Us components)
-	if (! wp_script_is('gsap', 'enqueued') && ! wp_script_is('gsap', 'registered')) {
+	if (! wp_script_is('gsap', 'enqueued')) {
 		wp_enqueue_script(
 			'gsap',
 			'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js',
@@ -70,6 +70,24 @@ add_action('wp_enqueue_scripts', function () {
 			true
 		);
 	}
+	if (! wp_script_is('gsap-scrolltrigger', 'enqueued')) {
+		wp_enqueue_script(
+			'gsap-scrolltrigger',
+			'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js',
+			['gsap'],
+			null,
+			true
+		);
+	}
+
+	// Scramble Scroll Effect
+	wp_enqueue_script(
+		'wschild-scramble-scroll',
+		get_stylesheet_directory_uri() . '/assets/js/scramble-scroll.js',
+		['gsap', 'gsap-scrolltrigger'],
+		wp_get_theme()->get('Version'),
+		true
+	);
 
 	// Pricing Card Hover Animation
 	wp_enqueue_script(

@@ -32,7 +32,7 @@ $qna_items = [
 <section class="home-qna">
 	<div class="wschild-container">
 		<div class="home-qna__header">
-			<h2 class="home-qna__title">Tanya Jawab Jasa Pembuatan Website</h2>
+			<h2 class="home-qna__title scramble-scroll">Tanya Jawab Jasa Pembuatan Website</h2>
 			<p class="home-qna__subtitle">Beberapa hal yang sering ditanyakan oleh klien kami.</p>
 		</div>
 
