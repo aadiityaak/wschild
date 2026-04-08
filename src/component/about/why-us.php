@@ -85,17 +85,6 @@
 		const aboutImage = document.querySelector('.about-why-us__image');
 
 		if (aboutImage && typeof gsap !== 'undefined') {
-			gsap.from(aboutImage, {
-				scrollTrigger: {
-					trigger: '.about-why-us',
-					start: 'top 80%',
-				},
-				y: 60,
-				opacity: 0,
-				duration: 1.5,
-				ease: 'power3.out'
-			});
-
 			// Optional: Parallax effect on mouse move
 			const container = document.querySelector('.about-why-us__image-container');
 			if (container) {

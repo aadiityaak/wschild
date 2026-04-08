@@ -89,6 +89,15 @@ add_action('wp_enqueue_scripts', function () {
 		true
 	);
 
+	// Reveal Animations
+	wp_enqueue_script(
+		'wschild-reveal-animation',
+		get_stylesheet_directory_uri() . '/assets/js/reveal-animation.js',
+		['gsap', 'gsap-scrolltrigger'],
+		wp_get_theme()->get('Version'),
+		true
+	);
+
 	// Pricing Card Hover Animation
 	wp_enqueue_script(
 		'wschild-pricing-hover',
