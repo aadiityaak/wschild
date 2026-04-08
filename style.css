@@ -672,20 +672,15 @@ a.wschild-button--dark:hover {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #f1f5f9;
   border: none;
   border-radius: 999px;
   padding: 8px 16px;
-  color: #1a1a1a;
+  color: #fff !important;
   font-family: var(--font-main);
   font-weight: 700;
   font-size: 14px;
   cursor: pointer;
   transition: all 0.3s ease;
-}
-
-.wschild-header__mobile-close:hover {
-  background: #e2e8f0;
 }
 
 .wschild-mobile-menu {
