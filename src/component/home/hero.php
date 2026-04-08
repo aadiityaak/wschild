@@ -51,6 +51,38 @@ $image_srcset = $args['image_srcset'] ?? 'https://websweetstudio.com/wp-content/
 		const floatingItems = document.querySelectorAll('.floating-item');
 
 		if (typeof gsap !== 'undefined') {
+			// ScrollTrigger animation for hero content
+			if (typeof ScrollTrigger !== 'undefined') {
+				gsap.registerPlugin(ScrollTrigger);
+
+				// Animate text content
+				gsap.from('.home-hero__content > *', {
+					scrollTrigger: {
+						trigger: '.home-hero__content',
+						start: 'top 85%',
+						toggleActions: 'play none none reverse'
+					},
+					y: 30,
+					opacity: 0,
+					duration: 0.8,
+					stagger: 0.2,
+					ease: 'power3.out'
+				});
+
+				// Animate image wrapper
+				gsap.from('.home-hero__image-wrapper', {
+					scrollTrigger: {
+						trigger: '.home-hero__image-wrapper',
+						start: 'top 80%',
+						toggleActions: 'play none none reverse'
+					},
+					scale: 0.95,
+					opacity: 0,
+					duration: 1,
+					ease: 'power2.out'
+				});
+			}
+
 			// Initial floating animation
 			floatingItems.forEach((item, index) => {
 				gsap.to(item, {

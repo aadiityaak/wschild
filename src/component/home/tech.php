@@ -78,3 +78,37 @@ $tech_images = [
 		</button>
 	</div>
 </section>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+		gsap.registerPlugin(ScrollTrigger);
+
+		gsap.from('.home-tech__container', {
+			scrollTrigger: {
+				trigger: '.home-tech__container',
+				start: 'top 90%',
+				toggleActions: 'play none none reverse'
+			},
+			y: 40,
+			opacity: 0,
+			duration: 1,
+			ease: 'power3.out'
+		});
+
+		// Staggered slide animation
+		gsap.from('.home-tech__slide-alpine', {
+			scrollTrigger: {
+				trigger: '.home-tech__carousel-alpine',
+				start: 'top 85%',
+				toggleActions: 'play none none reverse'
+			},
+			x: 30,
+			opacity: 0,
+			duration: 0.8,
+			stagger: 0.1,
+			ease: 'power2.out',
+			delay: 0.2
+		});
+	});
+</script>
