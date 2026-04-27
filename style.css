@@ -927,16 +927,19 @@ a.wschild-button--dark:hover {
   border-top: 1px solid rgba(0, 0, 0, 0.05);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   background: #fdfdfd;
+  overflow-x: hidden;
 }
 
 .home-tech__container {
   position: relative;
   padding: 0 50px; /* Memberi ruang untuk panah di kiri-kanan */
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .home-tech__carousel-alpine {
   width: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
 }
