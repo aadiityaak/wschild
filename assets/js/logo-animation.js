@@ -95,13 +95,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const m = l();
 
-  gsap
+  const u = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  let p = false;
+
+  const y = gsap
     .timeline({
       repeat: 0,
+      paused: true,
       defaults: { ease: "power2.inOut" },
+      onComplete: () => {
+        p = true;
+      },
     })
-    .set(a, { scale: 1, opacity: 0 })
     .set(t, { opacity: 1 })
+    .set([e, o], {
+      strokeDashoffset: (t, e) => (e === 0 ? r : n),
+      strokeOpacity: 1,
+    })
+    .set(a, { scale: 1, opacity: 0, strokeDashoffset: d, strokeOpacity: 1 })
+    .set(m && m.fillReveal ? m.fillReveal : {}, { attr: { r: 0 } })
     .to(e, { strokeDashoffset: 0, duration: 1.4 })
     .to(o, { strokeDashoffset: 0, duration: 1.2 }, ">-0.4")
     .to(a, { opacity: 1, duration: 0.4 }, ">-0.3")
@@ -109,12 +121,22 @@ document.addEventListener("DOMContentLoaded", () => {
     .to(a, { transformOrigin: "50% 50%", scale: 1.2, duration: 0.4 }, ">-0.05")
     .to(a, { scale: 1, duration: 0.4 })
     .to([e, o, a], { strokeOpacity: 0, duration: 0.18, ease: "power2.out" })
-    .set(m && m.fillReveal ? m.fillReveal : {}, { attr: { r: 0 } })
     .to(
       m && m.fillReveal ? m.fillReveal : {},
       { attr: { r: m ? m.fillRadius : 0 }, duration: 0.6, ease: "power2.out" },
       ">-0.1",
     );
+
+  y.play(0);
+
+  if (u) {
+    const f = t.closest("a") || t;
+    f.addEventListener("pointerenter", () => {
+      if (!p || y.isActive()) return;
+      p = false;
+      y.restart(true, false);
+    });
+  }
 
   gsap.to(t, {
     y: -8,
