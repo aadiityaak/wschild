@@ -117,6 +117,7 @@ h6,
   filter: url('#gooey');
   pointer-events: none;
   z-index: -1;
+  will-change: transform;
 }
 
 /* The actual button shape inside the gooey filter */
@@ -129,6 +130,7 @@ h6,
   background: var(--btn-bg, #000000);
   border-radius: 99px;
   z-index: 1;
+  will-change: transform;
 }
 
 .wschild-button__blob {
@@ -142,6 +144,7 @@ h6,
   opacity: 0;
   transform: translate(-50%, -50%) scale(0);
   z-index: 0;
+  will-change: transform, opacity;
 }
 
 .wschild-button__blob--white {
