@@ -1109,7 +1109,15 @@ body.admin-bar .wschild-header__mobile-overlay {
 .home-why-us__icon svg {
   width: 24px;
   height: 24px;
-  fill: currentColor;
+}
+
+.home-why-us__icon svg[stroke] {
+  fill: none;
+  stroke: currentColor;
+}
+
+.home-why-us__icon svg[stroke] path {
+  fill: none;
 }
 
 .home-why-us__card-title {
