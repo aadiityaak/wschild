@@ -126,11 +126,16 @@ add_action('wp_enqueue_scripts', function () {
 	);
 
 	// Circle Cursor
+	$cursor_css_path = get_stylesheet_directory() . '/assets/css/cursor.css';
+	$cursor_js_path = get_stylesheet_directory() . '/assets/js/cursor.js';
+	$cursor_css_ver = file_exists($cursor_css_path) ? (string) filemtime($cursor_css_path) : wp_get_theme()->get('Version');
+	$cursor_js_ver = file_exists($cursor_js_path) ? (string) filemtime($cursor_js_path) : wp_get_theme()->get('Version');
+
 	wp_enqueue_style(
 		'wschild-cursor',
 		get_stylesheet_directory_uri() . '/assets/css/cursor.css',
 		[],
-		wp_get_theme()->get('Version')
+		$cursor_css_ver
 	);
 
 	wp_enqueue_style(
@@ -144,7 +149,7 @@ add_action('wp_enqueue_scripts', function () {
 		'wschild-cursor',
 		get_stylesheet_directory_uri() . '/assets/js/cursor.js',
 		['gsap'],
-		wp_get_theme()->get('Version'),
+		$cursor_js_ver,
 		true
 	);
 

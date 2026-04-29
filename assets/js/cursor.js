@@ -1,59 +1,121 @@
-document.addEventListener("DOMContentLoaded", () => {
+const wschildInitCursor = () => {
+  if (window.__wschildCursorInitialized) return;
+  window.__wschildCursorInitialized = true;
+
   // Check if gsap is available
   if (typeof gsap === "undefined") {
     console.warn("GSAP is not loaded. Circle cursor will not work.");
     return;
   }
 
-  const cursor = document.querySelector(".cursor-circle");
-
-  if (!cursor) return;
-
   const canHover = window.matchMedia(
     "(hover: hover) and (pointer: fine)",
   ).matches;
+  if (canHover) document.body.classList.add("wschild-cursor-enabled");
   let mouseX = window.innerWidth / 2;
   let mouseY = window.innerHeight / 2;
 
-  // Set initial position
-  gsap.set(cursor, {
+  let cursor = document.querySelector(".cursor-circle");
+  let createdCursor = false;
+  if (!cursor) {
+    cursor = document.createElement("div");
+    cursor.className = "cursor-circle";
+    document.body.appendChild(cursor);
+    createdCursor = true;
+  }
+
+  let dot = document.querySelector(".cursor-dot");
+  let createdDot = false;
+  if (!dot) {
+    dot = document.createElement("div");
+    dot.className = "cursor-dot";
+    document.body.appendChild(dot);
+    createdDot = true;
+  }
+
+  if (createdCursor) {
+    cursor.style.width = "34px";
+    cursor.style.height = "34px";
+    cursor.style.background = "rgba(0, 0, 0, 0)";
+    cursor.style.border = "2px solid #000000";
+    cursor.style.borderRadius = "99px";
+    cursor.style.position = "fixed";
+    cursor.style.top = "0";
+    cursor.style.left = "0";
+    cursor.style.pointerEvents = "none";
+    cursor.style.zIndex = "2147483646";
+  }
+
+  if (createdDot) {
+    dot.style.width = "6px";
+    dot.style.height = "6px";
+    dot.style.background = "#000000";
+    dot.style.borderRadius = "99px";
+    dot.style.position = "fixed";
+    dot.style.top = "0";
+    dot.style.left = "0";
+    dot.style.pointerEvents = "none";
+    dot.style.zIndex = "2147483647";
+  }
+
+  gsap.set([cursor, dot], {
     xPercent: -50,
     yPercent: -50,
     scale: 1,
     opacity: 0,
   });
 
-  // Show cursor on first mouse move
-  window.addEventListener(
-    "mousemove",
-    (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      gsap.to(cursor, {
-        duration: 0.1,
-        opacity: 1,
-      });
+  let isVisible = false;
+  const showCursor = () => {
+    if (isVisible) return;
+    isVisible = true;
+    gsap.to([cursor, dot], { duration: 0.12, opacity: 1, overwrite: true });
+  };
 
-      gsap.to(cursor, {
-        duration: 0.4,
-        x: e.clientX,
-        y: e.clientY,
-        ease: "power2.out",
-      });
-    },
-    { once: true },
-  );
+  const setRingX = gsap.quickSetter(cursor, "x", "px");
+  const setRingY = gsap.quickSetter(cursor, "y", "px");
+  const setDotX = gsap.quickSetter(dot, "x", "px");
+  const setDotY = gsap.quickSetter(dot, "y", "px");
 
-  // Continuous mouse move update
-  window.addEventListener("mousemove", (e) => {
+  let targetX = mouseX;
+  let targetY = mouseY;
+  let ringX = mouseX;
+  let ringY = mouseY;
+  let dotX = mouseX;
+  let dotY = mouseY;
+
+  setRingX(ringX);
+  setRingY(ringY);
+  setDotX(dotX);
+  setDotY(dotY);
+
+  const onMove = (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-    gsap.to(cursor, {
-      duration: 0.4,
-      x: e.clientX,
-      y: e.clientY,
-      ease: "power2.out",
-    });
+    targetX = mouseX;
+    targetY = mouseY;
+    showCursor();
+  };
+
+  window.addEventListener("pointermove", (e) => {
+    if (e.pointerType && e.pointerType !== "mouse") return;
+    onMove(e);
+  });
+
+  window.addEventListener("mousemove", onMove);
+
+  gsap.ticker.add(() => {
+    const ringLerp = 0.14;
+    const dotLerp = 0.28;
+    ringX += (targetX - ringX) * ringLerp;
+    ringY += (targetY - ringY) * ringLerp;
+    dotX += (targetX - dotX) * dotLerp;
+    dotY += (targetY - dotY) * dotLerp;
+
+    setRingX(ringX);
+    setRingY(ringY);
+    setDotX(dotX);
+    setDotY(dotY);
   });
 
   // Hover effects on interactive elements
@@ -91,7 +153,11 @@ document.addEventListener("DOMContentLoaded", () => {
         duration: 0.25,
         ease: "power3.out",
       }),
-      setWs: gsap.quickTo(whiteBlob, "scale", {
+      setWsx: gsap.quickTo(whiteBlob, "scaleX", {
+        duration: 0.25,
+        ease: "power3.out",
+      }),
+      setWsy: gsap.quickTo(whiteBlob, "scaleY", {
         duration: 0.25,
         ease: "power3.out",
       }),
@@ -102,7 +168,8 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     gsap.set([gooey, bg, whiteBlob], { x: 0, y: 0 });
-    target.setWs(0);
+    target.setWsx(0);
+    target.setWsy(0);
     target.setWo(0);
 
     gooeyMap.set(el, target);
@@ -150,19 +217,12 @@ document.addEventListener("DOMContentLoaded", () => {
     el.addEventListener("mouseenter", () => {
       // Don't hide cursor or play blobs for excluded buttons
       if (isExcluded) {
-        gsap.to(cursor, {
-          scale: 1.5,
-          duration: 0.3,
-          backgroundColor: "rgba(254, 240, 138, 0.4)",
-          ease: "power2.out",
-        });
+        gsap.to(cursor, { scale: 1.25, duration: 0.2, ease: "power2.out" });
+        gsap.to(dot, { scale: 0.9, duration: 0.2, ease: "power2.out" });
         return;
       }
 
-      gsap.to(cursor, {
-        scale: 0, // Hide cursor when inside gooey button area
-        duration: 0.2,
-      });
+      gsap.to([cursor, dot], { scale: 0, duration: 0.18, ease: "power2.out" });
 
       if (el.classList.contains("wschild-button") || el.tagName === "BUTTON") {
         const target = gooeyMap.get(el);
@@ -219,21 +279,12 @@ document.addEventListener("DOMContentLoaded", () => {
     el.addEventListener("mouseleave", () => {
       // Don't reset blobs for excluded buttons
       if (isExcluded) {
-        gsap.to(cursor, {
-          scale: 1,
-          duration: 0.3,
-          backgroundColor: "#fef08a",
-          ease: "power2.out",
-        });
+        gsap.to(cursor, { scale: 1, duration: 0.22, ease: "power2.out" });
+        gsap.to(dot, { scale: 1, duration: 0.22, ease: "power2.out" });
         return;
       }
 
-      gsap.to(cursor, {
-        scale: 1,
-        duration: 0.3,
-        backgroundColor: "#fef08a", // Original yellow
-        ease: "power2.out",
-      });
+      gsap.to([cursor, dot], { scale: 1, duration: 0.22, ease: "power2.out" });
 
       // Reset gooey blobs only - sucking back in
       if (el.classList.contains("wschild-button") || el.tagName === "BUTTON") {
@@ -286,7 +337,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!target.isHovering) {
           target.setWx(gx * 1.1);
           target.setWy(gy * 1.1);
-          target.setWs(t * 0.55);
+          target.setWsx(t * 0.55);
+          target.setWsy(t * 0.55);
           target.setWo(t * 0.8);
         }
       }
@@ -295,16 +347,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Hide cursor when leaving window
   document.addEventListener("mouseleave", () => {
-    gsap.to(cursor, {
-      duration: 0.3,
-      opacity: 0,
-    });
+    gsap.to([cursor, dot], { duration: 0.3, opacity: 0 });
+    isVisible = false;
   });
 
   document.addEventListener("mouseenter", () => {
-    gsap.to(cursor, {
-      duration: 0.3,
-      opacity: 1,
-    });
+    showCursor();
   });
-});
+};
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", wschildInitCursor);
+} else {
+  wschildInitCursor();
+}
