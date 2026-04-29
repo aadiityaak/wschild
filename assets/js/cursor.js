@@ -62,14 +62,32 @@ const wschildInitCursor = () => {
     xPercent: -50,
     yPercent: -50,
     scale: 1,
-    opacity: 0,
+    opacity: 1,
   });
 
-  let isVisible = false;
-  const showCursor = () => {
-    if (isVisible) return;
-    isVisible = true;
-    gsap.to([cursor, dot], { duration: 0.12, opacity: 1, overwrite: true });
+  const jelly = (scale = 1.25) => {
+    gsap.fromTo(
+      cursor,
+      { scaleX: scale * 0.88, scaleY: scale * 1.12 },
+      {
+        scaleX: scale,
+        scaleY: scale,
+        duration: 0.55,
+        ease: "elastic.out(1, 0.45)",
+        overwrite: true,
+      },
+    );
+    gsap.fromTo(
+      dot,
+      { scaleX: 1.08, scaleY: 0.92 },
+      {
+        scaleX: Math.max(0.55, 1.1 - scale * 0.25),
+        scaleY: Math.max(0.55, 1.1 - scale * 0.25),
+        duration: 0.45,
+        ease: "elastic.out(1, 0.55)",
+        overwrite: true,
+      },
+    );
   };
 
   const setRingX = gsap.quickSetter(cursor, "x", "px");
@@ -94,7 +112,6 @@ const wschildInitCursor = () => {
     mouseY = e.clientY;
     targetX = mouseX;
     targetY = mouseY;
-    showCursor();
   };
 
   window.addEventListener("pointermove", (e) => {
@@ -217,12 +234,12 @@ const wschildInitCursor = () => {
     el.addEventListener("mouseenter", () => {
       // Don't hide cursor or play blobs for excluded buttons
       if (isExcluded) {
-        gsap.to(cursor, { scale: 1.25, duration: 0.2, ease: "power2.out" });
-        gsap.to(dot, { scale: 0.9, duration: 0.2, ease: "power2.out" });
+        jelly(1.18);
         return;
       }
 
-      gsap.to([cursor, dot], { scale: 0, duration: 0.18, ease: "power2.out" });
+      const hasGooey = !!el.querySelector(".wschild-button__gooey");
+      jelly(hasGooey ? 1.22 : 1.35);
 
       if (el.classList.contains("wschild-button") || el.tagName === "BUTTON") {
         const target = gooeyMap.get(el);
@@ -279,12 +296,23 @@ const wschildInitCursor = () => {
     el.addEventListener("mouseleave", () => {
       // Don't reset blobs for excluded buttons
       if (isExcluded) {
-        gsap.to(cursor, { scale: 1, duration: 0.22, ease: "power2.out" });
-        gsap.to(dot, { scale: 1, duration: 0.22, ease: "power2.out" });
+        gsap.to([cursor, dot], {
+          scaleX: 1,
+          scaleY: 1,
+          duration: 0.22,
+          ease: "power2.out",
+          overwrite: true,
+        });
         return;
       }
 
-      gsap.to([cursor, dot], { scale: 1, duration: 0.22, ease: "power2.out" });
+      gsap.to([cursor, dot], {
+        scaleX: 1,
+        scaleY: 1,
+        duration: 0.22,
+        ease: "power2.out",
+        overwrite: true,
+      });
 
       // Reset gooey blobs only - sucking back in
       if (el.classList.contains("wschild-button") || el.tagName === "BUTTON") {
@@ -347,12 +375,33 @@ const wschildInitCursor = () => {
 
   // Hide cursor when leaving window
   document.addEventListener("mouseleave", () => {
-    gsap.to([cursor, dot], { duration: 0.3, opacity: 0 });
-    isVisible = false;
+    gsap.killTweensOf([cursor, dot]);
+    gsap.fromTo(
+      [cursor, dot],
+      { scaleX: 1.05, scaleY: 0.95 },
+      {
+        scaleX: 0,
+        scaleY: 0,
+        duration: 0.42,
+        ease: "elastic.in(1, 0.6)",
+        overwrite: true,
+      },
+    );
   });
 
   document.addEventListener("mouseenter", () => {
-    showCursor();
+    gsap.killTweensOf([cursor, dot]);
+    gsap.fromTo(
+      [cursor, dot],
+      { scaleX: 0, scaleY: 0 },
+      {
+        scaleX: 1,
+        scaleY: 1,
+        duration: 0.55,
+        ease: "elastic.out(1, 0.55)",
+        overwrite: true,
+      },
+    );
   });
 };
 
