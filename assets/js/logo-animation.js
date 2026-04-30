@@ -231,7 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
       strokeWidth: 0,
       strokeDasharray: "none",
       strokeDashoffset: 0,
-      fill: "#000000",
+      fill: "#FF8C00",
     })
     .add(() => {
       if (D) D.style.opacity = "0";
@@ -252,7 +252,8 @@ document.addEventListener("DOMContentLoaded", () => {
           c.setAttribute("cy", `${k.sy}`);
         }
       },
-    });
+    })
+    .set([a, c].filter(Boolean), { fill: "#000000" });
 
   g.play(0);
 
