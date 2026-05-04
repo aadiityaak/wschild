@@ -205,11 +205,7 @@ const wschildInitCursor = () => {
       el.classList.contains("wschild-header__logo") ||
       el.closest(".wschild-header__logo");
 
-    if (
-      !isExcluded &&
-      !isLogo &&
-      (el.classList.contains("wschild-button") || el.tagName === "BUTTON")
-    ) {
+    if (!isExcluded && !isLogo && el.classList.contains("wschild-button")) {
       // Create gooey container
       if (!el.querySelector(".wschild-button__gooey")) {
         const gooey = document.createElement("div");
@@ -241,7 +237,7 @@ const wschildInitCursor = () => {
       const hasGooey = !!el.querySelector(".wschild-button__gooey");
       jelly(hasGooey ? 1.22 : 1.35);
 
-      if (el.classList.contains("wschild-button") || el.tagName === "BUTTON") {
+      if (hasGooey) {
         const target = gooeyMap.get(el);
         if (target) target.isHovering = true;
 
@@ -269,7 +265,8 @@ const wschildInitCursor = () => {
       if (isExcluded) return;
 
       // Gooey Blobs Interaction for buttons
-      if (el.classList.contains("wschild-button") || el.tagName === "BUTTON") {
+      const hasGooey = !!el.querySelector(".wschild-button__gooey");
+      if (hasGooey) {
         const rect = el.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
@@ -315,7 +312,8 @@ const wschildInitCursor = () => {
       });
 
       // Reset gooey blobs only - sucking back in
-      if (el.classList.contains("wschild-button") || el.tagName === "BUTTON") {
+      const hasGooey = !!el.querySelector(".wschild-button__gooey");
+      if (hasGooey) {
         const target = gooeyMap.get(el);
         if (target) {
           target.isHovering = false;
