@@ -22,6 +22,7 @@ $tech_images = [
 			autoplay: null,
 			next() {
 				const container = this.$refs.carousel;
+				if (!container || !container.firstElementChild || !container.firstElementChild.firstElementChild) return;
 				const itemWidth = container.firstElementChild.firstElementChild.offsetWidth;
 				const maxScroll = container.scrollWidth - container.offsetWidth;
 				
@@ -33,6 +34,7 @@ $tech_images = [
 			},
 			prev() {
 				const container = this.$refs.carousel;
+				if (!container || !container.firstElementChild || !container.firstElementChild.firstElementChild) return;
 				const itemWidth = container.firstElementChild.firstElementChild.offsetWidth;
 				
 				if (container.scrollLeft <= 10) {
@@ -42,13 +44,17 @@ $tech_images = [
 				}
 			},
 			startAutoplay() {
+				this.stopAutoplay();
 				this.autoplay = setInterval(() => { this.next() }, 4000);
 			},
 			stopAutoplay() {
-				clearInterval(this.autoplay);
+				if (this.autoplay) {
+					clearInterval(this.autoplay);
+					this.autoplay = null;
+				}
 			}
 		}"
-		x-init="startAutoplay()"
+		x-init="startAutoplay(); return () => stopAutoplay();"
 		@mouseenter="stopAutoplay()"
 		@mouseleave="startAutoplay()">
 		<h2 class="screen-reader-text">Teknologi Pengembangan Website yang Kami Gunakan</h2>

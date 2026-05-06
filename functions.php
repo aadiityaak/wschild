@@ -297,19 +297,6 @@ add_action('wp_enqueue_scripts', function () {
 });
 
 /**
- * Add defer attribute to Alpine.js and related scripts
- */
-add_filter('script_loader_tag', function ($tag, $handle) {
-	if (in_array($handle, ['alpinejs', 'alpine-collapse', 'wschild-pricing'])) {
-		if (strpos($tag, 'defer') === false) {
-			return str_replace(' src', ' defer src', $tag);
-		}
-	}
-	return $tag;
-}, 10, 2);
-
-
-/**
  * Register Navigation Menus & Theme Support
  */
 add_action('after_setup_theme', function () {
@@ -374,14 +361,17 @@ add_action('wp_head', function () {
 	}
 }, 1);
 
-add_filter('script_loader_tag', function ($tag, $handle, $src) {
-	if (! in_array($handle, ['alpinejs', 'alpine-collapse', 'gsap', 'barba', 'barba-prefetch', 'wschild-cursor', 'wschild-pricing'], true)) {
+add_filter('script_loader_tag', function ($tag, $handle) {
+	if (! in_array($handle, ['alpinejs', 'alpine-collapse', 'wschild-pricing'], true)) {
 		return $tag;
 	}
 
-	$src_attr = esc_url($src);
-	return "<script src=\"{$src_attr}\" defer></script>\n";
-}, 10, 3);
+	if (strpos($tag, 'defer') === false) {
+		return str_replace(' src', ' defer src', $tag);
+	}
+
+	return $tag;
+}, 11, 2);
 
 if (! function_exists('wschild_render_pricing_card')) {
 	function wschild_render_pricing_card(array $plan, string $primary_cta_url): void
