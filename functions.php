@@ -107,8 +107,15 @@ add_action('wp_enqueue_scripts', function () {
 		"(function(){\n" .
 			"if (typeof window === 'undefined' || typeof window.barba === 'undefined') return;\n" .
 			"window.wschildBarbaEnabled = true;\n" .
+			"var debug = window.location && window.location.search ? window.location.search.indexOf('barba_debug=1') !== -1 : false;\n" .
 			"var canAnimate = typeof window.gsap !== 'undefined';\n" .
 			"var wrapper = document.querySelector('[data-barba=\"wrapper\"]');\n" .
+			"var initialContainer = document.querySelector('[data-barba=\"container\"]');\n" .
+			"if (!wrapper || !initialContainer) {\n" .
+			"  if (debug && window.console) console.warn('[wschild] Barba disabled: wrapper/container not found', { wrapper: !!wrapper, container: !!initialContainer });\n" .
+			"  window.wschildBarbaEnabled = false;\n" .
+			"  return;\n" .
+			"}\n" .
 			"var setTransitioning = function(on){\n" .
 			"  if (!document.documentElement) return;\n" .
 			"  if (on) document.documentElement.classList.add('wschild-is-transitioning');\n" .
@@ -141,6 +148,8 @@ add_action('wp_enqueue_scripts', function () {
 			"}\n" .
 			"\n" .
 			"window.barba.init({\n" .
+			"  debug: debug,\n" .
+			"  logLevel: debug ? 'debug' : 'off',\n" .
 			"  preventRunning: true,\n" .
 			"  timeout: 7000,\n" .
 			"  prevent: function(_ref){\n" .
@@ -158,6 +167,7 @@ add_action('wp_enqueue_scripts', function () {
 			"    return false;\n" .
 			"  },\n" .
 			"  requestError: function(_trigger, action, url){\n" .
+			"    if (debug && window.console) console.warn('[wschild] Barba requestError', { action: action, url: url });\n" .
 			"    if (action === 'click' && url) window.location.href = url;\n" .
 			"    return false;\n" .
 			"  },\n" .
@@ -193,6 +203,10 @@ add_action('wp_enqueue_scripts', function () {
 			"  }]\n" .
 			"});\n" .
 			"\n" .
+			"if (debug && window.console) {\n" .
+			"  window.barba.hooks.before(function(data){ console.log('[wschild] barba:before', data); });\n" .
+			"  window.barba.hooks.after(function(data){ console.log('[wschild] barba:after', data); });\n" .
+			"}\n" .
 			"window.barba.hooks.once(function(data){\n" .
 			"  if (data && data.current && data.current.container) window.wschildInitPage(data.current.container);\n" .
 			"});\n" .
