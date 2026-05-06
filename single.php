@@ -11,7 +11,7 @@ if (! defined('ABSPATH')) {
 get_header();
 ?>
 
-<main id="primary" class="wschild-single-post">
+<main id="primary" class="wschild-single-post" data-barba="container" data-barba-namespace="single">
 	<?php
 	while (have_posts()) :
 		the_post();

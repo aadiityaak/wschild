@@ -40,4 +40,4 @@ if (! defined('ABSPATH')) {
 		<?php get_template_part('src/component/header'); ?>
 	</header>
 
-	<div id="content" class="site-content">
+	<div id="content" class="site-content" data-barba="wrapper">

@@ -16,7 +16,7 @@ $secondary_cta_url = '#';
 // Function wschild_render_pricing_card() is now in functions.php
 ?>
 
-<main id="primary" class="wschild-landing">
+<main id="primary" class="wschild-landing" data-barba="container" data-barba-namespace="landing-umroh">
 	<section class="wschild-hero">
 		<div class="wschild-container">
 			<p class="wschild-badge">Landing Page</p>

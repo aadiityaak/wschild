@@ -10,7 +10,7 @@ if (! defined('ABSPATH')) {
 get_header();
 ?>
 
-<main id="primary" class="wschild-contact-page">
+<main id="primary" class="wschild-contact-page" data-barba="container" data-barba-namespace="contact">
 	<?php
 	// Hero section for Contact
 	get_template_part(

@@ -80,6 +80,91 @@ add_action('wp_enqueue_scripts', function () {
 		);
 	}
 
+	// Barba.js (Page Transitions)
+	if (! wp_script_is('barba', 'enqueued')) {
+		wp_enqueue_script(
+			'barba',
+			'https://unpkg.com/@barba/core',
+			['gsap'],
+			null,
+			true
+		);
+	}
+
+	wp_add_inline_script(
+		'barba',
+		"(function(){\n" .
+			"if (typeof window === 'undefined' || typeof window.barba === 'undefined') return;\n" .
+			"window.wschildBarbaEnabled = true;\n" .
+			"var canAnimate = typeof window.gsap !== 'undefined';\n" .
+			"var killScrollTriggersIn = function(root){\n" .
+			"  if (!root || typeof window.ScrollTrigger === 'undefined') return;\n" .
+			"  try {\n" .
+			"    window.ScrollTrigger.getAll().forEach(function(t){\n" .
+			"      var trg = t && t.trigger;\n" .
+			"      if (trg && root.contains && root.contains(trg)) t.kill();\n" .
+			"    });\n" .
+			"  } catch (e) {}\n" .
+			"};\n" .
+			"window.wschildInitPage = function(container){\n" .
+			"  if (typeof window.wschildInitRevealAnimations === 'function') window.wschildInitRevealAnimations(container);\n" .
+			"  if (typeof window.wschildInitScrambleScroll === 'function') window.wschildInitScrambleScroll(container);\n" .
+			"  if (typeof window.wschildInitPricingHover === 'function') window.wschildInitPricingHover(container);\n" .
+			"  if (typeof window.wschildInitPricingScroll === 'function') window.wschildInitPricingScroll(container);\n" .
+			"};\n" .
+			"\n" .
+			"window.barba.init({\n" .
+			"  preventRunning: true,\n" .
+			"  prevent: function(_ref){\n" .
+			"    var el = _ref.el, event = _ref.event, href = _ref.href;\n" .
+			"    if (!el || !href) return false;\n" .
+			"    if (event && (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)) return true;\n" .
+			"    if (el.target && el.target === '_blank') return true;\n" .
+			"    if (el.hasAttribute && el.hasAttribute('download')) return true;\n" .
+			"    if (typeof href === 'string') {\n" .
+			"      if (href.indexOf('#') === 0) return true;\n" .
+			"      if (href.indexOf('mailto:') === 0 || href.indexOf('tel:') === 0) return true;\n" .
+			"      if (href.indexOf('/wp-admin') !== -1 || href.indexOf('/wp-login') !== -1) return true;\n" .
+			"    }\n" .
+			"    if (el.closest && el.closest('[data-no-barba]')) return true;\n" .
+			"    return false;\n" .
+			"  },\n" .
+			"  requestError: function(_trigger, action, url){\n" .
+			"    if (action === 'click' && url) window.location.href = url;\n" .
+			"    return false;\n" .
+			"  },\n" .
+			"  transitions: [{\n" .
+			"    name: 'wschild-fade',\n" .
+			"    leave: function(data){\n" .
+			"      killScrollTriggersIn(data && data.current ? data.current.container : null);\n" .
+			"      if (!canAnimate) return;\n" .
+			"      return window.gsap.to(data.current.container, { opacity: 0, duration: 0.25, ease: 'power1.out' });\n" .
+			"    },\n" .
+			"    enter: function(data){\n" .
+			"      if (!canAnimate) return;\n" .
+			"      return window.gsap.from(data.next.container, { opacity: 0, duration: 0.25, ease: 'power1.out' });\n" .
+			"    },\n" .
+			"    beforeEnter: function(_ref2){\n" .
+			"      var next = _ref2.next;\n" .
+			"      if (!next || !next.html) return;\n" .
+			"      var matches = next.html.match(/<body[^>]*class=([\\\"\\'])(.*?)\\1/i);\n" .
+			"      document.body.setAttribute('class', (matches && matches[2]) ? matches[2] : '');\n" .
+			"    },\n" .
+			"    afterEnter: function(data){\n" .
+			"      if (data && data.next && data.next.container) window.wschildInitPage(data.next.container);\n" .
+			"      var trig = data ? data.trigger : null;\n" .
+			"      if (trig !== 'back' && trig !== 'forward') window.scrollTo(0, 0);\n" .
+			"    }\n" .
+			"  }]\n" .
+			"});\n" .
+			"\n" .
+			"window.barba.hooks.once(function(data){\n" .
+			"  if (data && data.current && data.current.container) window.wschildInitPage(data.current.container);\n" .
+			"});\n" .
+			"})();",
+		'after'
+	);
+
 	// Scramble Scroll Effect
 	wp_enqueue_script(
 		'wschild-scramble-scroll',
@@ -241,7 +326,7 @@ add_action('wp_head', function () {
 }, 1);
 
 add_filter('script_loader_tag', function ($tag, $handle, $src) {
-	if (! in_array($handle, ['alpinejs', 'alpine-collapse', 'gsap', 'wschild-cursor', 'wschild-pricing'], true)) {
+	if (! in_array($handle, ['alpinejs', 'alpine-collapse', 'gsap', 'barba', 'wschild-cursor', 'wschild-pricing'], true)) {
 		return $tag;
 	}
 

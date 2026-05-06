@@ -1,28 +1,18 @@
 <?php
 
-/**
- * The template for displaying archive pages
- * Path: archive.php
- */
-
 if (! defined('ABSPATH')) {
 	exit;
 }
 
 get_header();
 
-// Get archive title and description
-$archive_title = get_the_archive_title();
-$archive_description = get_the_archive_description();
+$query = get_search_query();
 ?>
 
-<main id="primary" class="wschild-archive-page" data-barba="container" data-barba-namespace="archive">
+<main id="primary" class="wschild-archive-page wschild-search-page" data-barba="container" data-barba-namespace="search">
 	<header class="wschild-archive-header">
 		<div class="wschild-container">
-			<h1 class="wschild-archive-header__title"><?php echo wp_kses_post($archive_title); ?></h1>
-			<?php if ($archive_description) : ?>
-				<div class="wschild-archive-header__desc"><?php echo wp_kses_post($archive_description); ?></div>
-			<?php endif; ?>
+			<h1 class="wschild-archive-header__title"><?php echo esc_html('Hasil Pencarian: ' . $query); ?></h1>
 		</div>
 	</header>
 
@@ -47,10 +37,9 @@ $archive_description = get_the_archive_description();
 					]);
 					?>
 				</div>
-
 			<?php else : ?>
 				<div class="wschild-no-posts">
-					<p><?php _e('Maaf, tidak ada postingan yang ditemukan.', 'wschild'); ?></p>
+					<p><?php _e('Tidak ada hasil yang cocok.', 'wschild'); ?></p>
 				</div>
 			<?php endif; ?>
 		</div>
@@ -59,3 +48,4 @@ $archive_description = get_the_archive_description();
 
 <?php
 get_footer();
+

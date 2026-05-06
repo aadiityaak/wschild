@@ -12,7 +12,7 @@ get_header();
 $primary_cta_url = '#';
 ?>
 
-<main id="primary" class="wschild-landing">
+<main id="primary" class="wschild-landing" data-barba="container" data-barba-namespace="home">
 	<?php
 	// Include the new Hero component
 	get_template_part('src/component/home/hero');

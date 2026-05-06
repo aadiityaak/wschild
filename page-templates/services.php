@@ -10,7 +10,7 @@ if (! defined('ABSPATH')) {
 get_header();
 ?>
 
-<main id="primary" class="wschild-services">
+<main id="primary" class="wschild-services" data-barba="container" data-barba-namespace="services">
 	<?php
 	// Hero section for Services
 	get_template_part(

@@ -10,7 +10,7 @@ if (! defined('ABSPATH')) {
 get_header();
 ?>
 
-<main id="primary" class="wschild-pricing-page">
+<main id="primary" class="wschild-pricing-page" data-barba="container" data-barba-namespace="pricing">
 	<?php
 	// Hero section for Pricing
 	get_template_part(

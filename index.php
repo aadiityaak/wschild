@@ -16,7 +16,11 @@ if (is_front_page() && ! is_home()) {
 	if (have_posts()) {
 		while (have_posts()) {
 			the_post();
-			the_content();
+?>
+			<main id="primary" class="wschild-page" data-barba="container" data-barba-namespace="front">
+				<?php the_content(); ?>
+			</main>
+<?php
 		}
 	}
 } else {
@@ -24,7 +28,7 @@ if (is_front_page() && ! is_home()) {
 	$blog_title = get_the_title(get_option('page_for_posts', true));
 	$blog_desc = get_the_archive_description();
 ?>
-	<main id="primary" class="wschild-blog-page">
+	<main id="primary" class="wschild-blog-page" data-barba="container" data-barba-namespace="blog">
 		<header class="wschild-blog-header">
 			<div class="wschild-container">
 				<h1 class="wschild-blog-header__title"><?php echo esc_html($blog_title ?: 'Blog'); ?></h1>
