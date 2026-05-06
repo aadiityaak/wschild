@@ -91,12 +91,29 @@ add_action('wp_enqueue_scripts', function () {
 		);
 	}
 
+	// Barba Prefetch (optional, helps reduce wait when navigating)
+	if (! wp_script_is('barba-prefetch', 'enqueued')) {
+		wp_enqueue_script(
+			'barba-prefetch',
+			'https://unpkg.com/@barba/prefetch',
+			['barba'],
+			null,
+			true
+		);
+	}
+
 	wp_add_inline_script(
 		'barba',
 		"(function(){\n" .
 			"if (typeof window === 'undefined' || typeof window.barba === 'undefined') return;\n" .
 			"window.wschildBarbaEnabled = true;\n" .
 			"var canAnimate = typeof window.gsap !== 'undefined';\n" .
+			"var wrapper = document.querySelector('[data-barba=\"wrapper\"]');\n" .
+			"var setTransitioning = function(on){\n" .
+			"  if (!document.documentElement) return;\n" .
+			"  if (on) document.documentElement.classList.add('wschild-is-transitioning');\n" .
+			"  else document.documentElement.classList.remove('wschild-is-transitioning');\n" .
+			"};\n" .
 			"var killScrollTriggersIn = function(root){\n" .
 			"  if (!root || typeof window.ScrollTrigger === 'undefined') return;\n" .
 			"  try {\n" .
@@ -107,14 +124,25 @@ add_action('wp_enqueue_scripts', function () {
 			"  } catch (e) {}\n" .
 			"};\n" .
 			"window.wschildInitPage = function(container){\n" .
+			"  if (container && typeof container === 'object' && !container.__wschildAlpineInited) {\n" .
+			"    container.__wschildAlpineInited = true;\n" .
+			"    if (typeof window.Alpine !== 'undefined' && typeof window.Alpine.initTree === 'function') {\n" .
+			"      try { window.Alpine.initTree(container); } catch (e) {}\n" .
+			"    }\n" .
+			"  }\n" .
 			"  if (typeof window.wschildInitRevealAnimations === 'function') window.wschildInitRevealAnimations(container);\n" .
 			"  if (typeof window.wschildInitScrambleScroll === 'function') window.wschildInitScrambleScroll(container);\n" .
 			"  if (typeof window.wschildInitPricingHover === 'function') window.wschildInitPricingHover(container);\n" .
 			"  if (typeof window.wschildInitPricingScroll === 'function') window.wschildInitPricingScroll(container);\n" .
 			"};\n" .
 			"\n" .
+			"if (typeof window.barbaPrefetch !== 'undefined') {\n" .
+			"  try { window.barba.use(window.barbaPrefetch); } catch (e) {}\n" .
+			"}\n" .
+			"\n" .
 			"window.barba.init({\n" .
 			"  preventRunning: true,\n" .
+			"  timeout: 7000,\n" .
 			"  prevent: function(_ref){\n" .
 			"    var el = _ref.el, event = _ref.event, href = _ref.href;\n" .
 			"    if (!el || !href) return false;\n" .
@@ -135,8 +163,13 @@ add_action('wp_enqueue_scripts', function () {
 			"  },\n" .
 			"  transitions: [{\n" .
 			"    name: 'wschild-fade',\n" .
+			"    sync: true,\n" .
 			"    leave: function(data){\n" .
 			"      killScrollTriggersIn(data && data.current ? data.current.container : null);\n" .
+			"      if (wrapper && data && data.current && data.current.container) {\n" .
+			"        wrapper.style.minHeight = data.current.container.offsetHeight + 'px';\n" .
+			"      }\n" .
+			"      setTransitioning(true);\n" .
 			"      if (!canAnimate) return;\n" .
 			"      return window.gsap.to(data.current.container, { opacity: 0, duration: 0.25, ease: 'power1.out' });\n" .
 			"    },\n" .
@@ -154,6 +187,8 @@ add_action('wp_enqueue_scripts', function () {
 			"      if (data && data.next && data.next.container) window.wschildInitPage(data.next.container);\n" .
 			"      var trig = data ? data.trigger : null;\n" .
 			"      if (trig !== 'back' && trig !== 'forward') window.scrollTo(0, 0);\n" .
+			"      if (wrapper) wrapper.style.minHeight = '';\n" .
+			"      setTransitioning(false);\n" .
 			"    }\n" .
 			"  }]\n" .
 			"});\n" .
@@ -326,7 +361,7 @@ add_action('wp_head', function () {
 }, 1);
 
 add_filter('script_loader_tag', function ($tag, $handle, $src) {
-	if (! in_array($handle, ['alpinejs', 'alpine-collapse', 'gsap', 'barba', 'wschild-cursor', 'wschild-pricing'], true)) {
+	if (! in_array($handle, ['alpinejs', 'alpine-collapse', 'gsap', 'barba', 'barba-prefetch', 'wschild-cursor', 'wschild-pricing'], true)) {
 		return $tag;
 	}
 

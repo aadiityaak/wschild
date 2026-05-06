@@ -2124,3 +2124,13 @@ body.admin-bar .wschild-header__mobile-overlay {
   backface-visibility: hidden;
 }
 
+[data-barba="wrapper"] {
+  position: relative;
+}
+
+html.wschild-is-transitioning [data-barba="container"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+}
+
