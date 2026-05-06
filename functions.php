@@ -29,8 +29,8 @@ add_action('wp_enqueue_scripts', function () {
 		wp_get_theme()->get('Version')
 	);
 
-	// Enqueue Alpine Collapse only on home page
-	if (is_page_template('page-templates/home.php') && ! wp_script_is('alpine-collapse', 'enqueued') && ! wp_script_is('alpine-collapse', 'registered')) {
+	// Alpine Collapse (needed for x-collapse; with Barba, it must be available even when navigating to Home from other pages)
+	if (! wp_script_is('alpine-collapse', 'enqueued') && ! wp_script_is('alpine-collapse', 'registered')) {
 		wp_enqueue_script(
 			'alpine-collapse',
 			'https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js',
@@ -54,7 +54,7 @@ add_action('wp_enqueue_scripts', function () {
 		wp_enqueue_script(
 			'alpinejs',
 			'https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js',
-			is_page_template('page-templates/home.php') ? ['alpine-collapse', 'wschild-pricing'] : ['wschild-pricing'],
+			['alpine-collapse', 'wschild-pricing'],
 			null,
 			false // Move to head
 		);
