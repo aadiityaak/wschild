@@ -646,11 +646,20 @@ a.wschild-button--dark:hover {
 
 .wschild-header__mobile-trigger {
   display: none;
-  background: none;
+  position: relative;
+  /* background: none; */
   border: none;
   cursor: pointer;
   padding: 8px;
-  color: #1a1a1a;
+  background-color: #1a1a1a;
+  line-height: 0;
+}
+
+.wschild-header__mobile-trigger svg {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 24px;
 }
 
 .wschild-header__mobile-overlay {
@@ -684,6 +693,7 @@ a.wschild-button--dark:hover {
   font-size: 14px;
   cursor: pointer;
   transition: all 0.3s ease;
+  background-color: #1a1a1a;
 }
 
 .wschild-mobile-menu {
@@ -715,7 +725,6 @@ a.wschild-button--dark:hover {
 
   .wschild-header__mobile-trigger {
     display: block;
-    background: none !important;
     border: none;
     cursor: pointer;
     padding: 8px;
