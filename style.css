@@ -4,7 +4,7 @@ Theme URI: https://websweetstudio.com/
 Author: Aditya Kristyanto
 Author URI: https://github.com/aadiityaak/
 Description: Wschild is a simple starter theme for WordPress that offers a clean and minimalist design, making it both user-friendly and highly customizable.
-Version: 1.0.0
+Version: 1.0.1
 Text Domain: wschild
 */
 
@@ -608,6 +608,7 @@ a.wschild-button--dark:hover {
   height: 55px;
   width: auto;
   display: block;
+  transform: translateY(-15px);
 }
 
 .wschild-header__logo {
@@ -2122,5 +2123,18 @@ body.admin-bar .wschild-header__mobile-overlay {
   display: inline-block;
   transform-style: preserve-3d;
   backface-visibility: hidden;
+}
+
+.wschild-page__header {
+  margin: 0 0 28px;
+}
+
+.wschild-page__title {
+  margin: 0;
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 800;
+  line-height: 1.2;
+  color: #1a1a1a;
+  letter-spacing: -0.02em;
 }
 

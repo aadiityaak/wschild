@@ -51,7 +51,7 @@ if (is_front_page() && ! is_home()) {
 						the_posts_pagination([
 							'mid_size'  => 2,
 							'prev_text' => __('&laquo; Sebelumnya', 'wschild'),
-							'next_text' => __('Selanjutnya &raquo;', 'wschild'),
+							'next_text' => __('&raquo;', 'wschild'),
 						]);
 						?>
 					</div>
