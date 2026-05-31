@@ -6,12 +6,39 @@
  */
 
 $title = $args['title'] ?? 'Wujudkan Website Impian';
-$subtitle = $args['subtitle'] ?? 'Websweet Studio menghadirkan desain yang memikat dan pengalaman pengguna yang lembut, dirancang khusus untuk memperkuat kredibilitas bisnis Anda di dunia digital.';
+$subtitle = $args['subtitle'] ?? null;
 $cta_label = $args['cta_label'] ?? 'Mulai Eksplorasi';
 $cta_url = $args['cta_url'] ?? '#';
 
 $image_url = $args['image_url'] ?? 'https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home.webp';
 $image_srcset = $args['image_srcset'] ?? 'https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home-241x300.webp 241w, https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home-600x747.webp 600w, https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home-768x956.webp 768w, https://websweetstudio.com/wp-content/uploads/2023/07/websweetstudio-home.webp 823w';
+
+$enable_typing = $args['enable_typing'] ?? (is_front_page() || is_page_template('page-templates/home.php'));
+$typing_words = $args['typing_words'] ?? [
+	'Bisnis',
+	'Sekolah',
+	'Perusahaan',
+	'Profile',
+	'Yayasan',
+	'UMKM',
+	'Toko Online',
+	'Startup',
+	'Klinik',
+	'Restoran',
+	'Instansi',
+	'Komunitas',
+	'Event',
+	'Travel',
+	'Hotel',
+	'Aplikasi Web'
+];
+
+$subtitle_html = $subtitle ?? 'Websweet Studio menghadirkan desain yang memikat dan pengalaman pengguna yang lembut, dirancang khusus untuk memperkuat kredibilitas bisnis Anda di dunia digital.';
+
+if ($subtitle === null && $enable_typing && ! empty($typing_words)) {
+	$words_attr = esc_attr(implode('|', array_values($typing_words)));
+	$subtitle_html = 'Websweet Studio menghadirkan desain yang memikat dan pengalaman pengguna yang lembut, dirancang khusus untuk memperkuat kredibilitas <span class="wschild-typing wschild-typing--dark" data-wschild-typing data-words="' . $words_attr . '"></span> Anda.';
+}
 ?>
 
 <section class="home-hero">
@@ -19,7 +46,7 @@ $image_srcset = $args['image_srcset'] ?? 'https://websweetstudio.com/wp-content/
 		<div class="home-hero__grid">
 			<div class="home-hero__content">
 				<h1 class="home-hero__title"><?php echo esc_html($title); ?></h1>
-				<p class="home-hero__subtitle"><?php echo esc_html($subtitle); ?></p>
+				<p class="home-hero__subtitle"><?php echo wp_kses_post($subtitle_html); ?></p>
 				<div class="home-hero__actions">
 					<a href="<?php echo esc_url($cta_url); ?>" class="wschild-button wschild-button--dark wschild-button--pill">
 						<?php echo esc_html($cta_label); ?>
@@ -46,6 +73,65 @@ $image_srcset = $args['image_srcset'] ?? 'https://websweetstudio.com/wp-content/
 
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
+		const typingEl = document.querySelector('[data-wschild-typing]');
+		if (typingEl) {
+			const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			const rawWords = typingEl.getAttribute('data-words') || '';
+			const words = rawWords.split('|').map(w => w.trim()).filter(Boolean);
+
+			if (words.length) {
+				let wordIndex = 0;
+				let charIndex = 0;
+				let deleting = false;
+
+				const typeSpeed = 65;
+				const deleteSpeed = 35;
+				const holdAfterType = 1100;
+				const holdAfterDelete = 200;
+
+				const render = () => {
+					typingEl.textContent = words[wordIndex].slice(0, charIndex);
+				};
+
+				const tick = () => {
+					if (prefersReducedMotion) {
+						typingEl.textContent = words[0];
+						return;
+					}
+
+					const current = words[wordIndex];
+					if (!deleting) {
+						charIndex = Math.min(current.length, charIndex + 1);
+						render();
+						if (charIndex === current.length) {
+							deleting = true;
+							window.setTimeout(tick, holdAfterType);
+							return;
+						}
+						window.setTimeout(tick, typeSpeed);
+						return;
+					}
+
+					charIndex = Math.max(0, charIndex - 1);
+					render();
+					if (charIndex === 0) {
+						deleting = false;
+						wordIndex = (wordIndex + 1) % words.length;
+						window.setTimeout(tick, holdAfterDelete);
+						return;
+					}
+					window.setTimeout(tick, deleteSpeed);
+				};
+
+				typingEl.textContent = words[0];
+				charIndex = words[0].length;
+				window.setTimeout(() => {
+					deleting = true;
+					tick();
+				}, holdAfterType);
+			}
+		}
+
 		const container = document.getElementById('hero-image-container');
 		const image = document.getElementById('hero-main-image');
 		const floatingItems = document.querySelectorAll('.floating-item');
