@@ -58,7 +58,7 @@ $tech_images = [
 				<?php foreach ($tech_images as $item) : ?>
 					<div class="home-tech__slide-alpine">
 						<figure class="home-tech__item">
-							<img src="<?php echo esc_url($item['url']); ?>" alt="Teknologi <?php echo esc_attr($item['name']); ?> untuk Pembuatan Website" loading="lazy" decoding="async">
+							<img src="<?php echo esc_url($item['url']); ?>" alt="Teknologi <?php echo esc_attr($item['name']); ?> untuk Pembuatan Website" loading="eager" decoding="async">
 						</figure>
 					</div>
 				<?php endforeach; ?>

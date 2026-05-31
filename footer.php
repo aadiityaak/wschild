@@ -68,7 +68,7 @@ if (! defined('ABSPATH')) {
 	</div>
 	<!-- Copyright Row -->
 	<div class="wschild-footer__copyright">
-		<p>Copyright &copy; <?php echo date('Y'); ?>. All Right Reserved.</p>
+		<p>Websweet Studio &copy; <?php echo date('Y'); ?></p>
 	</div>
 </footer>
 

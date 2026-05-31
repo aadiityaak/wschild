@@ -241,7 +241,7 @@ add_action('wp_head', function () {
 }, 1);
 
 add_filter('script_loader_tag', function ($tag, $handle, $src) {
-	if (! in_array($handle, ['alpinejs', 'alpine-collapse', 'gsap', 'wschild-cursor', 'wschild-pricing'], true)) {
+	if (! in_array($handle, ['alpinejs', 'alpine-collapse', 'wschild-cursor', 'wschild-pricing'], true)) {
 		return $tag;
 	}
 
