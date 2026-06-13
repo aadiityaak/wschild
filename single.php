@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying all single posts
  * Path: single.php
@@ -15,11 +16,16 @@ get_header();
 	<?php
 	while (have_posts()) :
 		the_post();
-		?>
+	?>
 		<article id="post-<?php the_ID(); ?>" <?php post_class('wschild-article'); ?>>
 			<header class="wschild-article__header">
 				<div class="wschild-container">
 					<div class="wschild-article__meta">
+						<span class="wschild-article__author">
+							<?php echo get_avatar(get_the_author_meta('ID'), 48, '', '', ['class' => 'wschild-article__author-avatar']); ?>
+							<span class="wschild-article__author-name"><?php the_author(); ?></span>
+						</span>
+						<span class="wschild-article__sep">|</span>
 						<span class="wschild-article__date"><?php echo get_the_date(); ?></span>
 						<?php
 						$categories = get_the_category();
