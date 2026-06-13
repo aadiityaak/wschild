@@ -25,8 +25,14 @@
 			</div>
 		<?php endif; ?>
 
+		<div class="wschild-blog-card__avatar-wrap">
+			<?php echo get_avatar(get_the_author_meta('ID'), 48, '', '', ['class' => 'wschild-blog-card__author-avatar']); ?>
+		</div>
+
 		<div class="wschild-blog-card__content">
 			<div class="wschild-blog-card__meta">
+				<span class="wschild-blog-card__author-name"><?php the_author(); ?></span>
+				<span class="wschild-blog-card__sep">|</span>
 				<span class="wschild-blog-card__date"><?php echo get_the_date(); ?></span>
 				<?php
 				$categories = get_the_category();
