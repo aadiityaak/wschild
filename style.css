@@ -1724,6 +1724,7 @@ body.admin-bar .wschild-header__mobile-overlay {
 
 .wschild-archive-header__title,
 .wschild-blog-header__title {
+  font-family: var(--font-main);
   font-size: clamp(32px, 5vw, 48px);
   font-weight: 800;
   color: #1a1a1a;
@@ -2004,6 +2005,7 @@ body.admin-bar .wschild-header__mobile-overlay {
 }
 
 .wschild-article__title {
+  font-family: var(--font-main);
   font-size: clamp(32px, 5vw, 48px);
   font-weight: 800;
   line-height: 1.2;
