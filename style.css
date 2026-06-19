@@ -2205,3 +2205,15 @@ body.admin-bar .wschild-header__mobile-overlay {
   letter-spacing: -0.02em;
 }
 
+/* --------------------------------------------------------------
+ * Archive page: disable hover animations on blog cards
+ * -------------------------------------------------------------- */
+.wschild-archive-page .wschild-blog-card__inner:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.wschild-archive-page .wschild-blog-card__inner:hover .wschild-blog-card__image {
+  transform: none;
+}
+
