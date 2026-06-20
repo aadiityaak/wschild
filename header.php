@@ -19,22 +19,17 @@ if (! defined('ABSPATH')) {
 	<meta charset="<?php bloginfo('charset'); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
+	<style>
+		html,
+		body {
+			background: #ffffff !important
+		}
+	</style>
 	<?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?> x-data="{ mobileMenuOpen: false }">
 	<?php wp_body_open(); ?>
-
-	<!-- Global Gooey Filter -->
-	<svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display:block; position: absolute; width: 0; height: 0; pointer-events: none;">
-		<defs>
-			<filter id="gooey" x="-50%" y="-50%" width="200%" height="200%">
-				<feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur" />
-				<feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 25 -12" result="goo" />
-				<feComposite in="SourceGraphic" in2="goo" operator="atop" />
-			</filter>
-		</defs>
-	</svg>
 
 	<header id="masthead" class="site-header sticky-header">
 		<?php get_template_part('src/component/header'); ?>

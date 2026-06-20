@@ -74,7 +74,7 @@ const wschildInitCursor = () => {
         scaleY: scale,
         duration: 0.55,
         ease: "elastic.out(1, 0.45)",
-        overwrite: true,
+        overwrite: "auto",
       },
     );
     gsap.fromTo(
@@ -85,7 +85,7 @@ const wschildInitCursor = () => {
         scaleY: Math.max(0.55, 1.1 - scale * 0.25),
         duration: 0.45,
         ease: "elastic.out(1, 0.55)",
-        overwrite: true,
+        overwrite: "auto",
       },
     );
   };
@@ -140,52 +140,8 @@ const wschildInitCursor = () => {
     'a, button, .cursor-pointer, input[type="submit"], input[type="button"]',
   );
 
-  const gooeyMap = new WeakMap();
-  const gooeyTargets = [];
-
-  const registerGooeyTarget = (el) => {
-    const gooey = el.querySelector(".wschild-button__gooey");
-    if (!gooey) return;
-    const bg = gooey.querySelector(".wschild-button__bg");
-    const whiteBlob =
-      gooey.querySelector(".wschild-button__blob--white") ||
-      gooey.querySelector(".wschild-button__blob");
-    if (!bg || !whiteBlob) return;
-
-    const target = {
-      el,
-      gooey,
-      bg,
-      whiteBlob,
-      isHovering: false,
-      setGx: gsap.quickSetter(gooey, "x", "px"),
-      setGy: gsap.quickSetter(gooey, "y", "px"),
-      setBx: gsap.quickSetter(bg, "x", "px"),
-      setBy: gsap.quickSetter(bg, "y", "px"),
-      setWx: gsap.quickSetter(whiteBlob, "x", "px"),
-      setWy: gsap.quickSetter(whiteBlob, "y", "px"),
-      setWsx: gsap.quickSetter(whiteBlob, "scaleX"),
-      setWsy: gsap.quickSetter(whiteBlob, "scaleY"),
-      setWo: gsap.quickSetter(whiteBlob, "opacity"),
-      bx: 0,
-      by: 0,
-      bsx: 0,
-      bsy: 0,
-      bo: 0,
-    };
-
-    gsap.set([gooey, bg, whiteBlob], { x: 0, y: 0 });
-    target.setWsx(0);
-    target.setWsy(0);
-    target.setWo(0);
-
-    gooeyMap.set(el, target);
-    gooeyTargets.push(target);
-  };
-
-  // Initialize buttons for gooey effect
+  // Initialize buttons for color spread effect
   interactives.forEach((el) => {
-    // Check if the button should NOT have the gooey effect (e.g., nav buttons)
     const isExcluded =
       el.classList.contains("home-tech__nav-btn") ||
       el.closest(".home-tech__nav-btn") ||
@@ -194,94 +150,106 @@ const wschildInitCursor = () => {
     const isLogo =
       el.classList.contains("wschild-header__logo") ||
       el.closest(".wschild-header__logo");
+    const isButton = el.classList.contains("wschild-button");
 
-    if (!isExcluded && !isLogo && el.classList.contains("wschild-button")) {
-      // Create gooey container
-      if (!el.querySelector(".wschild-button__gooey")) {
-        const gooey = document.createElement("div");
-        gooey.className = "wschild-button__gooey";
+    if (!isExcluded && !isLogo && isButton) {
+      // Create ripple element for color spread
+      const ripple = document.createElement("span");
+      ripple.classList.add("wschild-button__ripple");
+      el.appendChild(ripple);
 
-        const bg = document.createElement("div");
-        bg.className = "wschild-button__bg";
-        gooey.appendChild(bg);
+      let tween = null;
+      let currentSize = 0;
+      let enterX = 0;
+      let enterY = 0;
 
-        for (let i = 0; i < 4; i++) {
-          const blob = document.createElement("div");
-          blob.className = "wschild-button__blob";
-          if (i === 0) blob.classList.add("wschild-button__blob--white");
-          gooey.appendChild(blob);
-        }
-        el.appendChild(gooey);
-      }
+      el.addEventListener("mouseenter", (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
 
-      if (canHover) registerGooeyTarget(el);
+        enterX = x;
+        enterY = y;
+
+        const maxDist = Math.max(
+          Math.hypot(x, y),
+          Math.hypot(rect.width - x, y),
+          Math.hypot(x, rect.height - y),
+          Math.hypot(rect.width - x, rect.height - y),
+        );
+
+        currentSize = maxDist * 2;
+
+        if (tween) tween.kill();
+
+        gsap.set(ripple, {
+          width: currentSize,
+          height: currentSize,
+          x: x - currentSize / 2,
+          y: y - currentSize / 2,
+          scale: 0,
+          opacity: 1,
+        });
+
+        tween = gsap.to(ripple, {
+          scale: 1,
+          duration: 0.5,
+          ease: "power2.out",
+        });
+      });
+
+      el.addEventListener("mousemove", (e) => {
+        const rect = el.getBoundingClientRect();
+        enterX = e.clientX - rect.left;
+        enterY = e.clientY - rect.top;
+      });
+
+      el.addEventListener("mouseleave", () => {
+        if (tween) tween.kill();
+
+        const exitX = enterX;
+        const exitY = enterY;
+        const halfSize = currentSize / 2;
+
+        gsap.set(ripple, {
+          x: exitX - halfSize,
+          y: exitY - halfSize,
+        });
+
+        tween = gsap.to(ripple, {
+          scale: 0,
+          opacity: 0,
+          duration: 0.4,
+          ease: "power2.in",
+          onUpdate: function () {
+            const s = gsap.getProperty(ripple, "scale");
+            gsap.set(ripple, {
+              x: exitX - halfSize * s,
+              y: exitY - halfSize * s,
+            });
+          },
+        });
+      });
     }
 
     el.addEventListener("mouseenter", () => {
-      // Don't hide cursor or play blobs for excluded buttons
+      // Change cursor color to orange on interactive elements
+      gsap.to(cursor, { borderColor: "#F8843F", duration: 0.2 });
+      gsap.to(dot, { background: "#F8843F", duration: 0.2 });
+
       if (isExcluded) {
         jelly(1.18);
         return;
       }
 
-      const hasGooey = !!el.querySelector(".wschild-button__gooey");
-      jelly(hasGooey ? 1.22 : 1.35);
-
-      if (hasGooey) {
-        const target = gooeyMap.get(el);
-        if (target) target.isHovering = true;
-
-        // Gooey blobs animation - scale up blobs
-        const blobs = el.querySelectorAll(".wschild-button__blob");
-        blobs.forEach((blob, i) => {
-          gsap.set(blob, {
-            x: 0,
-            y: 0,
-            scale: 0,
-            opacity: 1,
-          });
-          gsap.to(blob, {
-            scale: i === 0 ? 1 : 1.5,
-            duration: 0.5,
-            delay: i * 0.05,
-            ease: "back.out(1.7)",
-          });
-        });
-      }
-    });
-
-    el.addEventListener("mousemove", (e) => {
-      // Don't play slime/magnetic for excluded buttons
-      if (isExcluded) return;
-
-      // Gooey Blobs Interaction for buttons
-      const hasGooey = !!el.querySelector(".wschild-button__gooey");
-      if (hasGooey) {
-        const rect = el.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const x = e.clientX - centerX;
-        const y = e.clientY - centerY;
-
-        // Move blobs towards cursor with liquid feel (Button itself stays static)
-        const blobs = el.querySelectorAll(".wschild-button__blob");
-        blobs.forEach((blob, i) => {
-          // The first blob (white) follows the mouse more accurately (1:1)
-          const followX = i === 0 ? x : x * (0.8 + i * 0.06);
-          const followY = i === 0 ? y : y * (0.8 + i * 0.06);
-
-          gsap.to(blob, {
-            x: followX,
-            y: followY,
-            duration: i === 0 ? 0.15 : 0.35 + i * 0.08,
-            ease: i === 0 ? "none" : "power2.out",
-          });
-        });
-      }
+      jelly(1.35);
     });
 
     el.addEventListener("mouseleave", () => {
-      // Don't reset blobs for excluded buttons
+      // Reset cursor color
+      gsap.to(cursor, { borderColor: "#000000", duration: 0.2 });
+      gsap.to(dot, { background: "#000000", duration: 0.2 });
+
       if (isExcluded) {
         gsap.to([cursor, dot], {
           scaleX: 1,
@@ -300,81 +268,8 @@ const wschildInitCursor = () => {
         ease: "power2.out",
         overwrite: true,
       });
-
-      // Reset gooey blobs only - sucking back in
-      const hasGooey = !!el.querySelector(".wschild-button__gooey");
-      if (hasGooey) {
-        const target = gooeyMap.get(el);
-        if (target) {
-          target.isHovering = false;
-          target.bx = 0;
-          target.by = 0;
-          target.bsx = 0;
-          target.bsy = 0;
-          target.bo = 0;
-          gsap.killTweensOf(target.whiteBlob);
-        }
-
-        const blobs = el.querySelectorAll(".wschild-button__blob");
-        gsap.to(blobs, {
-          x: 0,
-          y: 0,
-          scale: 0,
-          opacity: 0,
-          duration: 0.5,
-          ease: "power3.in",
-        });
-      }
     });
   });
-
-  if (canHover) {
-    gsap.ticker.add(() => {
-      if (!gooeyTargets.length) return;
-
-      for (const target of gooeyTargets) {
-        const rect = target.el.getBoundingClientRect();
-        const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2;
-        const dx = mouseX - cx;
-        const dy = mouseY - cy;
-        const dist = Math.hypot(dx, dy);
-        const radius = Math.max(rect.width, rect.height) * 1.2 + 140;
-        const t = dist < radius ? 1 - dist / radius : 0;
-
-        const k = target.isHovering ? 1.6 : 1;
-        const max = 42 * k;
-        const nx = radius ? dx / radius : 0;
-        const ny = radius ? dy / radius : 0;
-        const pull = max * t;
-
-        // Keep button bg in place; only slime blob stretches towards cursor
-        target.setGx(0);
-        target.setGy(0);
-        target.setBx(0);
-        target.setBy(0);
-
-        if (!target.isHovering) {
-          const tx = nx * pull * 1.4;
-          const ty = ny * pull * 1.4;
-          const tsx = 0.4 + t * 0.5;
-          const tsy = 0.4 + t * 0.5;
-          const to = t;
-          const lerp = 0.4;
-          target.bx += (tx - target.bx) * lerp;
-          target.by += (ty - target.by) * lerp;
-          target.bsx += (tsx - target.bsx) * lerp;
-          target.bsy += (tsy - target.bsy) * lerp;
-          target.bo += (to - target.bo) * lerp;
-          target.setWx(target.bx);
-          target.setWy(target.by);
-          target.setWsx(target.bsx);
-          target.setWsy(target.bsy);
-          target.setWo(target.bo);
-        }
-      }
-    });
-  }
 
   // Hide cursor when leaving window
   document.addEventListener("mouseleave", () => {
