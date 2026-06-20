@@ -178,9 +178,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const y = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   let f = false;
 
+  const colors = ["#000000", "#76ABAE", "#BA5A5A", "#59B292", "#2C687B"];
+  const pWFillEl = t.querySelector("#pWFill");
+  const pSFillEl = t.querySelector("#pSFill");
+  const pathFillClones = [pWFillEl, pSFillEl].filter(Boolean);
+  const dotEls = [a, c].filter(Boolean);
+  const allFillTargets = [...pathFillClones, ...dotEls];
+  const origEls = [e, o, a, c].filter(Boolean);
+  const fillReveal = m && m.fillReveal ? m.fillReveal : {};
+  const orbitEnd = (k ? k.phi0 : 0) + Math.PI * 2 * (k ? k.turns : 3);
+
   const g = gsap
     .timeline({
-      repeat: 0,
+      repeat: -1,
       paused: true,
       defaults: { ease: "power2.inOut" },
       onComplete: () => {
@@ -192,68 +202,71 @@ document.addEventListener("DOMContentLoaded", () => {
       strokeDashoffset: (t, e) => (e === 0 ? r : n),
       strokeOpacity: 1,
     })
-    .set([a, c].filter(Boolean), {
+    .set(dotEls, {
       scaleX: 1,
       scaleY: 1,
       opacity: 0,
       strokeDashoffset: d,
       strokeOpacity: 1,
     })
-    .set(m && m.fillReveal ? m.fillReveal : {}, { attr: { r: 0 } })
+    .set(fillReveal, { attr: { r: 0 } })
     .set(b, { v: 0 })
     .set(w, { a: k ? k.phi0 : 0, onUpdate: x })
-    .to(e, { strokeDashoffset: 0, duration: 1.4 })
-    .to(o, { strokeDashoffset: 0, duration: 1.2 }, ">-0.4")
-    .to(
-      b,
-      {
-        v: 1,
-        duration: 0.4,
-        ease: "power2.out",
+    .set(origEls, { strokeOpacity: 0, stroke: "none", strokeWidth: 0 })
+    .set([e, o].filter(Boolean), { fill: "none" });
+
+  colors.forEach((color, idx) => {
+    if (idx > 0) {
+      g.set(fillReveal, { attr: { r: 0 } }).set(allFillTargets, {
+        fill: color,
+      });
+    } else {
+      g.set(allFillTargets, { fill: color });
+    }
+
+    g.set(w, { a: k ? k.phi0 : 0, onUpdate: x })
+      .set(dotEls, {
+        attr: k ? { cx: k.sx, cy: k.sy } : {},
+      })
+      .set(b, { v: 1 })
+      .to(
+        fillReveal,
+        {
+          attr: { r: m ? m.fillRadius : 0 },
+          duration: 0.6,
+          ease: "power2.out",
+        },
+        idx === 0 ? ">-0.1" : undefined,
+      )
+      .set(dotEls, {
+        opacity: 1,
+        stroke: "none",
+        strokeWidth: 0,
+        strokeDasharray: "none",
+        strokeDashoffset: 0,
+      })
+      .add(() => {
+        if (D) D.style.opacity = "0";
+      })
+      .to(w, {
+        a: orbitEnd,
+        duration: 3.6,
+        ease: "power2.inOut",
         onUpdate: x,
-      },
-      ">-0.3",
-    )
-    .to([a, c].filter(Boolean), { strokeDashoffset: 0, duration: 0.8 }, "<")
-    .to([e, o, a, c].filter(Boolean), {
-      strokeOpacity: 0,
-      duration: 0.18,
-      ease: "power2.out",
-    })
-    .to(
-      m && m.fillReveal ? m.fillReveal : {},
-      { attr: { r: m ? m.fillRadius : 0 }, duration: 0.6, ease: "power2.out" },
-      ">-0.1",
-    )
-    .set([a, c].filter(Boolean), {
-      opacity: 1,
-      stroke: "none",
-      strokeWidth: 0,
-      strokeDasharray: "none",
-      strokeDashoffset: 0,
-      fill: "#FF8C00",
-    })
-    .add(() => {
-      if (D) D.style.opacity = "0";
-    })
-    .to(w, {
-      a: (k ? k.phi0 : 0) + Math.PI * 2 * (k ? k.turns : 3),
-      duration: 3.6,
-      ease: "power2.inOut",
-      onUpdate: x,
-      onComplete: () => {
-        if (!k) return;
-        if (a) {
-          a.setAttribute("cx", `${k.sx}`);
-          a.setAttribute("cy", `${k.sy}`);
-        }
-        if (c) {
-          c.setAttribute("cx", `${k.sx}`);
-          c.setAttribute("cy", `${k.sy}`);
-        }
-      },
-    })
-    .set([a, c].filter(Boolean), { fill: "#000000" });
+        onComplete: () => {
+          if (!k) return;
+          if (a) {
+            a.setAttribute("cx", `${k.sx}`);
+            a.setAttribute("cy", `${k.sy}`);
+          }
+          if (c) {
+            c.setAttribute("cx", `${k.sx}`);
+            c.setAttribute("cy", `${k.sy}`);
+          }
+        },
+      })
+      .set(dotEls, { fill: color });
+  });
 
   g.play(0);
 
