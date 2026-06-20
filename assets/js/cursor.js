@@ -158,30 +158,20 @@ const wschildInitCursor = () => {
       bg,
       whiteBlob,
       isHovering: false,
-      setGx: gsap.quickTo(gooey, "x", { duration: 0.35, ease: "power3.out" }),
-      setGy: gsap.quickTo(gooey, "y", { duration: 0.35, ease: "power3.out" }),
-      setBx: gsap.quickTo(bg, "x", { duration: 0.35, ease: "power3.out" }),
-      setBy: gsap.quickTo(bg, "y", { duration: 0.35, ease: "power3.out" }),
-      setWx: gsap.quickTo(whiteBlob, "x", {
-        duration: 0.25,
-        ease: "power3.out",
-      }),
-      setWy: gsap.quickTo(whiteBlob, "y", {
-        duration: 0.25,
-        ease: "power3.out",
-      }),
-      setWsx: gsap.quickTo(whiteBlob, "scaleX", {
-        duration: 0.25,
-        ease: "power3.out",
-      }),
-      setWsy: gsap.quickTo(whiteBlob, "scaleY", {
-        duration: 0.25,
-        ease: "power3.out",
-      }),
-      setWo: gsap.quickTo(whiteBlob, "opacity", {
-        duration: 0.25,
-        ease: "power3.out",
-      }),
+      setGx: gsap.quickSetter(gooey, "x", "px"),
+      setGy: gsap.quickSetter(gooey, "y", "px"),
+      setBx: gsap.quickSetter(bg, "x", "px"),
+      setBy: gsap.quickSetter(bg, "y", "px"),
+      setWx: gsap.quickSetter(whiteBlob, "x", "px"),
+      setWy: gsap.quickSetter(whiteBlob, "y", "px"),
+      setWsx: gsap.quickSetter(whiteBlob, "scaleX"),
+      setWsy: gsap.quickSetter(whiteBlob, "scaleY"),
+      setWo: gsap.quickSetter(whiteBlob, "opacity"),
+      bx: 0,
+      by: 0,
+      bsx: 0,
+      bsy: 0,
+      bo: 0,
     };
 
     gsap.set([gooey, bg, whiteBlob], { x: 0, y: 0 });
@@ -277,13 +267,13 @@ const wschildInitCursor = () => {
         const blobs = el.querySelectorAll(".wschild-button__blob");
         blobs.forEach((blob, i) => {
           // The first blob (white) follows the mouse more accurately (1:1)
-          const followX = i === 0 ? x : x * (0.6 + i * 0.1);
-          const followY = i === 0 ? y : y * (0.6 + i * 0.1);
+          const followX = i === 0 ? x : x * (0.8 + i * 0.06);
+          const followY = i === 0 ? y : y * (0.8 + i * 0.06);
 
           gsap.to(blob, {
             x: followX,
             y: followY,
-            duration: i === 0 ? 0.2 : 0.6 + i * 0.1,
+            duration: i === 0 ? 0.15 : 0.35 + i * 0.08,
             ease: i === 0 ? "none" : "power2.out",
           });
         });
@@ -317,6 +307,11 @@ const wschildInitCursor = () => {
         const target = gooeyMap.get(el);
         if (target) {
           target.isHovering = false;
+          target.bx = 0;
+          target.by = 0;
+          target.bsx = 0;
+          target.bsy = 0;
+          target.bo = 0;
           gsap.killTweensOf(target.whiteBlob);
         }
 
@@ -344,28 +339,38 @@ const wschildInitCursor = () => {
         const dx = mouseX - cx;
         const dy = mouseY - cy;
         const dist = Math.hypot(dx, dy);
-        const radius = Math.max(rect.width, rect.height) * 0.9 + 90;
+        const radius = Math.max(rect.width, rect.height) * 1.2 + 140;
         const t = dist < radius ? 1 - dist / radius : 0;
 
-        const k = target.isHovering ? 1.15 : 1;
-        const max = 22 * k;
+        const k = target.isHovering ? 1.6 : 1;
+        const max = 42 * k;
         const nx = radius ? dx / radius : 0;
         const ny = radius ? dy / radius : 0;
         const pull = max * t;
 
-        const gx = nx * pull;
-        const gy = ny * pull;
-        target.setGx(gx);
-        target.setGy(gy);
-        target.setBx(gx * 0.65);
-        target.setBy(gy * 0.65);
+        // Keep button bg in place; only slime blob stretches towards cursor
+        target.setGx(0);
+        target.setGy(0);
+        target.setBx(0);
+        target.setBy(0);
 
         if (!target.isHovering) {
-          target.setWx(gx * 1.1);
-          target.setWy(gy * 1.1);
-          target.setWsx(t * 0.55);
-          target.setWsy(t * 0.55);
-          target.setWo(t * 0.8);
+          const tx = nx * pull * 1.4;
+          const ty = ny * pull * 1.4;
+          const tsx = 0.4 + t * 0.5;
+          const tsy = 0.4 + t * 0.5;
+          const to = t;
+          const lerp = 0.4;
+          target.bx += (tx - target.bx) * lerp;
+          target.by += (ty - target.by) * lerp;
+          target.bsx += (tsx - target.bsx) * lerp;
+          target.bsy += (tsy - target.bsy) * lerp;
+          target.bo += (to - target.bo) * lerp;
+          target.setWx(target.bx);
+          target.setWy(target.by);
+          target.setWsx(target.bsx);
+          target.setWsy(target.bsy);
+          target.setWo(target.bo);
         }
       }
     });

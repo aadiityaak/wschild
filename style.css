@@ -149,8 +149,8 @@ h6,
 
 .wschild-button__blob--white {
   background: #ffffff !important;
-  width: 22px;
-  height: 22px;
+  width: 26px;
+  height: 26px;
 }
 
 .wschild-button--primary {
@@ -1747,18 +1747,17 @@ body.admin-bar .wschild-header__mobile-overlay {
 
 .wschild-archive-grid,
 .wschild-blog-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 40px;
+  column-count: 3;
+  column-gap: 40px;
 }
 
 /* Blog Card */
 .wschild-blog-card {
-  height: 100%;
+  break-inside: avoid;
+  margin-bottom: 40px;
 }
 
 .wschild-blog-card__inner {
-  height: 100%;
   background: #ffffff;
   border-radius: 20px;
   overflow: hidden;
