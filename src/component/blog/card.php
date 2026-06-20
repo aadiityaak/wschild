@@ -32,8 +32,6 @@
 		<div class="wschild-blog-card__content">
 			<div class="wschild-blog-card__meta">
 				<span class="wschild-blog-card__author-name"><?php the_author(); ?></span>
-				<span class="wschild-blog-card__sep">|</span>
-				<span class="wschild-blog-card__date"><?php echo get_the_date(); ?></span>
 				<?php
 				$categories = get_the_category();
 				if ($categories) : ?>
@@ -48,6 +46,15 @@
 
 			<div class="wschild-blog-card__excerpt">
 				<?php echo wp_trim_words(get_the_excerpt(), 20, '...'); ?>
+			</div>
+
+			<div class="wschild-blog-card__date-row">
+				<svg class="wschild-blog-card__date-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+					<path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+				</svg>
+				<time class="wschild-blog-card__date" datetime="<?php echo esc_attr(get_the_date('c')); ?>">
+					<?php echo get_the_date(); ?>
+				</time>
 			</div>
 
 			<div class="wschild-blog-card__footer">
