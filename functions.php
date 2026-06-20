@@ -125,6 +125,15 @@ add_action('wp_enqueue_scripts', function () {
 		true
 	);
 
+	// Why Us Card Hover Animation
+	wp_enqueue_script(
+		'wschild-why-us-hover',
+		get_stylesheet_directory_uri() . '/assets/js/why-us-hover.js',
+		['gsap'],
+		wp_get_theme()->get('Version'),
+		true
+	);
+
 	// Circle Cursor
 	$cursor_css_path = get_stylesheet_directory() . '/assets/css/cursor.css';
 	$cursor_js_path = get_stylesheet_directory() . '/assets/js/cursor.js';
