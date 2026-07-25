@@ -13,7 +13,6 @@ Berbeda dengan desain tradisional yang seringkali terasa berat, Wschild mengguna
 - **Tipografi Geometris:** Menggunakan **Space Grotesk** untuk memberikan kesan teknis dan modern pada seluruh elemen.
 - **Minimalis & Bersih:** Dominasi warna putih dan slate ringan untuk fokus pada konten.
 - **Interaktivitas Halus:** Menggunakan GSAP untuk animasi _reveal_ dan _scramble_ yang memberikan kesan premium.
-- **Gooey Effects:** Implementasi filter SVG pada tombol untuk interaksi yang organik dan unik.
 - **Glassmorphism:** Header transparan dengan efek _blur_ untuk kesan kedalaman.
 
 ## 2. Color Palette & Roles
@@ -61,15 +60,6 @@ Berbeda dengan desain tradisional yang seringkali terasa berat, Wschild mengguna
 - **Tight Headings**: Judul menggunakan line-height yang ketat (1.08) dan tracking negatif (-0.02em) untuk kesan yang lebih padat dan profesional.
 - **Readable Body**: Teks isi menggunakan line-height 1.6 untuk keterbacaan yang maksimal.
 - **Uppercase Labels**: Penggunaan uppercase pada elemen label kecil untuk memperkuat estetika teknis.
-
-## 4. Component Stylings
-
-### Buttons
-
-- **Primary Button**: Background Hitam (`#000000`), teks Putih.
-- **Ghost Button**: Background Slate sangat tipis (`rgba(15, 23, 42, 0.04)`), teks Slate 900.
-- **Shape**: Pill-shaped (99px radius).
-- **Gooey Interaction**: Menggunakan filter SVG `#gooey` untuk efek penggabungan visual saat hover/animasi.
 
 ### Cards & Containers
 

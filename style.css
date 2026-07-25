@@ -114,29 +114,6 @@ h6,
   background: transparent;
 }
 
-.wschild-button::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--btn-bg, #000000);
-  border-radius: inherit;
-  z-index: -1;
-}
-
-.wschild-button__ripple {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--btn-bg-hover, #f8843f);
-  border-radius: inherit;
-  pointer-events: none;
-  z-index: -1;
-  transform: scale(0);
-  transform-origin: center center;
-}
-
 .wschild-button > *:not(.wschild-button__ripple) {
   position: relative;
   z-index: 2;
@@ -1235,15 +1212,6 @@ body.admin-bar .wschild-header__mobile-overlay {
   font-weight: 700 !important;
   transition: all 0.3s ease !important;
   border-radius: 16px !important;
-}
-
-.home-qna__trigger::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: #0a0a1a;
-  border-radius: inherit;
-  z-index: 0;
 }
 
 .home-qna__trigger--active {
