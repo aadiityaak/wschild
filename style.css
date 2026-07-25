@@ -114,27 +114,40 @@ h6,
   background: transparent;
 }
 
-.wschild-button > *:not(.wschild-button__ripple) {
+.wschild-button > * {
   position: relative;
   z-index: 2;
-}
-
-.wschild-button--primary {
-  --btn-bg: #000000;
-  --btn-bg-hover: #f8843f;
-  color: #ffffff;
 }
 
 .wschild-button--dark {
   --btn-bg: #0a0a1a;
   --btn-bg-hover: #f8843f;
+  background: var(--btn-bg);
+  color: #ffffff;
+}
+
+.wschild-button--dark:hover {
+  background: var(--btn-bg-hover);
   color: #ffffff;
 }
 
 .wschild-button--ghost {
   --btn-bg: rgba(15, 23, 42, 0.04);
   --btn-bg-hover: rgba(248, 132, 63, 0.15);
+  background: var(--btn-bg);
   color: #0f172a;
+}
+
+.wschild-button--primary {
+  --btn-bg: #000000;
+  --btn-bg-hover: #f8843f;
+  background: var(--btn-bg);
+  color: #ffffff;
+}
+
+.wschild-button--primary:hover {
+  background: var(--btn-bg-hover);
+  color: #ffffff;
 }
 
 .wschild-button--block {
@@ -380,8 +393,8 @@ h6,
   min-width: 180px;
 }
 
-a.wschild-button--dark {
-  border-radius: 20px;
+a.wschild-button--dark.wschild-button--pill {
+  border-radius: 999px;
 }
 
 .wschild-price__actions {
@@ -699,10 +712,22 @@ a.wschild-button--dark {
 
 /* Home Hero Section */
 .home-hero {
-  padding: 100px 0;
+  padding: 100px 0 80px;
   overflow: hidden;
-  background: #ffffff;
+  background:
+    radial-gradient(
+      700px 250px at 85% 30%,
+      rgba(245, 158, 11, 0.1),
+      transparent 60%
+    ),
+    radial-gradient(
+      600px 300px at 15% 70%,
+      rgba(2, 132, 199, 0.08),
+      transparent 60%
+    ),
+    #ffffff;
   position: relative;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
 }
 
 .home-hero .wschild-container {
@@ -752,7 +777,7 @@ a.wschild-button--dark {
 
 .home-hero__grid {
   display: grid;
-  grid-template-columns: 1fr 30%;
+  grid-template-columns: 1fr 40%;
   align-items: center;
   gap: 60px;
 }
@@ -766,21 +791,16 @@ a.wschild-button--dark {
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 24px;
-  color: #1a1a1a !important;
+  color: #1a1a1a;
   letter-spacing: -0.02em;
 }
 
 .home-hero__subtitle {
   font-size: 18px;
   line-height: 1.6;
-  color: #666666;
+  color: #4a4a4a;
   margin-bottom: 40px;
   max-width: 480px;
-}
-
-.wschild-typing--dark {
-  color: #ffffff;
-  font-weight: 800;
 }
 
 .wschild-typing {
@@ -789,6 +809,10 @@ a.wschild-button--dark {
   border-right: 2px solid currentColor;
   padding-right: 2px;
   animation: wschild-typing-caret 0.9s steps(1) infinite;
+}
+
+.wschild-typing--dark {
+  color: #ffffff;
 }
 
 @keyframes wschild-typing-caret {

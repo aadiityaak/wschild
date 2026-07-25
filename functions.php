@@ -80,6 +80,15 @@ add_action('wp_enqueue_scripts', function () {
 		);
 	}
 
+	// Hero — Typing & Mouse Tilt
+	wp_enqueue_script(
+		'wschild-hero',
+		get_stylesheet_directory_uri() . '/assets/js/hero.js',
+		['gsap'],
+		wp_get_theme()->get('Version'),
+		true
+	);
+
 	// Scramble Scroll Effect
 	wp_enqueue_script(
 		'wschild-scramble-scroll',
