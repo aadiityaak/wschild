@@ -33,11 +33,11 @@ $typing_words = $args['typing_words'] ?? [
 	'Aplikasi Web'
 ];
 
-$subtitle_html = $subtitle ?? 'Websweet Studio menghadirkan desain yang memikat dan pengalaman pengguna yang lembut, dirancang khusus untuk memperkuat kredibilitas bisnis Anda di dunia digital.';
+$subtitle_html = $subtitle ?? 'Websweet Studio menghadirkan desain yang memikat dan pengalaman pengguna yang halus, dirancang khusus untuk memperkuat kredibilitas bisnis Anda di dunia digital.';
 
 if ($subtitle === null && $enable_typing && ! empty($typing_words)) {
 	$words_attr = esc_attr(implode('|', array_values($typing_words)));
-	$subtitle_html = 'Websweet Studio menghadirkan desain yang memikat dan pengalaman pengguna yang lembut, dirancang khusus untuk memperkuat kredibilitas <span class="wschild-typing" data-wschild-typing data-words="' . $words_attr . '"></span> Anda.';
+	$subtitle_html = 'Websweet Studio menghadirkan desain yang memikat dan pengalaman pengguna yang halus, dirancang khusus untuk memperkuat kredibilitas <span class="wschild-typing" data-wschild-typing data-words="' . $words_attr . '"></span> Anda.';
 }
 ?>
 
@@ -59,7 +59,7 @@ if ($subtitle === null && $enable_typing && ! empty($typing_words)) {
 					decoding="async"
 					fetchpriority="high"
 					loading="eager"
-					width="800"
+					width="600"
 					height="995"
 					src="<?php echo esc_url($image_url); ?>"
 					class="home-hero__image"
