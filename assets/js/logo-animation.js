@@ -178,7 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const y = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   let f = false;
 
-  const colors = ["#000000", "#76ABAE", "#BA5A5A", "#59B292", "#2C687B"];
+  const colors = ["#000000", "#BA5A5A"];
   const pWFillEl = t.querySelector("#pWFill");
   const pSFillEl = t.querySelector("#pSFill");
   const pathFillClones = [pWFillEl, pSFillEl].filter(Boolean);

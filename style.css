@@ -13,6 +13,7 @@ Text Domain: wschild
 }
 
 html {
+  color-scheme: only light;
   background: #ffffff;
 }
 

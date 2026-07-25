@@ -38,9 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   };
 
-  // Hero Animations
-  reveal(".home-hero__content > *", { stagger: true, staggerAmount: 0.2 });
-  reveal(".home-hero__image-wrapper", { scale: 0.95, duration: 1, start: 80 });
+  // Hero — above the fold, no reveal needed
 
   // Home Components
   reveal(".home-why-us__card", { y: 40, duration: 0.9, randomStart: true });
