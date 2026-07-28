@@ -777,7 +777,7 @@ a.wschild-button--dark.wschild-button--pill {
 
 .home-hero__grid {
   display: grid;
-  grid-template-columns: 1fr 40%;
+  grid-template-columns: 1fr 30%;
   align-items: center;
   gap: 60px;
 }
@@ -800,7 +800,7 @@ a.wschild-button--dark.wschild-button--pill {
   line-height: 1.6;
   color: #4a4a4a;
   margin-bottom: 40px;
-  max-width: 480px;
+  max-width: 530px;
 }
 
 .wschild-typing {
