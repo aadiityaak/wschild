@@ -1170,7 +1170,7 @@ body.admin-bar .wschild-header__mobile-overlay {
 /* Home QNA Section */
 .home-qna {
   padding: 100px 0;
-  background: #ffffff;
+  background: #f8fafc;
 }
 
 .home-qna__header {
@@ -1203,6 +1203,7 @@ body.admin-bar .wschild-header__mobile-overlay {
 .home-qna__item {
   border-radius: 16px;
   overflow: hidden;
+  background: #ffffff;
 }
 
 .home-qna__ripple {
@@ -1228,7 +1229,7 @@ body.admin-bar .wschild-header__mobile-overlay {
   justify-content: space-between;
   padding: 24px 32px;
   background: transparent !important;
-  color: #ffffff !important;
+  color: #0f172a !important;
   border: none !important;
   cursor: pointer;
   text-align: left !important;

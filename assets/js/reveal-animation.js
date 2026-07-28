@@ -42,7 +42,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Home Components
   reveal(".home-why-us__card", { y: 40, duration: 0.9, randomStart: true });
-  reveal(".home-qna__header > *", { stagger: true, staggerAmount: 0.2 });
+  reveal(".home-qna__header > *", {
+    stagger: true,
+    staggerAmount: 0.2,
+    scrollTrigger: { toggleActions: "play none play none" },
+  });
   reveal(".home-qna__item", { randomStart: true });
   const homeTechContainer = document.querySelector(".home-tech__container");
   if (homeTechContainer) {

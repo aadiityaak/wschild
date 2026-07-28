@@ -152,9 +152,6 @@ const wschildInitCursor = () => {
       el.closest(".wschild-header__logo");
     const isButton = el.classList.contains("wschild-button");
 
-    // Ripple removed — CSS :hover handles button background transition now
-    }
-
     el.addEventListener("mouseenter", () => {
       // Change cursor color to orange on interactive elements
       gsap.to(cursor, { borderColor: "#F8843F", duration: 0.2 });
