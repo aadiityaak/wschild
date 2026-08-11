@@ -460,21 +460,21 @@ a.wschild-button--dark.wschild-button--pill {
   cursor: pointer;
 }
 
-.wschild-modal__list {
+.wschild-modal__list,
+.wschild-check-list {
+  list-style: none;
   margin: 14px 0 0;
-  padding-left: 18px;
+  padding: 0;
   color: rgba(15, 23, 42, 0.8);
   line-height: 1.7;
 }
 
-.wschild-modal__item {
+.wschild-modal__item,
+.wschild-check-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   padding: 3px 0;
-}
-
-.wschild-price__list {
-  margin: 14px 0 18px;
-  padding-left: 18px;
-  color: rgba(15, 23, 42, 0.74);
 }
 
 .wschild-note {
@@ -560,18 +560,28 @@ a.wschild-button--dark.wschild-button--pill {
 }
 
 .wschild-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  padding: 0;
   width: 100%;
+  padding: 0;
   background: transparent !important;
   box-shadow: none !important;
 }
 
 .sticky-header {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 0;
+  z-index: 1001;
   background: rgba(255, 255, 255, 0.8) !important;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+  max-width: 100% !important;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.sticky-header.scrolled {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .wschild-header__inner {
@@ -2200,12 +2210,6 @@ body.admin-bar .wschild-header__mobile-overlay {
   .wschild-blog-grid {
     column-count: 1;
   }
-}
-
-.scramble-char {
-  display: inline-block;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
 }
 
 .wschild-page__header {

@@ -29,8 +29,12 @@ add_action('wp_enqueue_scripts', function () {
 		wp_get_theme()->get('Version')
 	);
 
+	$is_home_template   = is_page_template('page-templates/home.php') || is_front_page();
+	$is_pricing_template = $is_home_template || is_page_template(['page-templates/pricing.php', 'page-templates/landing-jasa-website-umroh.php']);
+	$is_hero_template   = $is_home_template || is_page_template(['page-templates/about-us.php', 'page-templates/pricing.php', 'page-templates/contact.php', 'page-templates/services.php', 'page-templates/landing-jasa-website-umroh.php']);
+
 	// Enqueue Alpine Collapse only on home page
-	if (is_page_template('page-templates/home.php') && ! wp_script_is('alpine-collapse', 'enqueued') && ! wp_script_is('alpine-collapse', 'registered')) {
+	if ($is_home_template && ! wp_script_is('alpine-collapse', 'enqueued') && ! wp_script_is('alpine-collapse', 'registered')) {
 		wp_enqueue_script(
 			'alpine-collapse',
 			'https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js',
@@ -40,21 +44,28 @@ add_action('wp_enqueue_scripts', function () {
 		);
 	}
 
-	// Always enqueue theme-specific Alpine components FIRST
-	wp_enqueue_script(
-		'wschild-pricing',
-		get_stylesheet_directory_uri() . '/assets/js/pricing.js',
-		[], // Remove alpinejs dependency to control order
-		wp_get_theme()->get('Version'),
-		false // Move to head
-	);
+	// Alpine data components must load BEFORE Alpine itself
+	$alpine_deps = [];
+	if ($is_pricing_template) {
+		wp_enqueue_script(
+			'wschild-pricing',
+			get_stylesheet_directory_uri() . '/assets/js/pricing.js',
+			[], // Remove alpinejs dependency to control order
+			wp_get_theme()->get('Version'),
+			false // Move to head
+		);
+		$alpine_deps[] = 'wschild-pricing';
+	}
+	if ($is_home_template) {
+		$alpine_deps[] = 'alpine-collapse';
+	}
 
 	// Enqueue Alpine.js LAST (with defer, it will wait for components)
 	if (! wp_script_is('alpinejs', 'enqueued') && ! wp_script_is('alpinejs', 'registered')) {
 		wp_enqueue_script(
 			'alpinejs',
 			'https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js',
-			is_page_template('page-templates/home.php') ? ['alpine-collapse', 'wschild-pricing'] : ['wschild-pricing'],
+			$alpine_deps,
 			null,
 			false // Move to head
 		);
@@ -80,25 +91,18 @@ add_action('wp_enqueue_scripts', function () {
 		);
 	}
 
-	// Hero — Typing & Mouse Tilt
-	wp_enqueue_script(
-		'wschild-hero',
-		get_stylesheet_directory_uri() . '/assets/js/hero.js',
-		['gsap'],
-		wp_get_theme()->get('Version'),
-		true
-	);
+	// Hero — Typing & Mouse Tilt (only on templates that render the hero component)
+	if ($is_hero_template) {
+		wp_enqueue_script(
+			'wschild-hero',
+			get_stylesheet_directory_uri() . '/assets/js/hero.js',
+			['gsap'],
+			wp_get_theme()->get('Version'),
+			true
+		);
+	}
 
-	// Scramble Scroll Effect
-	wp_enqueue_script(
-		'wschild-scramble-scroll',
-		get_stylesheet_directory_uri() . '/assets/js/scramble-scroll.js',
-		['gsap', 'gsap-scrolltrigger'],
-		wp_get_theme()->get('Version'),
-		true
-	);
-
-	// Reveal Animations
+	// Reveal Animations (used across all templates)
 	wp_enqueue_script(
 		'wschild-reveal-animation',
 		get_stylesheet_directory_uri() . '/assets/js/reveal-animation.js',
@@ -107,23 +111,24 @@ add_action('wp_enqueue_scripts', function () {
 		true
 	);
 
-	// Pricing Card Hover Animation
-	wp_enqueue_script(
-		'wschild-pricing-hover',
-		get_stylesheet_directory_uri() . '/assets/js/pricing-hover.js',
-		['gsap'],
-		wp_get_theme()->get('Version'),
-		true
-	);
+	// Pricing Card hover & scroll effects (only where pricing cards render)
+	if ($is_pricing_template) {
+		wp_enqueue_script(
+			'wschild-pricing-hover',
+			get_stylesheet_directory_uri() . '/assets/js/pricing-hover.js',
+			['gsap'],
+			wp_get_theme()->get('Version'),
+			true
+		);
 
-	// Pricing Card Scroll Speed Parallax
-	wp_enqueue_script(
-		'wschild-pricing-scroll',
-		get_stylesheet_directory_uri() . '/assets/js/pricing-scroll.js',
-		['gsap', 'gsap-scrolltrigger'],
-		wp_get_theme()->get('Version'),
-		true
-	);
+		wp_enqueue_script(
+			'wschild-pricing-scroll',
+			get_stylesheet_directory_uri() . '/assets/js/pricing-scroll.js',
+			['gsap', 'gsap-scrolltrigger'],
+			wp_get_theme()->get('Version'),
+			true
+		);
+	}
 
 	// Logo Animation
 	wp_enqueue_script(
@@ -134,21 +139,16 @@ add_action('wp_enqueue_scripts', function () {
 		true
 	);
 
-	// Why Us Card Hover Animation
-	wp_enqueue_script(
-		'wschild-why-us-hover',
-		get_stylesheet_directory_uri() . '/assets/js/why-us-hover.js',
-		['gsap'],
-		wp_get_theme()->get('Version'),
-		true
-	);
-
-	wp_enqueue_style(
-		'wschild-header',
-		get_stylesheet_directory_uri() . '/assets/css/header.css',
-		[],
-		wp_get_theme()->get('Version')
-	);
+	// Why Us Card Hover Animation (home only)
+	if ($is_home_template) {
+		wp_enqueue_script(
+			'wschild-why-us-hover',
+			get_stylesheet_directory_uri() . '/assets/js/why-us-hover.js',
+			['gsap'],
+			wp_get_theme()->get('Version'),
+			true
+		);
+	}
 
 	wp_enqueue_script(
 		'wschild-header',
@@ -158,19 +158,6 @@ add_action('wp_enqueue_scripts', function () {
 		true
 	);
 });
-
-/**
- * Add defer attribute to Alpine.js and related scripts
- */
-add_filter('script_loader_tag', function ($tag, $handle) {
-	if (in_array($handle, ['alpinejs', 'alpine-collapse', 'wschild-pricing'])) {
-		if (strpos($tag, 'defer') === false) {
-			return str_replace(' src', ' defer src', $tag);
-		}
-	}
-	return $tag;
-}, 10, 2);
-
 
 /**
  * Register Navigation Menus & Theme Support

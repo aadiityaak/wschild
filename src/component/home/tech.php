@@ -55,10 +55,10 @@ $tech_images = [
 
 		<div class="home-tech__carousel-alpine" x-ref="carousel">
 			<div class="home-tech__wrapper-alpine">
-				<?php foreach ($tech_images as $item) : ?>
+				<?php foreach ($tech_images as $index => $item) : ?>
 					<div class="home-tech__slide-alpine">
 						<figure class="home-tech__item">
-							<img src="<?php echo esc_url($item['url']); ?>" alt="Teknologi <?php echo esc_attr($item['name']); ?> untuk Pembuatan Website" loading="eager" decoding="async">
+							<img src="<?php echo esc_url($item['url']); ?>" alt="Teknologi <?php echo esc_attr($item['name']); ?> untuk Pembuatan Website" <?php echo $index === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'; ?> decoding="async">
 						</figure>
 					</div>
 				<?php endforeach; ?>

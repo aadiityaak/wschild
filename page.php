@@ -7,7 +7,7 @@ if (! defined('ABSPATH')) {
 get_header();
 ?>
 
-<main id="primary" class="wschild-page" data-barba="container" data-barba-namespace="page">
+<main id="primary" class="wschild-page">
   <?php
   while (have_posts()) {
     the_post();
